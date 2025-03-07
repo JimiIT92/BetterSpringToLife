@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.hendrix.betterspringdrop.core.BSDItemGroups;
 import org.hendrix.betterspringdrop.core.BSDItems;
+import org.hendrix.betterspringdrop.world.gen.BSDBiomeFeatures;
 
 /**
  * Hendrix's Better Spring Drop
@@ -27,6 +28,8 @@ public final class BetterSpringDrop implements ModInitializer {
 
         BSDBlocks.registerStrippables();
         BSDBlocks.registerFlammableBlocks();
+
+        BSDBiomeFeatures.modifyBiomes();
     }
 
 }
