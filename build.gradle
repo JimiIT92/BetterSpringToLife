@@ -34,7 +34,8 @@ processResources {
                 "mod_name": project.mod_name,
                 "mod_description": project.mod_description,
                 "mod_author": project.mod_author,
-                "mod_url": project.mod_url
+                "mod_url": project.mod_url,
+                "snapshot_version": project.snapshot_version
     }
 }
 
