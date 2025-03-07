@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "org.hendrix.betterspringdrop.mixin",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AxeItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "BetterSpringDrop-refmap.json"
+}
