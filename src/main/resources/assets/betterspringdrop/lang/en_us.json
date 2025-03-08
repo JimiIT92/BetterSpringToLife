@@ -26,5 +26,7 @@
   "block.betterspringdrop.hollow_stripped_warped_stem": "Hollow Stripped Warped Stem",
   "block.betterspringdrop.firefly_jar": "Firefly Jar",
   "block.betterspringdrop.empty_firefly_bush": "Empty Firefly Bush",
+  "block.betterspringdrop.short_snowy_grass": "Short Snowy Grass",
+  "block.betterspringdrop.tall_snowy_grass": "Tall Snowy Grass",
   "tooltips.betterspringdrop.fireflies": "Fireflies: %s / %s"
 }

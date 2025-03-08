@@ -49,6 +49,8 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.HOLLOW_WARPED_STEM);
                         entries.add(BSDBlocks.HOLLOW_STRIPPED_WARPED_STEM);
                         entries.add(BSDItems.FIREFLY_JAR);
+                        entries.add(BSDBlocks.SHORT_SNOWY_GRASS);
+                        entries.add(BSDBlocks.TALL_SNOWY_GRASS);
                     })
                     .build()
     );

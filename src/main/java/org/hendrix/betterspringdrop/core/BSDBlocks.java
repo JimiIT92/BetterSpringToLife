@@ -12,9 +12,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
-import org.hendrix.betterspringdrop.block.EmptyFireflyBush;
-import org.hendrix.betterspringdrop.block.FireflyJarBlock;
-import org.hendrix.betterspringdrop.block.HollowBlock;
+import org.hendrix.betterspringdrop.block.*;
 import org.hendrix.betterspringdrop.utils.IdentifierUtils;
 import org.hendrix.betterspringdrop.utils.WoodUtils;
 
@@ -59,6 +57,30 @@ public final class BSDBlocks {
 
     public static final Block FIREFLY_JAR = registerFireflyJar();
     public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
+
+    public static final Block SHORT_SNOWY_GRASS = registerBlock("short_snowy_grass", Suppliers.memoize(() -> new ShortSnowyGrassBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.WHITE)
+            .replaceable()
+            .noCollision()
+            .breakInstantly()
+            .sounds(BlockSoundGroup.GRASS)
+            .burnable()
+            .offset(AbstractBlock.OffsetType.XYZ)
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("short_snowy_grass")))
+    )));
+
+    public static final Block TALL_SNOWY_GRASS = registerBlock("tall_snowy_grass", Suppliers.memoize(() -> new TallSnowyGrassBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.WHITE)
+            .replaceable()
+            .noCollision()
+            .breakInstantly()
+            .sounds(BlockSoundGroup.GRASS)
+            .burnable()
+            .offset(AbstractBlock.OffsetType.XYZ)
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("tall_snowy_grass")))
+    )));
 
     //#endregion
 
