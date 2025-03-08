@@ -85,7 +85,7 @@ public final class BSDBlocks {
      */
     private static Block registerFireflyJar() {
         final String name = "firefly_jar";
-        return registerBlock(
+        return registerBlockWithoutBlockItem(
                 name,
                 Suppliers.memoize(() -> new FireflyJarBlock(AbstractBlock.Settings.create()
                         .strength(0.3F)

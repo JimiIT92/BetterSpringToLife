@@ -48,7 +48,7 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
                         entries.add(BSDBlocks.HOLLOW_WARPED_STEM);
                         entries.add(BSDBlocks.HOLLOW_STRIPPED_WARPED_STEM);
-                        entries.add(BSDBlocks.FIREFLY_JAR);
+                        entries.add(BSDItems.FIREFLY_JAR);
                     })
                     .build()
     );

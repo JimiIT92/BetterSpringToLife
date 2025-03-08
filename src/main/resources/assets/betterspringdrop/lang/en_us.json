@@ -24,5 +24,6 @@
   "block.betterspringdrop.hollow_stripped_crimson_stem": "Hollow Stripped Crimson Stem",
   "block.betterspringdrop.hollow_warped_stem": "Hollow Warped Stem",
   "block.betterspringdrop.hollow_stripped_warped_stem": "Hollow Stripped Warped Stem",
-  "block.betterspringdrop.firefly_jar": "Firefly Jar"
+  "block.betterspringdrop.firefly_jar": "Firefly Jar",
+  "container.firefly_jar.fireflies": "Fireflies: %s / %s"
 }
