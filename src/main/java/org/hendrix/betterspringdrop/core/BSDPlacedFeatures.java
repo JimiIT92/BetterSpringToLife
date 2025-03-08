@@ -18,6 +18,8 @@ public final class BSDPlacedFeatures {
     public static final RegistryKey<PlacedFeature> FALLEN_HOLLOW_BIRCH_TREE = registerKey("fallen_hollow_birch_tree");
     public static final RegistryKey<PlacedFeature> FALLEN_HOLLOW_SUPER_BIRCH_TREE = registerKey("fallen_hollow_super_birch_tree");
     public static final RegistryKey<PlacedFeature> FALLEN_HOLLOW_JUNGLE_TREE = registerKey("fallen_hollow_jungle_tree");
+    public static final RegistryKey<PlacedFeature> PATCH_SNOWY_GRASS = registerKey("patch_snowy_grass");
+    public static final RegistryKey<PlacedFeature> PATCH_SNOWY_GRASS_MOUNTAINS = registerKey("patch_snowy_grass_mountains");
 
     //#endregion
 
