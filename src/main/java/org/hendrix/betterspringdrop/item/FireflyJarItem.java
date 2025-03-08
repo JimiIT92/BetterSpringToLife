@@ -7,8 +7,6 @@ import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 /**
  * Implementation class for the {@link BlockItem Firefly Jar Block Item}
  */
@@ -31,7 +29,8 @@ public class FireflyJarItem extends BlockItem {
      */
     @Override
     protected @Nullable BlockState getPlacementState(final ItemPlacementContext context) {
-        return Objects.requireNonNull(super.getPlacementState(context)).with(FireflyJarBlock.FIREFLIES, Math.min(FireflyJarBlock.MAX_FIREFLIES, FireflyJarBlock.getFireflies(context.getStack())));
+        final BlockState blockState = super.getPlacementState(context);
+        return blockState == null ? null : blockState.with(FireflyJarBlock.FIREFLIES, Math.min(FireflyJarBlock.MAX_FIREFLIES, FireflyJarBlock.getFireflies(context.getStack())));
     }
 
 }

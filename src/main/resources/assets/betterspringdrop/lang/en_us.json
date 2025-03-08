@@ -28,5 +28,16 @@
   "block.betterspringdrop.empty_firefly_bush": "Empty Firefly Bush",
   "block.betterspringdrop.short_snowy_grass": "Short Snowy Grass",
   "block.betterspringdrop.tall_snowy_grass": "Tall Snowy Grass",
+  "block.betterspringdrop.oak_leaves_pile": "Oak Leaves Pile",
+  "block.betterspringdrop.spruce_leaves_pile": "Spruce Leaves Pile",
+  "block.betterspringdrop.birch_leaves_pile": "Birch Leaves Pile",
+  "block.betterspringdrop.jungle_leaves_pile": "Jungle Leaves Pile",
+  "block.betterspringdrop.acacia_leaves_pile": "Acacia Leaves Pile",
+  "block.betterspringdrop.cherry_leaves_pile": "Cherry Leaves Pile",
+  "block.betterspringdrop.dark_oak_leaves_pile": "Dark Oak Leaves Pile",
+  "block.betterspringdrop.pale_oak_leaves_pile": "Pale Oak Leaves Pile",
+  "block.betterspringdrop.mangrove_leaves_pile": "Mangrove Leaves Pile",
+  "block.betterspringdrop.azalea_leaves_pile": "Azalea Leaves Pile",
+  "block.betterspringdrop.flowering_azalea_leaves_pile": "Flowering Azalea Leaves Pile",
   "tooltips.betterspringdrop.fireflies": "Fireflies: %s / %s"
 }

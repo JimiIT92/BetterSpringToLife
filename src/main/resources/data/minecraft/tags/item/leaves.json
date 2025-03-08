@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "betterspringdrop:oak_leaves_pile",
+    "betterspringdrop:spruce_leaves_pile",
+    "betterspringdrop:birch_leaves_pile",
+    "betterspringdrop:jungle_leaves_pile",
+    "betterspringdrop:acacia_leaves_pile",
+    "betterspringdrop:cherry_leaves_pile",
+    "betterspringdrop:dark_oak_leaves_pile",
+    "betterspringdrop:pale_oak_leaves_pile",
+    "betterspringdrop:mangrove_leaves_pile",
+    "betterspringdrop:azalea_leaves_pile",
+    "betterspringdrop:flowering_azalea_leaves_pile"
+  ]
+}

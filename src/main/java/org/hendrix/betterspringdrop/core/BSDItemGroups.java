@@ -48,9 +48,20 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
                         entries.add(BSDBlocks.HOLLOW_WARPED_STEM);
                         entries.add(BSDBlocks.HOLLOW_STRIPPED_WARPED_STEM);
-                        entries.add(BSDItems.FIREFLY_JAR);
+                        entries.add(BSDBlocks.OAK_LEAVES_PILE);
+                        entries.add(BSDBlocks.SPRUCE_LEAVES_PILE);
+                        entries.add(BSDBlocks.BIRCH_LEAVES_PILE);
+                        entries.add(BSDBlocks.JUNGLE_LEAVES_PILE);
+                        entries.add(BSDBlocks.ACACIA_LEAVES_PILE);
+                        entries.add(BSDBlocks.CHERRY_LEAVES_PILE);
+                        entries.add(BSDBlocks.DARK_OAK_LEAVES_PILE);
+                        entries.add(BSDBlocks.PALE_OAK_LEAVES_PILE);
+                        entries.add(BSDBlocks.MANGROVE_LEAVES_PILE);
+                        entries.add(BSDBlocks.AZALEA_LEAVES_PILE);
+                        entries.add(BSDBlocks.FLOWERING_AZALEA_LEAVES_PILE);
                         entries.add(BSDBlocks.SHORT_SNOWY_GRASS);
                         entries.add(BSDBlocks.TALL_SNOWY_GRASS);
+                        entries.add(BSDItems.FIREFLY_JAR);
                     })
                     .build()
     );

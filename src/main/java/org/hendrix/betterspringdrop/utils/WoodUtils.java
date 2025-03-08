@@ -76,4 +76,41 @@ public final class WoodUtils {
         return stripped ? Blocks.STRIPPED_OAK_LOG : Blocks.OAK_LOG;
     }
 
+    /**
+     * Get the {@link Block Leaves Block} corresponding to the {@link WoodType Wood Type}
+     *
+     * @param woodType The {@link WoodType Wood Type}
+     * @return The {@link Block Leaves Block}
+     */
+    public static Block leaves(final WoodType woodType) {
+        if(woodType.equals(WoodType.OAK)) {
+            return Blocks.OAK_LEAVES;
+        }
+        if(woodType.equals(WoodType.SPRUCE)) {
+            return Blocks.SPRUCE_LEAVES;
+        }
+        if(woodType.equals(WoodType.BIRCH)) {
+            return Blocks.BIRCH_LEAVES;
+        }
+        if(woodType.equals(WoodType.ACACIA)) {
+            return Blocks.ACACIA_LEAVES;
+        }
+        if(woodType.equals(WoodType.CHERRY)) {
+            return Blocks.CHERRY_LEAVES;
+        }
+        if(woodType.equals(WoodType.JUNGLE)) {
+            return Blocks.JUNGLE_LEAVES;
+        }
+        if(woodType.equals(WoodType.DARK_OAK)) {
+            return Blocks.DARK_OAK_LEAVES;
+        }
+        if(woodType.equals(WoodType.PALE_OAK)) {
+            return Blocks.PALE_OAK_LEAVES;
+        }
+        if(woodType.equals(WoodType.MANGROVE)) {
+            return Blocks.MANGROVE_LEAVES;
+        }
+        return Blocks.OAK_LEAVES;
+    }
+
 }

@@ -19,6 +19,8 @@ public final class BSDTags {
         //#region Tags
 
         public static final TagKey<Block> SNOWY_VEGETATION_MAY_PLACE_ON = tag("snowy_vegetation_may_place_on");
+        public static final TagKey<Block> LEAF_PILE_CANNOT_SURVIVE_ON = tag("leaf_pile_cannot_survive_on");
+        public static final TagKey<Block> LEAF_PILE_CAN_SURVIVE_ON = tag("leaf_pile_can_survive_on");
 
         //#endregion
 

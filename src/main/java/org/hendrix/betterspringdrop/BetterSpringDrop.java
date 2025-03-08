@@ -27,6 +27,7 @@ public final class BetterSpringDrop implements ModInitializer {
 
         BSDBlocks.registerStrippables();
         BSDBlocks.registerFlammableBlocks();
+        BSDBlocks.registerCompostableBlocks();
 
         BSDBiomeFeatures.modifyBiomes();
 

@@ -1,6 +1,7 @@
 package org.hendrix.betterspringdrop.core;
 
 import com.google.common.base.Suppliers;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -17,6 +18,7 @@ import org.hendrix.betterspringdrop.utils.IdentifierUtils;
 import org.hendrix.betterspringdrop.utils.WoodUtils;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 /**
@@ -52,6 +54,22 @@ public final class BSDBlocks {
     public static final Block HOLLOW_STRIPPED_CRIMSON_STEM = registerHollowLog(WoodType.CRIMSON, true);
     public static final Block HOLLOW_WARPED_STEM = registerHollowLog(WoodType.WARPED, false);
     public static final Block HOLLOW_STRIPPED_WARPED_STEM = registerHollowLog(WoodType.WARPED, true);
+
+    //#endregion
+
+    //#region Leaf Piles
+
+    public static final Block OAK_LEAVES_PILE = registerLeafPile(WoodType.OAK, BlockSoundGroup.GRASS);
+    public static final Block SPRUCE_LEAVES_PILE = registerLeafPile(WoodType.SPRUCE, BlockSoundGroup.GRASS);
+    public static final Block BIRCH_LEAVES_PILE = registerLeafPile(WoodType.BIRCH, BlockSoundGroup.GRASS);
+    public static final Block JUNGLE_LEAVES_PILE = registerLeafPile(WoodType.JUNGLE, BlockSoundGroup.GRASS);
+    public static final Block ACACIA_LEAVES_PILE = registerLeafPile(WoodType.ACACIA, BlockSoundGroup.GRASS);
+    public static final Block CHERRY_LEAVES_PILE = registerLeafPile(WoodType.CHERRY, BlockSoundGroup.CHERRY_LEAVES);
+    public static final Block DARK_OAK_LEAVES_PILE = registerLeafPile(WoodType.DARK_OAK, BlockSoundGroup.GRASS);
+    public static final Block PALE_OAK_LEAVES_PILE = registerLeafPile(WoodType.PALE_OAK, BlockSoundGroup.GRASS);
+    public static final Block MANGROVE_LEAVES_PILE = registerLeafPile(WoodType.MANGROVE, BlockSoundGroup.GRASS);
+    public static final Block AZALEA_LEAVES_PILE = registerLeafPile("azalea", Blocks.AZALEA_LEAVES, BlockSoundGroup.AZALEA_LEAVES);
+    public static final Block FLOWERING_AZALEA_LEAVES_PILE = registerLeafPile("flowering_azalea", Blocks.FLOWERING_AZALEA_LEAVES, BlockSoundGroup.AZALEA_LEAVES);
 
     //#endregion
 
@@ -144,6 +162,48 @@ public final class BSDBlocks {
     }
 
     /**
+     * Register a {@link LeafPileBlock Leaf Pile Block}
+     *
+     * @param woodType The {@link WoodType Wood Type}
+     * @param sound The {@link BlockSoundGroup Block Sound}
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerLeafPile(final WoodType woodType, final BlockSoundGroup sound) {
+        return registerLeafPile(
+                woodType.name().toLowerCase(Locale.ROOT),
+                WoodUtils.leaves(woodType),
+                sound
+        );
+    }
+
+    /**
+     * Register a {@link LeafPileBlock Leaf Pile Block}
+     *
+     * @param woodName The {@link String Wood Name}
+     * @param leaves The {@link Block Leaves Block}
+     * @param sound The {@link BlockSoundGroup Block Sound}
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerLeafPile(final String woodName, final Block leaves, final BlockSoundGroup sound) {
+        final String name = woodName + "_leaves_pile";
+        return registerBlock(
+                name,
+                Suppliers.memoize(() -> new LeafPileBlock(AbstractBlock.Settings.create()
+                        .mapColor(leaves.getDefaultMapColor())
+                        .replaceable()
+                        .solidBlock(Blocks::never)
+                        .strength(0.1F)
+                        .nonOpaque()
+                        .ticksRandomly()
+                        .sounds(sound)
+                        .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
+                        .pistonBehavior(PistonBehavior.DESTROY)
+                        .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
+                ))
+        );
+    }
+
+    /**
      * Register a {@link Block Block}
      *
      * @param name The {@link String Block name}
@@ -216,6 +276,19 @@ public final class BSDBlocks {
                 HOLLOW_WARPED_STEM,
                 HOLLOW_STRIPPED_WARPED_STEM
         );
+        registerFlammableLeavesPile(
+                OAK_LEAVES_PILE,
+                SPRUCE_LEAVES_PILE,
+                BIRCH_LEAVES_PILE,
+                JUNGLE_LEAVES_PILE,
+                ACACIA_LEAVES_PILE,
+                CHERRY_LEAVES_PILE,
+                DARK_OAK_LEAVES_PILE,
+                PALE_OAK_LEAVES_PILE,
+                MANGROVE_LEAVES_PILE,
+                AZALEA_LEAVES_PILE,
+                FLOWERING_AZALEA_LEAVES_PILE
+        );
     }
 
     /**
@@ -224,10 +297,49 @@ public final class BSDBlocks {
      * @param blocks The {@link Block Flammable Logs to register}
      */
     private static void registerFlammableLogs(final Block... blocks) {
+        registerFlammableBlocks(5, 5, blocks);
+    }
+
+    /**
+     * Register all flammable {@link PillarBlock Logs}
+     *
+     * @param blocks The {@link Block Flammable Logs to register}
+     */
+    private static void registerFlammableLeavesPile(final Block... blocks) {
+        registerFlammableBlocks(5, 100, blocks);
+    }
+
+    /**
+     * Register all flammable {@link Block Blocks}
+     *
+     * @param burnChance The {@link Integer burn chance}
+     * @param spreadChance The {@link Integer fire spread chance}
+     * @param blocks The {@link Block Flammable Logs to register}
+     */
+    private static void registerFlammableBlocks(final int burnChance, final int spreadChance, final Block... blocks) {
         final FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
         if(blocks != null) {
-            Arrays.stream(blocks).forEach(block -> registry.add(block, 5, 5));
+            Arrays.stream(blocks).forEach(block -> registry.add(block, burnChance, spreadChance));
         }
+    }
+
+    /**
+     * Register {@link ComposterBlock compostable} {@link Block Blocks}
+     */
+    public static void registerCompostableBlocks() {
+        Arrays.asList(
+                OAK_LEAVES_PILE,
+                SPRUCE_LEAVES_PILE,
+                BIRCH_LEAVES_PILE,
+                JUNGLE_LEAVES_PILE,
+                ACACIA_LEAVES_PILE,
+                CHERRY_LEAVES_PILE,
+                DARK_OAK_LEAVES_PILE,
+                PALE_OAK_LEAVES_PILE,
+                MANGROVE_LEAVES_PILE,
+                AZALEA_LEAVES_PILE,
+                FLOWERING_AZALEA_LEAVES_PILE
+        ).forEach(block -> CompostingChanceRegistry.INSTANCE.add(block, 0.3F));
     }
 
     /**
