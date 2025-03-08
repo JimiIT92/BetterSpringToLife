@@ -3,16 +3,16 @@ package org.hendrix.betterspringdrop.core;
 import com.google.common.base.Suppliers;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
+import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 import org.hendrix.betterspringdrop.block.HollowBlock;
 import org.hendrix.betterspringdrop.utils.IdentifierUtils;
 import org.hendrix.betterspringdrop.utils.WoodUtils;
@@ -56,6 +56,8 @@ public final class BSDBlocks {
 
     //#endregion
 
+    public static final Block FIREFLY_JAR = registerFireflyJar();
+
     //#endregion
 
     /**
@@ -69,7 +71,36 @@ public final class BSDBlocks {
         final String name = WoodUtils.woodName(woodType, stripped);
         return registerBlock(
                 name,
-                Suppliers.memoize(() -> new HollowBlock(AbstractBlock.Settings.copy(WoodUtils.blockFromWood(woodType, stripped)).registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name))))));
+                Suppliers.memoize(() -> new HollowBlock(AbstractBlock.Settings.copy(WoodUtils.blockFromWood(woodType, stripped))
+                        .nonOpaque()
+                        .blockVision(Blocks::never)
+                        .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
+                )));
+    }
+
+    /**
+     * Register an {@link FireflyJarBlock Firefly Jar Block}
+     *
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerFireflyJar() {
+        final String name = "firefly_jar";
+        return registerBlock(
+                name,
+                Suppliers.memoize(() -> new FireflyJarBlock(AbstractBlock.Settings.create()
+                        .strength(0.3F)
+                        .sounds(BlockSoundGroup.GLASS)
+                        .nonOpaque()
+                        .blockVision(Blocks::never)
+                        .allowsSpawning(Blocks::never)
+                        .solidBlock(Blocks::never)
+                        .suffocates(Blocks::never)
+                        .sounds(BlockSoundGroup.GLASS)
+                        .luminance((state) -> state.get(FireflyJarBlock.FIREFLIES) * 3)
+                        .pistonBehavior(PistonBehavior.DESTROY)
+                        .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
+                ))
+        );
     }
 
     /**

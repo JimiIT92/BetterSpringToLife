@@ -1,0 +1,6 @@
+{
+  "parent": "betterspringdrop:block/firefly_jar_hanging",
+  "textures": {
+    "lantern": "betterspringdrop:block/firefly_jar_1"
+  }
+}

@@ -78,7 +78,7 @@ public class HollowBlock extends PillarBlock implements Waterloggable {
      * @param settings The {@link Settings Block Settings}
      */
     public HollowBlock(final Settings settings) {
-        super(settings.nonOpaque().blockVision((state, world, pos) -> false));
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Y).with(WATERLOGGED, Boolean.FALSE));
     }
 

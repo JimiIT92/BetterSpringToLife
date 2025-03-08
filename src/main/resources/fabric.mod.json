@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "org.hendrix.betterspringdrop.BetterSpringDrop"
+    ],
+    "client": [
+      "org.hendrix.betterspringdrop.client.BetterSpringDropClient"
     ]
   },
   "mixins": [

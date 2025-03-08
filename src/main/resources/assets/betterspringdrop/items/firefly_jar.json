@@ -1,0 +1,48 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "fireflies",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "betterspringdrop:item/firefly_jar_1"
+        },
+        "when": "1"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "betterspringdrop:item/firefly_jar_2"
+        },
+        "when": "2"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "betterspringdrop:item/firefly_jar_3"
+        },
+        "when": "3"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "betterspringdrop:item/firefly_jar_4"
+        },
+        "when": "4"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "betterspringdrop:item/firefly_jar_5"
+        },
+        "when": "5"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "betterspringdrop:item/firefly_jar_1"
+    },
+    "property": "minecraft:block_state"
+  }
+}
