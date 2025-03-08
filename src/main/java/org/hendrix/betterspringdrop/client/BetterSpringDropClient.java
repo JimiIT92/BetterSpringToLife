@@ -22,7 +22,8 @@ public final class BetterSpringDropClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         Arrays.asList(
-                BSDBlocks.FIREFLY_JAR
+                BSDBlocks.FIREFLY_JAR,
+                BSDBlocks.EMPTY_FIREFLY_BUSH
         ).forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
     }
 

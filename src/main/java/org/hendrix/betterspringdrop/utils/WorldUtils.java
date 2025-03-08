@@ -32,12 +32,12 @@ public final class WorldUtils {
      * @return The {@link ActionResult Action Result}
      */
     public static ActionResult setBlock(final BlockState blockState, final PlayerEntity player, final Hand hand, final World world, final BlockPos blockPos, final ItemStack itemStack, final SoundEvent sound) {
+        world.setBlockState(blockPos, blockState, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(player, blockState));
         if(player != null) {
             if (player instanceof ServerPlayerEntity) {
                 Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)player, blockPos, itemStack);
             }
-            world.setBlockState(blockPos, blockState, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-            world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(player, blockState));
             if (itemStack != null && !itemStack.isEmpty()) {
                 itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
             }
@@ -48,7 +48,7 @@ public final class WorldUtils {
             }
             return isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
-        return ActionResult.CONSUME;
+        return ActionResult.PASS;
     }
 
 }

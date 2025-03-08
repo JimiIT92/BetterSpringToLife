@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FireflyBushBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.TooltipDisplayComponent;
@@ -19,8 +20,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
+import org.hendrix.betterspringdrop.block.EmptyFireflyBush;
 import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 import org.hendrix.betterspringdrop.block.HollowBlock;
 import org.hendrix.betterspringdrop.component.type.FirefliesComponent;
@@ -69,16 +72,66 @@ public final class BSDEvents {
         final BlockPos blockPos = blockHitResult.getBlockPos();
         final BlockState blockState = world.getBlockState(blockPos);
         if(blockState.isOf(Blocks.FIREFLY_BUSH)) {
-            final ItemStack itemStack = player.getStackInHand(hand);
-            if(itemStack.isOf(Items.GLASS_BOTTLE)) {
-                player.setStackInHand(hand, new ItemStack(BSDBlocks.FIREFLY_JAR));
-            }
-            if(itemStack.isOf(BSDItems.FIREFLY_JAR)) {
-                final int fireflies = FireflyJarBlock.getFireflies(itemStack);
-                itemStack.set(BSDDataComponentTypes.FIREFLIES, new FirefliesComponent(Math.min(FireflyJarBlock.MAX_FIREFLIES, fireflies + 1)));
+            return pickFirefliesFromFireflyBush(player, hand, player.getStackInHand(hand), world, blockPos, blockState);
+        }
+        return ActionResult.PASS;
+    }
+
+    /**
+     * Pick some Fireflies from a {@link FireflyBushBlock Firefly Bush}
+     *
+     * @param player The {@link PlayerEntity Player picking the Fireflies}
+     * @param hand The {@link Hand Hand the Player is using}
+     * @param itemStack The {@link ItemStack current Item Stack}
+     * @param world The {@link World World reference}
+     * @param pos The {@link BlockPos Firefly Bush Block Pos}
+     * @param blockState The {@link BlockState Firefly Bush Block State}
+     */
+    private static ActionResult pickFirefliesFromFireflyBush(final PlayerEntity player, final Hand hand, final ItemStack itemStack, final World world, final BlockPos pos, final BlockState blockState) {
+        final Random random = world.getRandom();
+        final int pickedFireflies = 1 + random.nextInt(2);
+        if(itemStack.isOf(Items.GLASS_BOTTLE)) {
+            itemStack.decrement(1);
+            player.giveItemStack(getFireflyJar(null, pickedFireflies));
+            emptyFireflyBush(world, pos, blockState);
+            return ActionResult.SUCCESS;
+        }
+        if(itemStack.isOf(BSDItems.FIREFLY_JAR)) {
+            final int fireflies = FireflyJarBlock.getFireflies(itemStack);
+            if(fireflies < FireflyJarBlock.MAX_FIREFLIES) {
+                player.setStackInHand(hand, getFireflyJar(itemStack, fireflies + pickedFireflies));
+                return ActionResult.SUCCESS;
             }
         }
         return ActionResult.PASS;
+    }
+
+    /**
+     * Get the {@link ItemStack Firefly Jar Item Stack}
+     *
+     * @param itemStack The {@link ItemStack current Item Stack}
+     * @param fireflies The {@link Integer Fireflies amount}
+     * @return The {@link ItemStack Firefly Jar Item Stack}
+     */
+    private static ItemStack getFireflyJar(ItemStack itemStack, final int fireflies) {
+        if(itemStack == null) {
+            itemStack = new ItemStack(BSDBlocks.FIREFLY_JAR);
+        }
+        itemStack.set(BSDDataComponentTypes.FIREFLIES, new FirefliesComponent(Math.min(FireflyJarBlock.MAX_FIREFLIES, fireflies)));
+        return itemStack;
+    }
+
+    /**
+     * Replace a {@link FireflyBushBlock Firefly Bush} with an {@link EmptyFireflyBush Empty Firefly Bush}
+     *
+     * @param world The {@link World World reference}
+     * @param pos The {@link BlockPos Firefly Bush Block Pos}
+     * @param blockState The {@link BlockState Firefly Bush Block State}
+     */
+    private static void emptyFireflyBush(final World world, final BlockPos pos, final BlockState blockState) {
+        if(world.getRandom().nextBoolean()) {
+            WorldUtils.setBlock(BSDBlocks.EMPTY_FIREFLY_BUSH.getStateWithProperties(blockState), null, null, world, pos, null, null);
+        }
     }
 
     /**

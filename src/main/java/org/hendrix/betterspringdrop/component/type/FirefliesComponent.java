@@ -10,6 +10,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 
 import java.util.function.Consumer;
@@ -43,7 +44,7 @@ public record FirefliesComponent(int fireflies) implements TooltipAppender {
      * @param components The {@link ComponentsAccess Components Access}
      */
     public void appendTooltip(final Item.TooltipContext context, final Consumer<Text> textConsumer, final TooltipType type, final ComponentsAccess components) {
-        textConsumer.accept(Text.translatable("container.firefly_jar.fireflies", this.fireflies, FireflyJarBlock.MAX_FIREFLIES).formatted(Formatting.GRAY));
+        textConsumer.accept(Text.translatable("tooltips." + BetterSpringDrop.MOD_ID + ".fireflies", this.fireflies, FireflyJarBlock.MAX_FIREFLIES).formatted(Formatting.GRAY));
     }
 
 }

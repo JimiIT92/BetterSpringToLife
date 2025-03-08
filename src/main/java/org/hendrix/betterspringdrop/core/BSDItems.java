@@ -34,7 +34,10 @@ public final class BSDItems {
      */
     private static Item registerFireflyJar() {
         final String name = "firefly_jar";
-        return registerItem(name, Suppliers.memoize(() -> new FireflyJarItem(blockItemSettings(IdentifierUtils.modIdentifier(name)).component(BSDDataComponentTypes.FIREFLIES, FirefliesComponent.DEFAULT))));
+        return registerItem(name, Suppliers.memoize(() -> new FireflyJarItem(blockItemSettings(IdentifierUtils.modIdentifier(name))
+                .maxCount(1)
+                .component(BSDDataComponentTypes.FIREFLIES, FirefliesComponent.DEFAULT)
+        )));
     }
 
     /**

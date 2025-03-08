@@ -12,6 +12,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
+import org.hendrix.betterspringdrop.block.EmptyFireflyBush;
 import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 import org.hendrix.betterspringdrop.block.HollowBlock;
 import org.hendrix.betterspringdrop.utils.IdentifierUtils;
@@ -57,6 +58,7 @@ public final class BSDBlocks {
     //#endregion
 
     public static final Block FIREFLY_JAR = registerFireflyJar();
+    public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
 
     //#endregion
 
@@ -101,6 +103,22 @@ public final class BSDBlocks {
                         .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
                 ))
         );
+    }
+
+    /**
+     * Register an {@link EmptyFireflyBush Empty Firefly Bush Block}
+     *
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerEmptyFireflyBush() {
+        final String name = "empty_firefly_bush";
+        return registerBlockWithoutBlockItem(
+                name,
+                Suppliers.memoize(() -> new EmptyFireflyBush(AbstractBlock.Settings.copy(Blocks.FIREFLY_BUSH)
+                        .luminance(state -> 0)
+                        .ticksRandomly()
+                        .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
+                )));
     }
 
     /**
