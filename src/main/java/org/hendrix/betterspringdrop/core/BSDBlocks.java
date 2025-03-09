@@ -76,6 +76,17 @@ public final class BSDBlocks {
     public static final Block FIREFLY_JAR = registerFireflyJar();
     public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
 
+    public static final Block SNOWY_BUSH = registerBlock("snowy_bush", Suppliers.memoize(() -> new SnowyBushBlock(AbstractBlock.Settings.create()
+            .mapColor(MapColor.WHITE)
+            .replaceable()
+            .noCollision()
+            .breakInstantly()
+            .sounds(BlockSoundGroup.GRASS)
+            .burnable()
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("snowy_bush")))
+    )));
+
     public static final Block SHORT_SNOWY_GRASS = registerBlock("short_snowy_grass", Suppliers.memoize(() -> new ShortSnowyGrassBlock(AbstractBlock.Settings.create()
             .mapColor(MapColor.WHITE)
             .replaceable()

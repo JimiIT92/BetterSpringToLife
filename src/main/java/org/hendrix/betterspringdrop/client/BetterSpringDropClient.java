@@ -26,6 +26,7 @@ public final class BetterSpringDropClient implements ClientModInitializer {
         Arrays.asList(
                 BSDBlocks.FIREFLY_JAR,
                 BSDBlocks.EMPTY_FIREFLY_BUSH,
+                BSDBlocks.SNOWY_BUSH,
                 BSDBlocks.SHORT_SNOWY_GRASS,
                 BSDBlocks.TALL_SNOWY_GRASS,
                 BSDBlocks.OAK_LEAVES_PILE,

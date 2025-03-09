@@ -59,6 +59,7 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.MANGROVE_LEAVES_PILE);
                         entries.add(BSDBlocks.AZALEA_LEAVES_PILE);
                         entries.add(BSDBlocks.FLOWERING_AZALEA_LEAVES_PILE);
+                        entries.add(BSDBlocks.SNOWY_BUSH);
                         entries.add(BSDBlocks.SHORT_SNOWY_GRASS);
                         entries.add(BSDBlocks.TALL_SNOWY_GRASS);
                         entries.add(BSDItems.FIREFLY_JAR);
