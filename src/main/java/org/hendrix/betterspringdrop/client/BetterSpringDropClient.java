@@ -5,12 +5,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * {@link BetterSpringDrop Hendrix's Better Spring Drop} {@link ClientModInitializer Client initializer}
@@ -39,7 +41,8 @@ public final class BetterSpringDropClient implements ClientModInitializer {
                 BSDBlocks.PALE_OAK_LEAVES_PILE,
                 BSDBlocks.MANGROVE_LEAVES_PILE,
                 BSDBlocks.AZALEA_LEAVES_PILE,
-                BSDBlocks.FLOWERING_AZALEA_LEAVES_PILE
+                BSDBlocks.FLOWERING_AZALEA_LEAVES_PILE,
+                BSDBlocks.POTTED_BUSH
         ).forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
         Arrays.asList(
@@ -52,6 +55,8 @@ public final class BetterSpringDropClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> FoliageColors.BIRCH, BSDBlocks.BIRCH_LEAVES_PILE);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> FoliageColors.SPRUCE, BSDBlocks.SPRUCE_LEAVES_PILE);
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> FoliageColors.MANGROVE, BSDBlocks.MANGROVE_LEAVES_PILE);
+
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> BiomeColors.getGrassColor(Objects.requireNonNull(view), pos), BSDBlocks.POTTED_BUSH);
 
     }
 

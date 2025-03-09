@@ -73,6 +73,14 @@ public final class BSDBlocks {
 
     //#endregion
 
+    //#region Flower Pots
+
+    public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Suppliers.memoize(() -> Blocks.BUSH));
+
+    //#endregion
+
+    //#region Misc
+
     public static final Block FIREFLY_JAR = registerFireflyJar();
     public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
 
@@ -110,6 +118,8 @@ public final class BSDBlocks {
             .pistonBehavior(PistonBehavior.DESTROY)
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("tall_snowy_grass")))
     )));
+
+    //#endregion
 
     //#endregion
 
@@ -212,6 +222,22 @@ public final class BSDBlocks {
                         .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
                 ))
         );
+    }
+
+    /**
+     * Register a {@link Block Flower Pot Block}
+     *
+     * @param name The {@link String Block Name}
+     * @param blockSupplier The {@link Supplier<Block> Flower Block Supplier}
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerFlowerPot(final String name, final Supplier<Block> blockSupplier) {
+        return registerBlockWithoutBlockItem(name, Suppliers.memoize(() -> new FlowerPotBlock(blockSupplier.get(), AbstractBlock.Settings.create()
+                .breakInstantly()
+                .nonOpaque()
+                .pistonBehavior(PistonBehavior.DESTROY)
+                .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
+        )));
     }
 
     /**
@@ -357,6 +383,6 @@ public final class BSDBlocks {
      * Register all {@link Block Blocks}
      */
     public static void register() {
-
     }
+
 }
