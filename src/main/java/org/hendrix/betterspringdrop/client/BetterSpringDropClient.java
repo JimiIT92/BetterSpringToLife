@@ -42,7 +42,13 @@ public final class BetterSpringDropClient implements ClientModInitializer {
                 BSDBlocks.MANGROVE_LEAVES_PILE,
                 BSDBlocks.AZALEA_LEAVES_PILE,
                 BSDBlocks.FLOWERING_AZALEA_LEAVES_PILE,
-                BSDBlocks.POTTED_BUSH
+                BSDBlocks.POTTED_CACTUS_FLOWER,
+                BSDBlocks.POTTED_BUSH,
+                BSDBlocks.POTTED_SNOWY_BUSH,
+                BSDBlocks.POTTED_SHORT_DRY_GRASS,
+                BSDBlocks.POTTED_TALL_DRY_GRASS,
+                BSDBlocks.POTTED_SHORT_SNOWY_GRASS,
+                BSDBlocks.POTTED_TALL_SNOWY_GRASS
         ).forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
         Arrays.asList(

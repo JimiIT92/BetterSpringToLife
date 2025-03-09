@@ -73,16 +73,7 @@ public final class BSDBlocks {
 
     //#endregion
 
-    //#region Flower Pots
-
-    public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Suppliers.memoize(() -> Blocks.BUSH));
-
-    //#endregion
-
-    //#region Misc
-
-    public static final Block FIREFLY_JAR = registerFireflyJar();
-    public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
+    //#region Grass and Flowers
 
     public static final Block SNOWY_BUSH = registerBlock("snowy_bush", Suppliers.memoize(() -> new SnowyBushBlock(AbstractBlock.Settings.create()
             .mapColor(MapColor.WHITE)
@@ -118,6 +109,28 @@ public final class BSDBlocks {
             .pistonBehavior(PistonBehavior.DESTROY)
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("tall_snowy_grass")))
     )));
+
+    //#endregion
+
+    //#region Flower Pots
+
+    public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Suppliers.memoize(() -> Blocks.CACTUS_FLOWER));
+
+    public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Suppliers.memoize(() -> Blocks.BUSH));
+    public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", Suppliers.memoize(() -> SNOWY_BUSH));
+
+    public static final Block POTTED_SHORT_DRY_GRASS = registerFlowerPot("potted_short_dry_grass", Suppliers.memoize(() -> Blocks.SHORT_DRY_GRASS));
+    public static final Block POTTED_TALL_DRY_GRASS = registerFlowerPot("potted_tall_dry_grass", Suppliers.memoize(() -> Blocks.TALL_DRY_GRASS));
+
+    public static final Block POTTED_SHORT_SNOWY_GRASS = registerFlowerPot("potted_short_snowy_grass", Suppliers.memoize(() -> SHORT_SNOWY_GRASS));
+    public static final Block POTTED_TALL_SNOWY_GRASS = registerFlowerPot("potted_tall_snowy_grass", Suppliers.memoize(() -> TALL_SNOWY_GRASS));
+
+    //#endregion
+
+    //#region Misc
+
+    public static final Block FIREFLY_JAR = registerFireflyJar();
+    public static final Block EMPTY_FIREFLY_BUSH = registerEmptyFireflyBush();
 
     //#endregion
 
