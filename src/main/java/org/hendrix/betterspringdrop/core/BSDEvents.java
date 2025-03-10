@@ -2,30 +2,31 @@ package org.hendrix.betterspringdrop.core;
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FireflyBushBlock;
-import net.minecraft.block.PillarBlock;
+import net.minecraft.block.*;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.block.EmptyFireflyBush;
 import org.hendrix.betterspringdrop.block.FireflyJarBlock;
 import org.hendrix.betterspringdrop.block.HollowBlock;
+import org.hendrix.betterspringdrop.block.WallMushroomBlock;
 import org.hendrix.betterspringdrop.component.type.FirefliesComponent;
 import org.hendrix.betterspringdrop.utils.WorldUtils;
 
@@ -135,6 +136,62 @@ public final class BSDEvents {
     }
 
     /**
+     * Place a {@link WallMushroomBlock Wall Mushroom Block} when right-clicking a {@link PillarBlock Log} with a mushroom
+     *
+     * @param player The {@link PlayerEntity Player}
+     * @param world The {@link World World reference}
+     * @param hand The {@link Hand Hand the Player is using}
+     * @param blockHitResult The {@link BlockHitResult Block Hit Result}
+     * @return The {@link ActionResult interaction Action Result}
+     */
+    private static ActionResult placeWallMushrooms(final PlayerEntity player, final World world, final Hand hand, final BlockHitResult blockHitResult) {
+        final BlockPos blockPos = blockHitResult.getBlockPos();
+        final BlockState blockState = world.getBlockState(blockPos);
+        final ItemStack itemStack = player.getStackInHand(hand);
+        final Direction direction = blockHitResult.getSide();
+        if(direction.getAxis().isHorizontal()) {
+            if(blockState.isIn(BlockTags.LOGS)) {
+                Block wallMushroomBlock = null;
+                if(itemStack.isOf(Items.BROWN_MUSHROOM)) {
+                    wallMushroomBlock = BSDBlocks.BROWN_WALL_MUSHROOM;
+                }
+                if(itemStack.isOf(Items.RED_MUSHROOM)) {
+                    wallMushroomBlock = BSDBlocks.RED_WALL_MUSHROOM;
+                }
+                if(wallMushroomBlock != null) {
+                    final BlockPos mushroomPos = blockPos.offset(direction);
+                    if(world.getBlockState(mushroomPos).isAir() || world.getBlockState(mushroomPos).isReplaceable()) {
+                        WorldUtils.setBlock(wallMushroomBlock.getDefaultState()
+                                .with(WallMushroomBlock.FACING, direction)
+                                .with(WallMushroomBlock.WATERLOGGED, Fluids.WATER.equals(world.getFluidState(mushroomPos).getFluid()))
+                            , player, hand, world, blockPos.offset(blockHitResult.getSide()), itemStack, SoundEvents.BLOCK_GRASS_PLACE);
+                    }
+                }
+            }
+            else if(canIncreaseMushroom(BSDBlocks.BROWN_WALL_MUSHROOM, Items.BROWN_MUSHROOM, blockState, itemStack) ||
+                    canIncreaseMushroom(BSDBlocks.RED_WALL_MUSHROOM, Items.RED_MUSHROOM, blockState, itemStack)) {
+                WorldUtils.setBlock(blockState
+                        .with(WallMushroomBlock.MUSHROOMS, Math.min(WallMushroomBlock.MAX_MUSHROOMS, blockState.get(WallMushroomBlock.MUSHROOMS) + 1))
+                    , player, hand, world, blockPos, itemStack, SoundEvents.BLOCK_GRASS_PLACE);
+            }
+        }
+        return ActionResult.PASS;
+    }
+
+    /**
+     * Check if an already placed {@link WallMushroomBlock Wall Mushroom} can be increased
+     *
+     * @param block The {@link Block Block to check}
+     * @param item The {@link Item Item to check}
+     * @param blockState The {@link BlockState current Block State}
+     * @param itemStack The {@link ItemStack held Item Stack}
+     * @return {@link Boolean True if Mushrooms can be increased}
+     */
+    private static boolean canIncreaseMushroom(final Block block, final Item item, final BlockState blockState, final ItemStack itemStack) {
+        return blockState.isOf(block) && blockState.contains(WallMushroomBlock.MUSHROOMS) && blockState.get(WallMushroomBlock.MUSHROOMS) < WallMushroomBlock.MAX_MUSHROOMS && itemStack.isOf(item);
+    }
+
+    /**
      * Append the modded Data Component Tooltips to Items
      *
      * @param itemStack The {@link ItemStack current Item Stack}
@@ -155,6 +212,7 @@ public final class BSDEvents {
     public static void register() {
         UseBlockCallback.EVENT.register(BSDEvents::hollowLog);
         UseBlockCallback.EVENT.register(BSDEvents::fillFireflyJar);
+        UseBlockCallback.EVENT.register(BSDEvents::placeWallMushrooms);
         ItemTooltipCallback.EVENT.register(BSDEvents::appendComponentTooltips);
     }
 

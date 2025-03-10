@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "mushrooms=1,facing=west": {
+      "model": "betterspringdrop:block/red_wall_mushroom_1",
+      "y": 90
+    },
+    "mushrooms=1,facing=south": {
+      "model": "betterspringdrop:block/red_wall_mushroom_1"
+    },
+    "mushrooms=1,facing=north": {
+      "model": "betterspringdrop:block/red_wall_mushroom_1",
+      "y": 180
+    },
+    "mushrooms=1,facing=east": {
+      "model": "betterspringdrop:block/red_wall_mushroom_1",
+      "y": 270
+    },
+    "mushrooms=2,facing=west": {
+      "model": "betterspringdrop:block/red_wall_mushroom_2",
+      "y": 90
+    },
+    "mushrooms=2,facing=south": {
+      "model": "betterspringdrop:block/red_wall_mushroom_2"
+    },
+    "mushrooms=2,facing=north": {
+      "model": "betterspringdrop:block/red_wall_mushroom_2",
+      "y": 180
+    },
+    "mushrooms=2,facing=east": {
+      "model": "betterspringdrop:block/red_wall_mushroom_2",
+      "y": 270
+    },
+    "mushrooms=3,facing=west": {
+      "model": "betterspringdrop:block/red_wall_mushroom_3",
+      "y": 90
+    },
+    "mushrooms=3,facing=south": {
+      "model": "betterspringdrop:block/red_wall_mushroom_3"
+    },
+    "mushrooms=3,facing=north": {
+      "model": "betterspringdrop:block/red_wall_mushroom_3",
+      "y": 180
+    },
+    "mushrooms=3,facing=east": {
+      "model": "betterspringdrop:block/red_wall_mushroom_3",
+      "y": 270
+    },
+    "mushrooms=4,facing=west": {
+      "model": "betterspringdrop:block/red_wall_mushroom_4",
+      "y": 90
+    },
+    "mushrooms=4,facing=south": {
+      "model": "betterspringdrop:block/red_wall_mushroom_4"
+    },
+    "mushrooms=4,facing=north": {
+      "model": "betterspringdrop:block/red_wall_mushroom_4",
+      "y": 180
+    },
+    "mushrooms=4,facing=east": {
+      "model": "betterspringdrop:block/red_wall_mushroom_4",
+      "y": 270
+    }
+  }
+}

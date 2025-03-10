@@ -39,7 +39,11 @@ public final class WorldUtils {
                 Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)player, blockPos, itemStack);
             }
             if (itemStack != null && !itemStack.isEmpty()) {
-                itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
+                if(itemStack.isDamageable()) {
+                    itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
+                } else {
+                    itemStack.decrementUnlessCreative(1, player);
+                }
             }
             boolean isClient = world.isClient;
             if(isClient) {

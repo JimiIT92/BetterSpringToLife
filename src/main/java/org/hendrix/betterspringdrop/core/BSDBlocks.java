@@ -128,6 +128,9 @@ public final class BSDBlocks {
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("prickly_pear")))
     )));
 
+    public static final Block BROWN_WALL_MUSHROOM = registerWallMushroom("brown_wall_mushroom", Blocks.BROWN_MUSHROOM);
+    public static final Block RED_WALL_MUSHROOM = registerWallMushroom("red_wall_mushroom", Blocks.RED_MUSHROOM);
+
     //#endregion
 
     //#region Flower Pots
@@ -269,6 +272,20 @@ public final class BSDBlocks {
                 .pistonBehavior(PistonBehavior.DESTROY)
                 .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name)))
         )));
+    }
+
+    /**
+     * Register a {@link WallMushroomBlock Wall Mushroom Block}
+     *
+     * @param name The {@link String Block Name}
+     * @param mushroomBlock The {@link Block Mushroom Block}
+     * @return The {@link Block registered Block}
+     */
+    private static Block registerWallMushroom(final String name, final Block mushroomBlock) {
+        return registerBlockWithoutBlockItem(name, Suppliers.memoize(() -> new WallMushroomBlock(mushroomBlock, AbstractBlock.Settings.copy(mushroomBlock)
+                .noCollision()
+                .breakInstantly()
+                .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier(name))))));
     }
 
     /**
