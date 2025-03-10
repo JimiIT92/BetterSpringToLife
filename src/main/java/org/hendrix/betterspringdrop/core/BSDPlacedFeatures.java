@@ -21,6 +21,8 @@ public final class BSDPlacedFeatures {
     public static final RegistryKey<PlacedFeature> PATCH_SNOWY_BUSH = registerKey("patch_snowy_bush");
     public static final RegistryKey<PlacedFeature> PATCH_SNOWY_GRASS = registerKey("patch_snowy_grass");
     public static final RegistryKey<PlacedFeature> PATCH_SNOWY_GRASS_MOUNTAINS = registerKey("patch_snowy_grass_mountains");
+    public static final RegistryKey<PlacedFeature> PATCH_ASPHODEL = registerKey("patch_asphodel");
+    public static final RegistryKey<PlacedFeature> PATCH_ASPHODEL_2 = registerKey("patch_asphodel_2");
 
     //#endregion
 

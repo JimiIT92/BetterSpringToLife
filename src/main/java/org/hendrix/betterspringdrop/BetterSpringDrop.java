@@ -22,6 +22,7 @@ public final class BetterSpringDrop implements ModInitializer {
     public void onInitialize() {
         BSDItemGroups.register();
         BSDDataComponentTypes.register();
+        BSDParticles.register();
         BSDItems.register();
         BSDBlocks.register();
 

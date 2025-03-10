@@ -49,6 +49,16 @@ public final class BSDBiomeFeatures {
                 BSDPlacedFeatures.FALLEN_HOLLOW_SUPER_BIRCH_TREE
         );
         BiomeModifications.addFeature(
+                BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                BSDPlacedFeatures.PATCH_ASPHODEL
+        );
+        BiomeModifications.addFeature(
+                BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                BSDPlacedFeatures.PATCH_ASPHODEL_2
+        );
+        BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(BiomeKeys.SNOWY_TAIGA, BiomeKeys.SNOWY_PLAINS, BiomeKeys.JAGGED_PEAKS, BiomeKeys.FROZEN_PEAKS, BiomeKeys.SNOWY_SLOPES, BiomeKeys.GROVE),
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 BSDPlacedFeatures.PATCH_SNOWY_BUSH

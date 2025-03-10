@@ -110,6 +110,19 @@ public final class BSDBlocks {
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("tall_snowy_grass")))
     )));
 
+    public static final Block ASPHODEL = registerBlock("asphodel", Suppliers.memoize(() -> new AsphodelBlock(
+            AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN)
+                    .replaceable()
+                    .noCollision()
+                    .breakInstantly()
+                    .offset(AbstractBlock.OffsetType.XZ)
+                    .burnable()
+                    .ticksRandomly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("asphodel")))
+    )));
+
     //#endregion
 
     //#region Flower Pots
@@ -339,6 +352,12 @@ public final class BSDBlocks {
                 AZALEA_LEAVES_PILE,
                 FLOWERING_AZALEA_LEAVES_PILE
         );
+        registerFlammableBlocks(60, 100,
+                SNOWY_BUSH,
+                SHORT_SNOWY_GRASS,
+                TALL_SNOWY_GRASS,
+                ASPHODEL
+        );
     }
 
     /**
@@ -388,8 +407,13 @@ public final class BSDBlocks {
                 PALE_OAK_LEAVES_PILE,
                 MANGROVE_LEAVES_PILE,
                 AZALEA_LEAVES_PILE,
-                FLOWERING_AZALEA_LEAVES_PILE
+                FLOWERING_AZALEA_LEAVES_PILE,
+                SNOWY_BUSH,
+                SHORT_SNOWY_GRASS,
+                TALL_SNOWY_GRASS
+
         ).forEach(block -> CompostingChanceRegistry.INSTANCE.add(block, 0.3F));
+        CompostingChanceRegistry.INSTANCE.add(ASPHODEL, 0.5F);
     }
 
     /**
