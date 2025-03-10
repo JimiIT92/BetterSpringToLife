@@ -7,11 +7,14 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.hendrix.betterspringdrop.core.BSDTags;
 
@@ -86,6 +89,19 @@ public class LeafPileBlock extends SnowBlock implements Waterloggable {
      */
     public FluidState getFluidState(final BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+    /**
+     * Prevent the block from "melting"
+     *
+     * @param state The {@link BlockState current Block State}
+     * @param world The {@link World World reference}
+     * @param pos The {@link BlockPos current Block Pos}
+     * @param random The {@link Random Random reference}
+     */
+    @Override
+    protected void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
+
     }
 
 }
