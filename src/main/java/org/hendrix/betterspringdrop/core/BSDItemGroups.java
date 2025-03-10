@@ -65,6 +65,7 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.ASPHODEL);
                         entries.add(BSDItems.FIREFLY_JAR);
                         entries.add(BSDItems.PRICKLY_PEAR);
+                        entries.add(BSDItems.MUSIC_DISC_BLOCK_BY_BLOCK);
                     })
                     .build()
     );

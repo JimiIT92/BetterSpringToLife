@@ -51,5 +51,8 @@
   "block.betterspringdrop.prickly_pear": "Prickly Pear",
   "block.betterspringdrop.brown_wall_mushroom": "Brown Wall Mushroom",
   "block.betterspringdrop.red_wall_mushroom": "Red Wall Mushroom",
-  "tooltips.betterspringdrop.fireflies": "Fireflies: %s / %s"
+  "item.betterspringdrop.music_disc_block_by_block": "Music Disc",
+  "item.betterspringdrop.music_disc_block_by_block.desc": "Suno - Block by Block",
+  "tooltips.betterspringdrop.fireflies": "Fireflies: %s / %s",
+  "jukebox_song.betterspringdrop.block_by_block": "Suno - Block by Block"
 }
