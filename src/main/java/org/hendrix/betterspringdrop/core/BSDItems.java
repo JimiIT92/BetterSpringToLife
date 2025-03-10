@@ -24,6 +24,7 @@ public final class BSDItems {
     //#region Items
 
     public static final Item FIREFLY_JAR = registerFireflyJar();
+    public static final Item PRICKLY_PEAR = registerPricklyPear();
 
     //#endregion
 
@@ -41,14 +42,36 @@ public final class BSDItems {
     }
 
     /**
+     * Register the {@link BSDBlocks#PRICKLY_PEAR Prickly Pear Item}
+     *
+     * @return The {@link Item registered Item}
+     */
+    private static Item registerPricklyPear() {
+        final Identifier identifier = IdentifierUtils.modIdentifier("prickly_pear");
+        return registerBlockItem(identifier, Suppliers.memoize(() -> BSDBlocks.PRICKLY_PEAR), blockItemSettings(identifier).food(BSDFoods.PRICKLY_PEAR));
+    }
+
+    /**
+     * Register a {@link BlockItem Block Item}
+     *
+     * @param identifier    The {@link Identifier Block Identifier}
+     * @param blockSupplier The {@link Supplier<Block> Block Supplier}
+     */
+    public static void registerBlockItem(final Identifier identifier, final Supplier<Block> blockSupplier) {
+        registerBlockItem(identifier, blockSupplier, blockItemSettings(identifier));
+    }
+
+    /**
      * Register a {@link BlockItem Block Item}
      *
      * @param identifier The {@link Identifier Block Identifier}
-     * @param blockSupplier The {@link Supplier < Block > Block Supplier}
+     * @param blockSupplier The {@link Supplier<Block> Block Supplier}
+     * @param settings The {@link Item.Settings Item Settings}
      */
-    public static void registerBlockItem(final Identifier identifier, final Supplier<Block> blockSupplier) {
-        Registry.register(Registries.ITEM, identifier, new BlockItem(blockSupplier.get(), blockItemSettings(identifier)));
+    public static Item registerBlockItem(final Identifier identifier, final Supplier<Block> blockSupplier, final Item.Settings settings) {
+        return registerItem(identifier.getPath(), Suppliers.memoize(() -> new BlockItem(blockSupplier.get(), settings)));
     }
+
 
     /**
      * Get the {@link Item.Settings Item Settings} of a {@link BlockItem Block Item}

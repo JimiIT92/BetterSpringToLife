@@ -123,6 +123,11 @@ public final class BSDBlocks {
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("asphodel")))
     )));
 
+    public static final Block PRICKLY_PEAR = registerBlockWithoutBlockItem("prickly_pear", Suppliers.memoize(() -> new CactusFlowerBlock(AbstractBlock.Settings.copy(Blocks.CACTUS_FLOWER)
+            .offset(AbstractBlock.OffsetType.XZ)
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("prickly_pear")))
+    )));
+
     //#endregion
 
     //#region Flower Pots

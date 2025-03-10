@@ -64,6 +64,7 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.TALL_SNOWY_GRASS);
                         entries.add(BSDBlocks.ASPHODEL);
                         entries.add(BSDItems.FIREFLY_JAR);
+                        entries.add(BSDItems.PRICKLY_PEAR);
                     })
                     .build()
     );
