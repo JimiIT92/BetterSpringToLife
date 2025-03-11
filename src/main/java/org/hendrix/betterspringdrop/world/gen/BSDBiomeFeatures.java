@@ -73,6 +73,11 @@ public final class BSDBiomeFeatures {
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 BSDPlacedFeatures.PATCH_SNOWY_GRASS_MOUNTAINS
         );
+        BiomeModifications.addFeature(
+                BiomeSelectors.includeByKey(BiomeKeys.WOODED_BADLANDS),
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                BSDPlacedFeatures.PATCH_CACTUS_MESA
+        );
     }
 
 }

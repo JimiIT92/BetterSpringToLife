@@ -23,6 +23,7 @@ public final class BSDPlacedFeatures {
     public static final RegistryKey<PlacedFeature> PATCH_SNOWY_GRASS_MOUNTAINS = registerKey("patch_snowy_grass_mountains");
     public static final RegistryKey<PlacedFeature> PATCH_ASPHODEL = registerKey("patch_asphodel");
     public static final RegistryKey<PlacedFeature> PATCH_ASPHODEL_2 = registerKey("patch_asphodel_2");
+    public static final RegistryKey<PlacedFeature> PATCH_CACTUS_MESA = registerKey("patch_cactus_mesa");
 
     //#endregion
 
