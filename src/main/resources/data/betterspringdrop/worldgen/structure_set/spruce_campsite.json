@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "betterspringdrop:spruce_campsite",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1642136477,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}
