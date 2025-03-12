@@ -6,12 +6,15 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.client.particle.AsphodelParticle;
+import org.hendrix.betterspringdrop.client.render.entity.MoobloomEntityRenderer;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
+import org.hendrix.betterspringdrop.core.BSDEntities;
 import org.hendrix.betterspringdrop.core.BSDParticles;
 
 import java.util.Arrays;
@@ -52,8 +55,10 @@ public final class BetterSpringDropClient implements ClientModInitializer {
                 BSDBlocks.POTTED_TALL_DRY_GRASS,
                 BSDBlocks.POTTED_SHORT_SNOWY_GRASS,
                 BSDBlocks.POTTED_TALL_SNOWY_GRASS,
+                BSDBlocks.POTTED_BUTTERCUP,
                 BSDBlocks.ASPHODEL,
-                BSDBlocks.PRICKLY_PEAR
+                BSDBlocks.PRICKLY_PEAR,
+                BSDBlocks.BUTTERCUP
         ).forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
 
         Arrays.asList(
@@ -70,6 +75,8 @@ public final class BetterSpringDropClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> BiomeColors.getGrassColor(Objects.requireNonNull(view), pos), BSDBlocks.POTTED_BUSH);
 
         ParticleFactoryRegistry.getInstance().register(BSDParticles.ASPHODEL, AsphodelParticle.Factory::new);
+
+        EntityRendererRegistry.register(BSDEntities.MOOBLOOM, MoobloomEntityRenderer::new);
 
     }
 

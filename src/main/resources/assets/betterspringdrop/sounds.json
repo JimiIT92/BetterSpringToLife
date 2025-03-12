@@ -6,5 +6,18 @@
         "stream": true
       }
     ]
+  },
+  "entity.moobloom.suspicious_milk": {
+    "sounds": [
+      "minecraft:mob/mooshroom/milk1",
+      "minecraft:mob/mooshroom/milk2",
+      "minecraft:mob/mooshroom/milk3"
+    ],
+    "subtitle": "subtitles.betterspringdrop.entity.moobloom.suspicious_milk"
+  },
+  "entity.moobloom.shear": {
+    "sounds": [
+      "minecraft:mob/sheep/shear"
+    ]
   }
 }

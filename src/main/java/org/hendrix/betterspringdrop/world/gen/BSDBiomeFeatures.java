@@ -2,9 +2,11 @@ package org.hendrix.betterspringdrop.world.gen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
+import org.hendrix.betterspringdrop.core.BSDEntities;
 import org.hendrix.betterspringdrop.core.BSDPlacedFeatures;
 
 /**
@@ -17,6 +19,8 @@ public final class BSDBiomeFeatures {
      */
     public static void modifyBiomes() {
         addFallenTrees();
+        addFlowers();
+        addSpawns();
     }
 
     /**
@@ -48,6 +52,12 @@ public final class BSDBiomeFeatures {
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 BSDPlacedFeatures.FALLEN_HOLLOW_SUPER_BIRCH_TREE
         );
+    }
+
+    /**
+     * Add the modded flowers to biomes
+     */
+    private static void addFlowers() {
         BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
                 GenerationStep.Feature.VEGETAL_DECORATION,
@@ -77,6 +87,20 @@ public final class BSDBiomeFeatures {
                 BiomeSelectors.includeByKey(BiomeKeys.WOODED_BADLANDS),
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 BSDPlacedFeatures.PATCH_CACTUS_MESA
+        );
+    }
+
+    /**
+     * Add the modded mobs to biomes
+     */
+    private static void addSpawns() {
+        BiomeModifications.addSpawn(
+                BiomeSelectors.includeByKey(BiomeKeys.FLOWER_FOREST),
+                SpawnGroup.CREATURE,
+                BSDEntities.MOOBLOOM,
+                10,
+                1,
+                3
         );
     }
 

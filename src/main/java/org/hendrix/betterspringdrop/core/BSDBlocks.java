@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -131,6 +132,11 @@ public final class BSDBlocks {
     public static final Block BROWN_WALL_MUSHROOM = registerWallMushroom("brown_wall_mushroom", Blocks.BROWN_MUSHROOM);
     public static final Block RED_WALL_MUSHROOM = registerWallMushroom("red_wall_mushroom", Blocks.RED_MUSHROOM);
 
+    public static final Block BUTTERCUP = registerBlock("buttercup", Suppliers.memoize(() -> new FlowerBlock(StatusEffects.ABSORPTION, 0.35F, AbstractBlock.Settings
+            .copy(Blocks.DANDELION)
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, IdentifierUtils.modIdentifier("buttercup")))
+    )));
+
     //#endregion
 
     //#region Flower Pots
@@ -145,6 +151,8 @@ public final class BSDBlocks {
 
     public static final Block POTTED_SHORT_SNOWY_GRASS = registerFlowerPot("potted_short_snowy_grass", Suppliers.memoize(() -> SHORT_SNOWY_GRASS));
     public static final Block POTTED_TALL_SNOWY_GRASS = registerFlowerPot("potted_tall_snowy_grass", Suppliers.memoize(() -> TALL_SNOWY_GRASS));
+
+    public static final Block POTTED_BUTTERCUP = registerFlowerPot("potted_buttercup", Suppliers.memoize(() -> BUTTERCUP));
 
     //#endregion
 

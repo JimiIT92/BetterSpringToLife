@@ -3,8 +3,11 @@ package org.hendrix.betterspringdrop.core;
 import com.google.common.base.Suppliers;
 import net.minecraft.block.Block;
 import net.minecraft.block.jukebox.JukeboxSong;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -29,6 +32,8 @@ public final class BSDItems {
     public static final Item PRICKLY_PEAR = registerPricklyPear();
 
     public static final Item MUSIC_DISC_BLOCK_BY_BLOCK = registerMusicDisc("music_disc_block_by_block", BSDJukeboxSongs.BLOCK_BY_BLOCK);
+
+    public static final Item MOOBLOOM_SPAWN_EGG = registerSpawnEgg("moobloom_spawn_egg", Suppliers.memoize(() -> BSDEntities.MOOBLOOM));
 
     //#endregion
 
@@ -68,6 +73,21 @@ public final class BSDItems {
                 .maxCount(1)
                 .rarity(Rarity.UNCOMMON)
                 .jukeboxPlayable(song)
+                .useItemPrefixedTranslationKey()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, identifier))
+        )));
+    }
+
+    /**
+     * Register a {@link SpawnEggItem Spawn Egg Item}
+     *
+     * @param name The {@link String Item name}
+     * @param entityType The {@link Supplier<EntityType> Spawn Egg Entity Type Supplier}
+     * @return The {@link Item registered Item}
+     */
+    private static Item registerSpawnEgg(final String name, final Supplier<EntityType<? extends MobEntity>> entityType) {
+        final Identifier identifier = IdentifierUtils.modIdentifier(name);
+        return registerItem(name, Suppliers.memoize(() -> new SpawnEggItem(entityType.get(), new Item.Settings()
                 .useItemPrefixedTranslationKey()
                 .registryKey(RegistryKey.of(RegistryKeys.ITEM, identifier))
         )));

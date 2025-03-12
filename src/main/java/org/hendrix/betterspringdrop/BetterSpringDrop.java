@@ -26,6 +26,7 @@ public final class BetterSpringDrop implements ModInitializer {
         BSDParticles.register();
         BSDItems.register();
         BSDBlocks.register();
+        BSDEntities.register();
 
         BSDBlocks.registerStrippables();
         BSDBlocks.registerFlammableBlocks();

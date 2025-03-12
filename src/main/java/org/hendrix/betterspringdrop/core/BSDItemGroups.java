@@ -63,9 +63,11 @@ public final class BSDItemGroups {
                         entries.add(BSDBlocks.SHORT_SNOWY_GRASS);
                         entries.add(BSDBlocks.TALL_SNOWY_GRASS);
                         entries.add(BSDBlocks.ASPHODEL);
+                        entries.add(BSDBlocks.BUTTERCUP);
                         entries.add(BSDItems.FIREFLY_JAR);
                         entries.add(BSDItems.PRICKLY_PEAR);
                         entries.add(BSDItems.MUSIC_DISC_BLOCK_BY_BLOCK);
+                        entries.add(BSDItems.MOOBLOOM_SPAWN_EGG);
                     })
                     .build()
     );
