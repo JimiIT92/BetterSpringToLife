@@ -34,6 +34,7 @@ public final class BSDItems {
     public static final Item MUSIC_DISC_BLOCK_BY_BLOCK = registerMusicDisc("music_disc_block_by_block", BSDJukeboxSongs.BLOCK_BY_BLOCK);
 
     public static final Item MOOBLOOM_SPAWN_EGG = registerSpawnEgg("moobloom_spawn_egg", Suppliers.memoize(() -> BSDEntities.MOOBLOOM));
+    public static final Item MUDDY_PIG_SPAWN_EGG = registerSpawnEgg("muddy_pig_spawn_egg", Suppliers.memoize(() -> BSDEntities.MUDDY_PIG));
 
     //#endregion
 

@@ -1,16 +1,16 @@
 package org.hendrix.betterspringdrop.entity;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.SuspiciousStewEffectsComponent;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Shearable;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.conversion.EntityConversionContext;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.AbstractCowEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
@@ -19,34 +19,26 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.hendrix.betterspringdrop.core.BSDEntities;
 import org.hendrix.betterspringdrop.core.BSDSounds;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-
 /**
- * Implementation class for a {@link AbstractCowEntity Moobloom}
+ * Implementation class for a {@link PigEntity Muddy Pig}
  */
-public class MoobloomEntity extends AbstractCowEntity implements Shearable {
+public class MuddyPigEntity extends PigEntity implements Shearable {
 
     /**
-     * {@link TrackedData<Boolean> Whether the Mooblom has flowers}
+     * {@link TrackedData<Boolean> Whether the Muddy Pig has a flower}
      */
-    private static final TrackedData<Boolean> HAS_FLOWERS = DataTracker.registerData(MoobloomEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    /**
-     * {@link TrackedData<Integer> The Mooblom time left for flowers to regrow}
-     */
-    private static final TrackedData<Integer> FLOWER_REGROW_TIME = DataTracker.registerData(MoobloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    /**
-     * The {@link Integer maximum time for flowers to regrow in ticks}
-     */
-    private static final int MAX_REGROW_TIME = 6000;
+    private static final TrackedData<Boolean> HAS_FLOWER = DataTracker.registerData(MuddyPigEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     /**
      * Constructor. Set the entity properties
@@ -54,26 +46,8 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      * @param entityType The {@link EntityType Entity Type}
      * @param world The {@link World World reference}
      */
-    public MoobloomEntity(final EntityType<? extends AbstractCowEntity> entityType, final World world) {
+    public MuddyPigEntity(final EntityType<? extends PigEntity> entityType, final World world) {
         super(entityType, world);
-    }
-
-    /**
-     * Tick the entity
-     *
-     * @param world The {@link ServerWorld World reference}
-     */
-    protected void mobTick(final ServerWorld world) {
-        if(!this.isBaby() && !this.hasFlowers()) {
-            final int flowerGrowTime = this.dataTracker.get(FLOWER_REGROW_TIME) - 1;
-            if(flowerGrowTime <= 0) {
-                this.setHasFlowers(true);
-            } else {
-                this.dataTracker.set(FLOWER_REGROW_TIME, flowerGrowTime);
-            }
-
-        }
-        super.mobTick(world);
     }
 
     /**
@@ -83,8 +57,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      */
     protected void initDataTracker(final DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(HAS_FLOWERS, true);
-        builder.add(FLOWER_REGROW_TIME, MAX_REGROW_TIME);
+        builder.add(HAS_FLOWER, false);
     }
 
     /**
@@ -96,27 +69,31 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      */
     public ActionResult interactMob(final PlayerEntity player, Hand hand) {
         final ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.isOf(Items.BOWL) && !this.isBaby() && this.hasFlowers()) {
-            final ItemStack suspiciousStew = new ItemStack(Items.SUSPICIOUS_STEW);
-            suspiciousStew.set(DataComponentTypes.SUSPICIOUS_STEW_EFFECTS, new SuspiciousStewEffectsComponent(Collections.singletonList(new SuspiciousStewEffectsComponent.StewEffect(StatusEffects.ABSORPTION, 100))));
-            this.playSound(BSDSounds.ENTITY_MOOBLOOM_SUSPICIOUS_MILK, 1.0F, 1.0F);
-            return ActionResult.SUCCESS.withNewHandStack(ItemUsage.exchangeStack(itemStack, player, suspiciousStew, false));
-        }
-        else if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
+        if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
             final World world = this.getWorld();
             if (world instanceof ServerWorld serverWorld) {
                 this.sheared(serverWorld, SoundCategory.PLAYERS, itemStack);
                 this.emitGameEvent(GameEvent.SHEAR, player);
                 itemStack.damage(1, player, getSlotForHand(hand));
-                this.dropStack(serverWorld, new ItemStack(BSDBlocks.BUTTERCUP, 4));
+                this.dropStack(serverWorld, new ItemStack(Blocks.POPPY, 1));
             }
             return ActionResult.SUCCESS;
         }
+        else if (itemStack.isOf(Items.WATER_BUCKET)) {
+            final World world = this.getWorld();
+            if (world instanceof ServerWorld serverWorld) {
+                world.playSoundFromEntity(null, player, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                this.clean(serverWorld);
+                player.setStackInHand(hand, ItemUsage.exchangeStack(itemStack, player, new ItemStack(Items.BUCKET)));
+            }
+            return ActionResult.SUCCESS;
+        }
+
         return super.interactMob(player, hand);
     }
 
     /**
-     * Shear the Moobloom
+     * Shear the Muddy Pig
      *
      * @param world The {@link World World reference}
      * @param shearedSoundCategory The {@link SoundCategory Sound Category for the Shear sound}
@@ -126,8 +103,17 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
     public void sheared(final ServerWorld world, final SoundCategory shearedSoundCategory, final ItemStack shears) {
         world.playSoundFromEntity(null, this, BSDSounds.ENTITY_MOOBLOOM_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
         world.spawnParticles(ParticleTypes.EXPLOSION, this.getX(), this.getBodyY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-        this.setHasFlowers(false);
-        this.dataTracker.set(FLOWER_REGROW_TIME, MAX_REGROW_TIME);
+        this.setHasFlower(false);
+    }
+
+    /**
+     * Clean the Muddy Pig
+     *
+     * @param world The {@link World World reference}
+     */
+    public void clean(final ServerWorld world) {
+        world.spawnParticles(ParticleTypes.FALLING_WATER, this.getX(), this.getBodyY(0.5D) + 0.5D, this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+        this.convertTo(EntityType.PIG, EntityConversionContext.create(this, false, false), (pig) -> { });
     }
 
     /**
@@ -135,39 +121,39 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      *
      * @param world The {@link ServerWorld World reference}
      * @param entity The {@link PassiveEntity parent entity}
-     * @return The {@link PassiveEntity child entity}
+     * @return The {@link PigEntity child entity}
      */
     @Override
-    public @Nullable PassiveEntity createChild(final ServerWorld world, final PassiveEntity entity) {
-        return BSDEntities.MOOBLOOM.create(world, SpawnReason.BREEDING);
+    public @Nullable PigEntity createChild(final ServerWorld world, final PassiveEntity entity) {
+        return BSDEntities.MUDDY_PIG.create(world, SpawnReason.BREEDING);
     }
 
     /**
-     * Check if the Moobloom can be sheared
+     * Check if the Muddy Pig can be sheared
      *
-     * @return {@link Boolean True if is alive, not a baby and has flowers}
+     * @return {@link Boolean True if is alive, not a baby and has a flower}
      */
     @Override
     public boolean isShearable() {
-        return this.isAlive() && !this.isBaby() && this.hasFlowers();
+        return this.isAlive() && !this.isBaby() && this.hasFlower();
     }
 
     /**
-     * Set the flowers status of the Moobloom
+     * Set the flower status of the Muddy Pig
      *
-     * @param hasFlowers {@link Boolean Whether the Moobloom has flowers or not}
+     * @param hasFlower {@link Boolean Whether the Muddy Pig has a flower or not}
      */
-    private void setHasFlowers(final boolean hasFlowers) {
-        this.dataTracker.set(HAS_FLOWERS, hasFlowers);
+    private void setHasFlower(final boolean hasFlower) {
+        this.dataTracker.set(HAS_FLOWER, hasFlower);
     }
 
     /**
-     * Check if the Moobloom has flowers
+     * Check if the Muddy Pig has a flower
      *
-     * @return {@link Boolean True if the Moobloom has flowers}
+     * @return {@link Boolean True if the Muddy Pig has a flower}
      */
-    public boolean hasFlowers() {
-        return this.dataTracker.get(HAS_FLOWERS);
+    public boolean hasFlower() {
+        return this.dataTracker.get(HAS_FLOWER);
     }
 
     /**
@@ -177,8 +163,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      */
     public void writeCustomDataToNbt(final NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("HasFlowers", this.hasFlowers());
-        nbt.putInt("FlowerRegrowTime", this.dataTracker.get(FLOWER_REGROW_TIME));
+        nbt.putBoolean("HasFlower", this.hasFlower());
     }
 
     /**
@@ -188,8 +173,21 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      */
     public void readCustomDataFromNbt(final NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        this.setHasFlowers(nbt.getBoolean("HasFlowers").orElse(true));
-        this.dataTracker.set(FLOWER_REGROW_TIME, nbt.getInt("FlowerRegrowTime").orElse(MAX_REGROW_TIME));
+        this.setHasFlower(nbt.getBoolean("HasFlower").orElse(false));
+    }
+
+    /**
+     * Initialize the entity
+     *
+     * @param world The {@link ServerWorldAccess World reference}
+     * @param difficulty The {@link LocalDifficulty difficulty level}
+     * @param spawnReason The {@link SpawnReason Spawn Reason}
+     * @param entityData The {@link EntityData custom Entity Data}
+     * @return {@link EntityData The Entity Data}
+     */
+    public EntityData initialize(final ServerWorldAccess world, final LocalDifficulty difficulty, final SpawnReason spawnReason, final @Nullable EntityData entityData) {
+        this.setHasFlower(this.getRandom().nextBoolean());
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
 }

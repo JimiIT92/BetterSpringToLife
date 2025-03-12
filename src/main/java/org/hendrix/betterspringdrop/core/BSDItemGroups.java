@@ -68,6 +68,7 @@ public final class BSDItemGroups {
                         entries.add(BSDItems.PRICKLY_PEAR);
                         entries.add(BSDItems.MUSIC_DISC_BLOCK_BY_BLOCK);
                         entries.add(BSDItems.MOOBLOOM_SPAWN_EGG);
+                        entries.add(BSDItems.MUDDY_PIG_SPAWN_EGG);
                     })
                     .build()
     );

@@ -13,6 +13,7 @@ import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.client.particle.AsphodelParticle;
 import org.hendrix.betterspringdrop.client.render.entity.MoobloomEntityRenderer;
+import org.hendrix.betterspringdrop.client.render.entity.MuddyPigEntityRenderer;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.hendrix.betterspringdrop.core.BSDEntities;
 import org.hendrix.betterspringdrop.core.BSDParticles;
@@ -77,6 +78,7 @@ public final class BetterSpringDropClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(BSDParticles.ASPHODEL, AsphodelParticle.Factory::new);
 
         EntityRendererRegistry.register(BSDEntities.MOOBLOOM, MoobloomEntityRenderer::new);
+        EntityRendererRegistry.register(BSDEntities.MUDDY_PIG, MuddyPigEntityRenderer::new);
 
     }
 

@@ -102,6 +102,14 @@ public final class BSDBiomeFeatures {
                 1,
                 3
         );
+        BiomeModifications.addSpawn(
+                BiomeSelectors.includeByKey(BiomeKeys.MANGROVE_SWAMP),
+                SpawnGroup.CREATURE,
+                BSDEntities.MUDDY_PIG,
+                15,
+                2,
+                4
+        );
     }
 
 }
