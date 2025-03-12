@@ -5,6 +5,7 @@ import net.minecraft.component.type.SuspiciousStewEffectsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Shearable;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
@@ -56,6 +58,31 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      */
     public MoobloomEntity(final EntityType<? extends AbstractCowEntity> entityType, final World world) {
         super(entityType, world);
+    }
+
+    /**
+     * Initialize the entity goals
+     */
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 2.0F));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0F));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25F, this::isBreedingItem, false));
+        this.goalSelector.add(4, new FollowParentGoal(this, 1.25F));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0F));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(7, new LookAroundGoal(this));
+    }
+
+    /**
+     * Check if the {@link ItemStack Item Stack} can be used to breed the entity
+     *
+     * @param itemStack The {@link ItemStack Item Stack}
+     * @return {@link Boolean True} if is a {@link BSDBlocks#BUTTERCUP Buttercup} or is in the {@link ItemTags#COW_FOOD Cow Food Tag}
+     */
+    public boolean isBreedingItem(final ItemStack itemStack) {
+        return itemStack.isOf(BSDBlocks.BUTTERCUP.asItem());
     }
 
     /**
