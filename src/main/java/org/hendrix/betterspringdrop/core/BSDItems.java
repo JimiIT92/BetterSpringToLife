@@ -35,6 +35,7 @@ public final class BSDItems {
 
     public static final Item MOOBLOOM_SPAWN_EGG = registerSpawnEgg("moobloom_spawn_egg", Suppliers.memoize(() -> BSDEntities.MOOBLOOM));
     public static final Item MUDDY_PIG_SPAWN_EGG = registerSpawnEgg("muddy_pig_spawn_egg", Suppliers.memoize(() -> BSDEntities.MUDDY_PIG));
+    public static final Item BUTTERFLY_SPAWN_EGG = registerSpawnEgg("butterfly_spawn_egg", Suppliers.memoize(() -> BSDEntities.BUTTERFLY));
 
     //#endregion
 

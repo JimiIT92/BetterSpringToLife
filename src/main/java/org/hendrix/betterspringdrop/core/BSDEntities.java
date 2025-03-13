@@ -12,6 +12,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
+import org.hendrix.betterspringdrop.entity.ButterflyEntity;
 import org.hendrix.betterspringdrop.entity.MoobloomEntity;
 import org.hendrix.betterspringdrop.entity.MuddyPigEntity;
 import org.hendrix.betterspringdrop.utils.IdentifierUtils;
@@ -40,6 +41,14 @@ public final class BSDEntities {
                     .maxTrackingRange(10)
     );
 
+    public static final EntityType<ButterflyEntity> BUTTERFLY = registerEntity(
+            "butterfly",
+            EntityType.Builder.create(ButterflyEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.9F, 0.1F)
+                    .eyeHeight(0.05F)
+                    .maxTrackingRange(8)
+    );
+
     //#endregion
 
     /**
@@ -61,6 +70,7 @@ public final class BSDEntities {
     public static void register() {
         FabricDefaultAttributeRegistry.register(MOOBLOOM, AbstractCowEntity.createCowAttributes());
         FabricDefaultAttributeRegistry.register(MUDDY_PIG, PigEntity.createPigAttributes());
+        FabricDefaultAttributeRegistry.register(BUTTERFLY, ButterflyEntity.createButterflyAttributes());
     }
 
 }

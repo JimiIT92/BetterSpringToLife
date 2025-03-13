@@ -6,14 +6,18 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.client.particle.AsphodelParticle;
+import org.hendrix.betterspringdrop.client.render.entity.ButterflyEntityRenderer;
 import org.hendrix.betterspringdrop.client.render.entity.MoobloomEntityRenderer;
 import org.hendrix.betterspringdrop.client.render.entity.MuddyPigEntityRenderer;
+import org.hendrix.betterspringdrop.client.render.entity.model.BSDEntityModelLayers;
+import org.hendrix.betterspringdrop.client.render.entity.model.ButterflyEntityModel;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.hendrix.betterspringdrop.core.BSDEntities;
 import org.hendrix.betterspringdrop.core.BSDParticles;
@@ -79,6 +83,9 @@ public final class BetterSpringDropClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(BSDEntities.MOOBLOOM, MoobloomEntityRenderer::new);
         EntityRendererRegistry.register(BSDEntities.MUDDY_PIG, MuddyPigEntityRenderer::new);
+        EntityRendererRegistry.register(BSDEntities.BUTTERFLY, ButterflyEntityRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(BSDEntityModelLayers.BUTTERFLY, ButterflyEntityModel::getTexturedModelData);
 
     }
 
