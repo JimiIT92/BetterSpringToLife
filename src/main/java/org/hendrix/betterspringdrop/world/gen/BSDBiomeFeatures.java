@@ -111,7 +111,7 @@ public final class BSDBiomeFeatures {
                 4
         );
         BiomeModifications.addSpawn(
-                BiomeSelectors.includeByKey(BiomeKeys.BIRCH_FOREST, BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST),
+                BiomeSelectors.includeByKey(BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST),
                 SpawnGroup.CREATURE,
                 BSDEntities.BUTTERFLY,
                 30,
