@@ -81,6 +81,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      * @param itemStack The {@link ItemStack Item Stack}
      * @return {@link Boolean True} if is a {@link BSDBlocks#BUTTERCUP Buttercup} or is in the {@link ItemTags#COW_FOOD Cow Food Tag}
      */
+    @Override
     public boolean isBreedingItem(final ItemStack itemStack) {
         return itemStack.isOf(BSDBlocks.BUTTERCUP.asItem());
     }
@@ -90,6 +91,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      *
      * @param world The {@link ServerWorld World reference}
      */
+    @Override
     protected void mobTick(final ServerWorld world) {
         if(!this.isBaby() && !this.hasFlowers()) {
             final int flowerGrowTime = this.dataTracker.get(FLOWER_REGROW_TIME) - 1;
@@ -108,6 +110,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      *
      * @param builder The {@link DataTracker.Builder Data Tracker Builder}
      */
+    @Override
     protected void initDataTracker(final DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(HAS_FLOWERS, true);
@@ -121,7 +124,8 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      * @param hand The {@link Hand Hand the Player is using}
      * @return The {@link ActionResult interaction result}
      */
-    public ActionResult interactMob(final PlayerEntity player, Hand hand) {
+    @Override
+    public ActionResult interactMob(final PlayerEntity player, final Hand hand) {
         final ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.isOf(Items.BOWL) && !this.isBaby() && this.hasFlowers()) {
             final ItemStack suspiciousStew = new ItemStack(Items.SUSPICIOUS_STEW);
@@ -202,6 +206,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      *
      * @param nbt The {@link NbtCompound NBT Compound Data}
      */
+    @Override
     public void writeCustomDataToNbt(final NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasFlowers", this.hasFlowers());
@@ -213,6 +218,7 @@ public class MoobloomEntity extends AbstractCowEntity implements Shearable {
      *
      * @param nbt The {@link NbtCompound NBT Compound Data}
      */
+    @Override
     public void readCustomDataFromNbt(final NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasFlowers(nbt.getBoolean("HasFlowers").orElse(true));

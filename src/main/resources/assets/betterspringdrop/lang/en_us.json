@@ -63,12 +63,5 @@
   "entity.betterspringdrop.moobloom": "Moobloom",
   "entity.betterspringdrop.muddy_pig": "Muddy Pig",
   "entity.betterspringdrop.butterfly": "Butterfly",
-  "subtitles.betterspringdrop.entity.moobloom.suspicious_milk": "Moobloom gets milked suspiciously",
-  "tag.item.betterspringdrop.block.bushes": "Bushes (Better Spring Drop)",
-  "tag.item.betterspringdrop.block.snowy_vegetation_may_place_on": "Snowy Vegetation May Place On (Better Spring Drop)",
-  "tag.item.betterspringdrop.block.butterflies_spawnable_on": "Butterflies Spawnable On (Better Spring Drop)",
-  "tag.item.betterspringdrop.item.bushes": "Bushes (Better Spring Drop)",
-  "tag.item.betterspringdrop.worldgen.biome.has_structure.birch_campsite": "Has Birch Campsites (Better Spring Drop)",
-  "tag.item.betterspringdrop.worldgen.biome.has_structure.oak_campsite": "Has Oak Campsites (Better Spring Drop)",
-  "tag.item.betterspringdrop.worldgen.biome.has_structure.spruce_campsite": "Has Spruce Campsites (Better Spring Drop)"
+  "subtitles.betterspringdrop.entity.moobloom.suspicious_milk": "Moobloom gets milked suspiciously"
 }

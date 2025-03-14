@@ -5,6 +5,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.component.type.FirefliesComponent;
+import org.hendrix.betterspringdrop.entity.ButterflyEntity;
 import org.hendrix.betterspringdrop.utils.IdentifierUtils;
 
 import java.util.function.UnaryOperator;
@@ -17,6 +18,7 @@ public final class BSDDataComponentTypes {
     //#region Data Component Types
 
     public static final ComponentType<FirefliesComponent> FIREFLIES = register("fireflies", (builder) -> builder.codec(FirefliesComponent.CODEC).packetCodec(FirefliesComponent.PACKET_CODEC));
+    public static final ComponentType<ButterflyEntity.Variant> BUTTERFLY_VARIANT = register("butterfly/variant", (builder) -> builder.codec(ButterflyEntity.Variant.CODEC).packetCodec(ButterflyEntity.Variant.PACKET_CODEC));
 
     //#endregion
 

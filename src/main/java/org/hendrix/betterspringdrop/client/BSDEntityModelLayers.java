@@ -1,4 +1,4 @@
-package org.hendrix.betterspringdrop.client.render.entity.model;
+package org.hendrix.betterspringdrop.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

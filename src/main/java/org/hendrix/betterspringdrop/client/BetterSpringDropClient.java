@@ -16,7 +16,6 @@ import org.hendrix.betterspringdrop.client.particle.AsphodelParticle;
 import org.hendrix.betterspringdrop.client.render.entity.ButterflyEntityRenderer;
 import org.hendrix.betterspringdrop.client.render.entity.MoobloomEntityRenderer;
 import org.hendrix.betterspringdrop.client.render.entity.MuddyPigEntityRenderer;
-import org.hendrix.betterspringdrop.client.render.entity.model.BSDEntityModelLayers;
 import org.hendrix.betterspringdrop.client.render.entity.model.ButterflyEntityModel;
 import org.hendrix.betterspringdrop.core.BSDBlocks;
 import org.hendrix.betterspringdrop.core.BSDEntities;

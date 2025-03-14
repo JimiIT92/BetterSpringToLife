@@ -55,6 +55,7 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      *
      * @param builder The {@link DataTracker.Builder Data Tracker Builder}
      */
+    @Override
     protected void initDataTracker(final DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(HAS_FLOWER, false);
@@ -67,7 +68,8 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      * @param hand The {@link Hand Hand the Player is using}
      * @return The {@link ActionResult interaction result}
      */
-    public ActionResult interactMob(final PlayerEntity player, Hand hand) {
+    @Override
+    public ActionResult interactMob(final PlayerEntity player, final Hand hand) {
         final ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
             final World world = this.getWorld();
@@ -161,6 +163,7 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      *
      * @param nbt The {@link NbtCompound NBT Compound Data}
      */
+    @Override
     public void writeCustomDataToNbt(final NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasFlower", this.hasFlower());
@@ -171,6 +174,7 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      *
      * @param nbt The {@link NbtCompound NBT Compound Data}
      */
+    @Override
     public void readCustomDataFromNbt(final NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasFlower(nbt.getBoolean("HasFlower").orElse(false));
@@ -185,6 +189,7 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      * @param entityData The {@link EntityData custom Entity Data}
      * @return {@link EntityData The Entity Data}
      */
+    @Override
     public EntityData initialize(final ServerWorldAccess world, final LocalDifficulty difficulty, final SpawnReason spawnReason, final @Nullable EntityData entityData) {
         this.setHasFlower(this.getRandom().nextBoolean());
         return super.initialize(world, difficulty, spawnReason, entityData);

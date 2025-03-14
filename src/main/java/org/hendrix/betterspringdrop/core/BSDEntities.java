@@ -44,8 +44,9 @@ public final class BSDEntities {
     public static final EntityType<ButterflyEntity> BUTTERFLY = registerEntity(
             "butterfly",
             EntityType.Builder.create(ButterflyEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.9F, 0.1F)
-                    .eyeHeight(0.05F)
+                    .dimensions(0.3F, 0.25F)
+                    .dropsNothing()
+                    .eyeHeight(0.19F)
                     .maxTrackingRange(8)
     );
 
