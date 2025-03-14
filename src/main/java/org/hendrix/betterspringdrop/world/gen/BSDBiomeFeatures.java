@@ -98,7 +98,7 @@ public final class BSDBiomeFeatures {
                 BiomeSelectors.includeByKey(BiomeKeys.FLOWER_FOREST),
                 SpawnGroup.CREATURE,
                 BSDEntities.MOOBLOOM,
-                10,
+                20,
                 1,
                 3
         );
@@ -114,7 +114,7 @@ public final class BSDBiomeFeatures {
                 BiomeSelectors.includeByKey(BiomeKeys.BIRCH_FOREST, BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST),
                 SpawnGroup.CREATURE,
                 BSDEntities.BUTTERFLY,
-                15,
+                30,
                 3,
                 5
         );

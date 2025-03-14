@@ -36,11 +36,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.*;
 import org.hendrix.betterspringdrop.core.BSDDataComponentTypes;
+import org.hendrix.betterspringdrop.core.BSDTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntFunction;
@@ -327,6 +326,20 @@ public class ButterflyEntity extends PathAwareEntity implements Flutterer {
     @Override
     public boolean isInAir() {
         return !this.isOnGround();
+    }
+
+    /**
+     * Check if the entity can spawn at the current {@link BlockPos Block Pos}
+     *
+     * @param type The {@link EntityType<ButterflyEntity> Entity Type}
+     * @param world The {@link WorldAccess World reference}
+     * @param spawnReason The {@link SpawnReason Spawn Reason}
+     * @param pos The {@link BlockPos current BLock Pos}
+     * @param random The {@link Random Random reference}
+     * @return {@link Boolean True if the entity can spawn}
+     */
+    public static boolean canSpawn(final EntityType<ButterflyEntity> type, final WorldAccess world, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
+        return world.getBlockState(pos.down()).isIn(BSDTags.BlockTags.BUTTERFLIES_SPAWNABLE_ON) && world.getBaseLightLevel(pos, 0) > 8;
     }
 
     /**
