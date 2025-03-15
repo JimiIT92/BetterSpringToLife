@@ -13,7 +13,7 @@ public final class BSDJukeboxSongs {
 
     //#region Jukebox Songs
 
-    public static final RegistryKey<JukeboxSong> BLOCK_BY_BLOCK = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, IdentifierUtils.modIdentifier("block_by_block"));
+    public static final RegistryKey<JukeboxSong> SWEDEN = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, IdentifierUtils.modIdentifier("sweden"));
 
     //#endregion
 

@@ -122,7 +122,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "betterspringdrop:music_disc_block_by_block",
+          "name": "betterspringdrop:music_disc_sweden",
           "weight": 1,
           "functions": [
             {
