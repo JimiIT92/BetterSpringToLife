@@ -9,10 +9,7 @@ import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.FlyGoal;
-import net.minecraft.entity.ai.goal.FollowMobGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -29,6 +26,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 import net.minecraft.util.function.ValueLists;
@@ -98,9 +96,10 @@ public class ButterflyEntity extends PathAwareEntity implements Flutterer {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(2, new ButterflyEntity.FlyOntoTreeGoal(this, 1.0F));
-        this.goalSelector.add(3, new FollowMobGoal(this, 1.0F, 3.0F, 7.0F));
+        this.goalSelector.add(1, new TemptGoal(this, 1.25F, itemStack -> itemStack.isIn(ItemTags.SMALL_FLOWERS), false));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(3, new ButterflyEntity.FlyOntoTreeGoal(this, 1.0F));
+        this.goalSelector.add(4, new FollowMobGoal(this, 1.0F, 3.0F, 7.0F));
     }
 
     /**
