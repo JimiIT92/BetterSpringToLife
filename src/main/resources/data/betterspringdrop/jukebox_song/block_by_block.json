@@ -1,8 +1,0 @@
-{
-  "comparator_output": 15,
-  "description": {
-    "translate": "jukebox_song.betterspringdrop.block_by_block"
-  },
-  "length_in_seconds": 193.0,
-  "sound_event": "betterspringdrop:music_disc_block_by_block"
-}

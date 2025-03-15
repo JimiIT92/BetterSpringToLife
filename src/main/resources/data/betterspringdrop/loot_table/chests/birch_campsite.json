@@ -119,18 +119,6 @@
           ],
           "name": "minecraft:birch_log",
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "betterspringdrop:music_disc_block_by_block",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 1,
-              "add": false
-            }
-          ]
         }
       ],
       "rolls": 4

@@ -2,7 +2,6 @@ package org.hendrix.betterspringdrop.core;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.block.Block;
-import net.minecraft.block.jukebox.JukeboxSong;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.BlockItem;
@@ -13,7 +12,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import org.hendrix.betterspringdrop.BetterSpringDrop;
 import org.hendrix.betterspringdrop.component.type.FirefliesComponent;
 import org.hendrix.betterspringdrop.item.FireflyJarItem;
@@ -30,8 +28,6 @@ public final class BSDItems {
 
     public static final Item FIREFLY_JAR = registerFireflyJar();
     public static final Item PRICKLY_PEAR = registerPricklyPear();
-
-    public static final Item MUSIC_DISC_BLOCK_BY_BLOCK = registerMusicDisc("music_disc_block_by_block", BSDJukeboxSongs.BLOCK_BY_BLOCK);
 
     public static final Item MOOBLOOM_SPAWN_EGG = registerSpawnEgg("moobloom_spawn_egg", Suppliers.memoize(() -> BSDEntities.MOOBLOOM));
     public static final Item MUDDY_PIG_SPAWN_EGG = registerSpawnEgg("muddy_pig_spawn_egg", Suppliers.memoize(() -> BSDEntities.MUDDY_PIG));
@@ -60,24 +56,6 @@ public final class BSDItems {
     private static Item registerPricklyPear() {
         final Identifier identifier = IdentifierUtils.modIdentifier("prickly_pear");
         return registerBlockItem(identifier, Suppliers.memoize(() -> BSDBlocks.PRICKLY_PEAR), blockItemSettings(identifier).food(BSDFoods.PRICKLY_PEAR));
-    }
-
-    /**
-     * Register a {@link Item Music Disc Item}
-     *
-     * @param name The {@link String Item name}
-     * @param song The {@link RegistryKey<JukeboxSong> Jukebox Song}
-     * @return The {@link Item registered Item}
-     */
-    private static Item registerMusicDisc(final String name, final RegistryKey<JukeboxSong> song) {
-        final Identifier identifier = IdentifierUtils.modIdentifier(name);
-        return registerItem(name, Suppliers.memoize(() -> new Item(new Item.Settings()
-                .maxCount(1)
-                .rarity(Rarity.UNCOMMON)
-                .jukeboxPlayable(song)
-                .useItemPrefixedTranslationKey()
-                .registryKey(RegistryKey.of(RegistryKeys.ITEM, identifier))
-        )));
     }
 
     /**

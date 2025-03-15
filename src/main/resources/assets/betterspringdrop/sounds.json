@@ -1,12 +1,4 @@
 {
-  "music_disc_block_by_block": {
-    "sounds": [
-      {
-        "name": "betterspringdrop:music_disc_block_by_block",
-        "stream": true
-      }
-    ]
-  },
   "entity.moobloom.suspicious_milk": {
     "sounds": [
       "minecraft:mob/mooshroom/milk1",
