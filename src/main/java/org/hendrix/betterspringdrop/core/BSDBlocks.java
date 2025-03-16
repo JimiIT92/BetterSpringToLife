@@ -154,6 +154,8 @@ public final class BSDBlocks {
 
     public static final Block POTTED_BUTTERCUP = registerFlowerPot("potted_buttercup", Suppliers.memoize(() -> BUTTERCUP));
 
+    public static final Block POTTED_PRICKLY_PEAR = registerFlowerPot("potted_prickly_pear", Suppliers.memoize(() -> PRICKLY_PEAR));
+
     //#endregion
 
     //#region Misc

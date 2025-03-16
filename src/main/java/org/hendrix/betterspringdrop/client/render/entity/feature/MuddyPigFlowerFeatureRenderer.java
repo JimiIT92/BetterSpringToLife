@@ -53,7 +53,7 @@ public class MuddyPigFlowerFeatureRenderer extends FeatureRenderer<MuddyPigEntit
      */
     @Override
     public void render(final MatrixStack matrixStack, final VertexConsumerProvider vertexConsumerProvider, final int light, final MuddyPigEntityRenderState muddyPigEntityRenderState, final float limbAngle, final float limbDistance) {
-        if (!muddyPigEntityRenderState.baby && muddyPigEntityRenderState.hasFlower) {
+        if (muddyPigEntityRenderState.hasFlower) {
             final boolean renderFlowerModel = muddyPigEntityRenderState.hasOutline && muddyPigEntityRenderState.invisible;
             if (!muddyPigEntityRenderState.invisible || renderFlowerModel) {
                 final BlockState blockState = Blocks.POPPY.getDefaultState();

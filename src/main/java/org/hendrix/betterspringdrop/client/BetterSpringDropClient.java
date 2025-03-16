@@ -60,6 +60,7 @@ public final class BetterSpringDropClient implements ClientModInitializer {
                 BSDBlocks.POTTED_SHORT_SNOWY_GRASS,
                 BSDBlocks.POTTED_TALL_SNOWY_GRASS,
                 BSDBlocks.POTTED_BUTTERCUP,
+                BSDBlocks.POTTED_PRICKLY_PEAR,
                 BSDBlocks.ASPHODEL,
                 BSDBlocks.PRICKLY_PEAR,
                 BSDBlocks.BUTTERCUP

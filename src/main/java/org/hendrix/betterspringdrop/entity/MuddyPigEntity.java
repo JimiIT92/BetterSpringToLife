@@ -127,7 +127,11 @@ public class MuddyPigEntity extends PigEntity implements Shearable {
      */
     @Override
     public @Nullable PigEntity createChild(final ServerWorld world, final PassiveEntity entity) {
-        return BSDEntities.MUDDY_PIG.create(world, SpawnReason.BREEDING);
+        final MuddyPigEntity child = BSDEntities.MUDDY_PIG.create(world, SpawnReason.BREEDING);
+        if(child != null) {
+            child.setHasFlower(false);
+        }
+        return child;
     }
 
     /**
