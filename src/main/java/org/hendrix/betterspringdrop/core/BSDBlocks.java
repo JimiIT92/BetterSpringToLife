@@ -388,7 +388,9 @@ public final class BSDBlocks {
                 SNOWY_BUSH,
                 SHORT_SNOWY_GRASS,
                 TALL_SNOWY_GRASS,
-                ASPHODEL
+                ASPHODEL,
+                PRICKLY_PEAR,
+                BUTTERCUP
         );
     }
 
@@ -445,7 +447,8 @@ public final class BSDBlocks {
                 TALL_SNOWY_GRASS
 
         ).forEach(block -> CompostingChanceRegistry.INSTANCE.add(block, 0.3F));
-        CompostingChanceRegistry.INSTANCE.add(ASPHODEL, 0.5F);
+        CompostingChanceRegistry.INSTANCE.add(ASPHODEL, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(BUTTERCUP, 0.65F);
     }
 
     /**

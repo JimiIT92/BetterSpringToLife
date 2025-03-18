@@ -17,8 +17,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Versions (please complete the following information)**
-- Minecraft: [e.g. 1.21.1]
-- Fabric: [e.g. 0.118.6]
+- Minecraft: [e.g. 1.21.5]
+- Fabric: [e.g. 0.119.1]
 - BetterSpringDrop: [e.g. 1.0]
 
 **Additional context**
