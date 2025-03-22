@@ -1,9 +1,0 @@
-{
-  "parent": "betterspringdrop:block/hollow_cube",
-  "textures": {
-    "end": "minecraft:block/stripped_birch_log_top",
-    "side": "minecraft:block/stripped_birch_log",
-    "inner": "minecraft:block/stripped_birch_log",
-    "particle": "minecraft:block/stripped_birch_log"
-  }
-}

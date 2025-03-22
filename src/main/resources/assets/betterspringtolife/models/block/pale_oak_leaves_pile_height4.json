@@ -1,0 +1,6 @@
+{
+    "parent": "betterspringtolife:block/leaves_pile_height4",
+    "textures": {
+        "leaves": "minecraft:block/pale_oak_leaves"
+    }
+}

@@ -2,12 +2,12 @@
 
 ## Supported Versions
 
-This repository contains the source code for [Hendrix's Better Spring Drop](https://modrinth.com/mod/hendrixs-better-spring-drop).
+This repository contains the source code for [Hendrix's Better Spring to Life](https://modrinth.com/mod/hendrixs-better-spring-to-life).
 Only latest major release (and relative minors) will be supported. Any other release prior to these will be automatically considered deprecated as soon as a new release is out.
 
 ## Reporting a Vulnerability
 
-The only place to report a bug or an issue is the [Issue Tracker](https://github.com/JimiIT92/BetterSpringDrop/issues) of this repository.
+The only place to report a bug or an issue is the [Issue Tracker](https://github.com/JimiIT92/BetterSpringToLife/issues) of this repository.
 
 **DO NOT SEND EMAILS**.
 

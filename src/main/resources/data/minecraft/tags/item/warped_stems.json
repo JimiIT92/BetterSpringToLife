@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "betterspringdrop:hollow_warped_stem",
-    "betterspringdrop:hollow_stripped_warped_stem"
+    "betterspringtolife:hollow_warped_stem",
+    "betterspringtolife:hollow_stripped_warped_stem"
   ]
 }

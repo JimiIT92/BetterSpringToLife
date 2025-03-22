@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betterspringtolife:block/short_snowy_grass"
+  }
+}

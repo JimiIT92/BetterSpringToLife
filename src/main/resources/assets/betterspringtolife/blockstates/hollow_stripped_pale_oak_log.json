@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "betterspringtolife:block/hollow_stripped_pale_oak_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "betterspringtolife:block/hollow_stripped_pale_oak_log"
+    },
+    "axis=z": {
+      "model": "betterspringtolife:block/hollow_stripped_pale_oak_log",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "music_disc_sweden": {
+    "sounds": [
+      {
+        "name": "betterspringtolife:music_disc_sweden",
+        "stream": true
+      }
+    ]
+  },
+  "entity.moobloom.suspicious_milk": {
+    "sounds": [
+      "minecraft:mob/mooshroom/milk1",
+      "minecraft:mob/mooshroom/milk2",
+      "minecraft:mob/mooshroom/milk3"
+    ],
+    "subtitle": "subtitles.betterspringtolife.entity.moobloom.suspicious_milk"
+  },
+  "entity.moobloom.shear": {
+    "sounds": [
+      "minecraft:mob/sheep/shear"
+    ]
+  }
+}

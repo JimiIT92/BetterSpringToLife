@@ -1,0 +1,6 @@
+{
+	"parent": "betterspringtolife:block/wall_mushroom_2",
+	"textures": {
+		"mushroom": "minecraft:block/brown_mushroom_block"
+	}
+}

@@ -1,6 +1,0 @@
-{
-    "parent": "betterspringdrop:block/leaves_pile_height8",
-    "textures": {
-        "leaves": "minecraft:block/jungle_leaves"
-    }
-}

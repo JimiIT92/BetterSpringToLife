@@ -1,6 +1,0 @@
-{
-  "parent": "betterspringdrop:block/firefly_jar",
-  "textures": {
-    "lantern": "betterspringdrop:block/firefly_jar_2"
-  }
-}

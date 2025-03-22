@@ -324,7 +324,7 @@
     "prickly_pear": {
       "conditions": {
         "item": {
-          "items": "betterspringdrop:prickly_pear"
+          "items": "betterspringtolife:prickly_pear"
         }
       },
       "trigger": "minecraft:consume_item"

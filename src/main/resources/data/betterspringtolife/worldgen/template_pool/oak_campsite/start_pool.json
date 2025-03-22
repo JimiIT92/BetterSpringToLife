@@ -1,0 +1,15 @@
+{
+  "name": "betterspringtolife:oak_campsite/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterspringtolife:oak_campsite",
+        "processors": "betterspringtolife:campsite",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

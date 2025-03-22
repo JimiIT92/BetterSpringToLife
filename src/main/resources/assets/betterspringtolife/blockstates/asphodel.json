@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "betterspringtolife:block/asphodel_bottom"
+    },
+    "half=upper": {
+      "model": "betterspringtolife:block/asphodel_top"
+    }
+  }
+}

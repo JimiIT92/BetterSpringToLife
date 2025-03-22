@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "betterspringdrop:hollow_bamboo_block",
-    "betterspringdrop:hollow_stripped_bamboo_block"
+    "betterspringtolife:hollow_bamboo_block",
+    "betterspringtolife:hollow_stripped_bamboo_block"
   ]
 }

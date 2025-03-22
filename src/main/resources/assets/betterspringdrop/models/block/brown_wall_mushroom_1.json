@@ -1,6 +1,0 @@
-{
-	"parent": "betterspringdrop:block/wall_mushroom_1",
-	"textures": {
-		"mushroom": "minecraft:block/brown_mushroom_block"
-	}
-}

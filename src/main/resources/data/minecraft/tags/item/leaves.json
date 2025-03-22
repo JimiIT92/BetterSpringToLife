@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "betterspringdrop:oak_leaves_pile",
-    "betterspringdrop:spruce_leaves_pile",
-    "betterspringdrop:birch_leaves_pile",
-    "betterspringdrop:jungle_leaves_pile",
-    "betterspringdrop:acacia_leaves_pile",
-    "betterspringdrop:cherry_leaves_pile",
-    "betterspringdrop:dark_oak_leaves_pile",
-    "betterspringdrop:pale_oak_leaves_pile",
-    "betterspringdrop:mangrove_leaves_pile",
-    "betterspringdrop:azalea_leaves_pile",
-    "betterspringdrop:flowering_azalea_leaves_pile"
+    "betterspringtolife:oak_leaves_pile",
+    "betterspringtolife:spruce_leaves_pile",
+    "betterspringtolife:birch_leaves_pile",
+    "betterspringtolife:jungle_leaves_pile",
+    "betterspringtolife:acacia_leaves_pile",
+    "betterspringtolife:cherry_leaves_pile",
+    "betterspringtolife:dark_oak_leaves_pile",
+    "betterspringtolife:pale_oak_leaves_pile",
+    "betterspringtolife:mangrove_leaves_pile",
+    "betterspringtolife:azalea_leaves_pile",
+    "betterspringtolife:flowering_azalea_leaves_pile"
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_buttercup": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterspringtolife:buttercup"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterspringtolife:yellow_dye_from_buttercup"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_buttercup"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterspringtolife:yellow_dye_from_buttercup"
+    ]
+  }
+}

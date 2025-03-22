@@ -11,14 +11,14 @@
     "issues": "${mod_url}/issues"
   },
   "license": "MIT",
-  "icon": "assets/betterspringdrop/icon.png",
+  "icon": "assets/betterspringtolife/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "org.hendrix.betterspringdrop.BetterSpringDrop"
+      "org.hendrix.betterspringtolife.BetterSpringToLife"
     ],
     "client": [
-      "org.hendrix.betterspringdrop.client.BetterSpringDropClient"
+      "org.hendrix.betterspringtolife.client.BetterSpringToLifeClient"
     ]
   },
   "mixins": [
@@ -28,6 +28,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "java": ">=21",
-    "minecraft": "${snapshot_version}"
+    "minecraft": "~${snapshot_version}"
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Add your ideas to BetterSpringDrop!
+about: Add your ideas to BetterSpringToLife!
 title: ''
 labels: enhancement
 assignees: JimiIT92

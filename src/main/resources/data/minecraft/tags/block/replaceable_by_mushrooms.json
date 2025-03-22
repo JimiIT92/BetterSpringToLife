@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "betterspringdrop:empty_firefly_bush",
-    "betterspringdrop:snowy_bush",
-    "betterspringdrop:short_snowy_grass",
-    "betterspringdrop:tall_snowy_grass"
+    "betterspringtolife:empty_firefly_bush",
+    "betterspringtolife:snowy_bush",
+    "betterspringtolife:short_snowy_grass",
+    "betterspringtolife:tall_snowy_grass"
   ]
 }

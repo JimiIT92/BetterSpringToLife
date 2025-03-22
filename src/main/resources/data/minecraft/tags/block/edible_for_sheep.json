@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "betterspringdrop:short_snowy_grass",
-    "betterspringdrop:tall_snowy_grass"
+    "betterspringtolife:short_snowy_grass",
+    "betterspringtolife:tall_snowy_grass"
   ]
 }
