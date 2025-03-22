@@ -6,7 +6,7 @@ import org.hendrix.betterspringtolife.world.gen.BSTLBiomeFeatures;
 
 /**
  * Hendrix's Better Spring to Life
- * Improve the Spring to Life Drop with new Hollow Logs, Firefly Jars, Butterflies and more!
+ * Improve the Minecraft Forests with new Hollow Logs, Firefly Jars, new ambient mobs and more!
  */
 public final class BetterSpringToLife implements ModInitializer {
 
