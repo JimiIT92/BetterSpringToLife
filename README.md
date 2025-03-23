@@ -5,7 +5,7 @@
 [![](http://cf.way2muchnoise.eu/full_1225597_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/hendrixs-better-pale-garden)
 [![](https://img.shields.io/modrinth/dt/FwTcHrQD?logo=modrinth&label=Modrinth&color=darkgreen)](https://modrinth.com/mod/hendrixs-better-pale-garden)
 
-The Spring to LIfe Drop brings variety to the overworld by adding new mob variants and some nice ambient features, like fallen
+The Spring to Life Drop brings variety to the overworld by adding new mob variants and some nice ambient features, like fallen
 trees and wildflowers.
 
 These additions bring life to the overworld forests, however there are still some features that might be added
