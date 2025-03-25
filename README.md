@@ -15,7 +15,7 @@ So here's this mod, adding more ambient features like hollow logs, new mobs, fir
 
 -------------------------
 
-### 🌫️ Features
+### 🌸 Features
 
 #### FIREFLY JARS
 
