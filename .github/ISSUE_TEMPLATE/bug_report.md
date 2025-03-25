@@ -18,7 +18,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Versions (please complete the following information)**
 - Minecraft: [e.g. 1.21.5]
-- Fabric: [e.g. 0.119.3]
+- Fabric: [e.g. 0.119.5]
 - BetterSpringToLife: [e.g. 1.0]
 
 **Additional context**
