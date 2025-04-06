@@ -9,5 +9,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "betterspringtolife-refmap.json"
+  "refmap": "BetterSpringToLife-refmap.json"
 }
