@@ -3,13 +3,13 @@ package org.hendrix.betterspringtolife.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
@@ -35,7 +35,8 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
      */
     @Override
     public void onInitializeClient() {
-        Arrays.asList(
+        BlockRenderLayerMap.putBlocks(
+                BlockRenderLayer.CUTOUT_MIPPED,
                 BSTLBlocks.FIREFLY_JAR,
                 BSTLBlocks.EMPTY_FIREFLY_BUSH,
                 BSTLBlocks.SNOWY_BUSH,
@@ -64,7 +65,7 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
                 BSTLBlocks.ASPHODEL,
                 BSTLBlocks.PRICKLY_PEAR,
                 BSTLBlocks.BUTTERCUP
-        ).forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
+        );
 
         Arrays.asList(
                 BSTLBlocks.OAK_LEAVES_PILE,

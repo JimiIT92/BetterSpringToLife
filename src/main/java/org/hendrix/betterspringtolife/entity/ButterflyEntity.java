@@ -22,11 +22,12 @@ import net.minecraft.entity.mob.AmbientEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 import net.minecraft.util.function.ValueLists;
@@ -126,25 +127,25 @@ public final class ButterflyEntity extends PathAwareEntity implements Flutterer 
     }
 
     /**
-     * Write the entity data to {@link NbtCompound NBT}
+     * Write the entity data to {@link net.minecraft.storage.WriteView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link net.minecraft.storage.WriteView NBT Compound Data}
      */
     @Override
-    public void writeCustomDataToNbt(final NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    public void writeCustomData(final WriteView nbt) {
+        super.writeCustomData(nbt);
         nbt.put("Variant", ButterflyEntity.Variant.INDEX_CODEC, this.getVariant());
     }
 
     /**
-     * Read the entity data from the {@link NbtCompound NBT}
+     * Read the entity data from the {@link net.minecraft.storage.ReadView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link net.minecraft.storage.ReadView NBT Compound Data}
      */
     @Override
-    public void readCustomDataFromNbt(final NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.setVariant(nbt.get("Variant", Variant.INDEX_CODEC).orElse(Variant.DEFAULT));
+    public void readCustomData(final ReadView nbt) {
+        super.readCustomData(nbt);
+        this.setVariant(nbt.read("Variant", Variant.INDEX_CODEC).orElse(Variant.DEFAULT));
     }
 
     /**
@@ -230,7 +231,7 @@ public final class ButterflyEntity extends PathAwareEntity implements Flutterer 
     @Override
     protected EntityNavigation createNavigation(final World world) {
         final BirdNavigation birdNavigation = new BirdNavigation(this, world);
-        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanOpenDoors(false);
         birdNavigation.setCanSwim(true);
         return birdNavigation;
     }

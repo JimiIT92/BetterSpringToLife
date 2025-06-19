@@ -15,11 +15,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.LocalDifficulty;
@@ -163,25 +164,25 @@ public final class MuddyPigEntity extends PigEntity implements Shearable {
     }
 
     /**
-     * Write the entity data to {@link NbtCompound NBT}
+     * Write the entity data to {@link WriteView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link WriteView NBT Compound Data}
      */
     @Override
-    public void writeCustomDataToNbt(final NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    public void writeCustomData(final WriteView nbt) {
+        super.writeCustomData(nbt);
         nbt.putBoolean("HasFlower", this.hasFlower());
     }
 
     /**
-     * Read the entity data from the {@link NbtCompound NBT}
+     * Read the entity data from the {@link ReadView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link ReadView NBT Compound Data}
      */
     @Override
-    public void readCustomDataFromNbt(final NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.setHasFlower(nbt.getBoolean("HasFlower").orElse(false));
+    public void readCustomData(final ReadView nbt) {
+        super.readCustomData(nbt);
+        this.setHasFlower(nbt.getBoolean("HasFlower", false));
     }
 
     /**

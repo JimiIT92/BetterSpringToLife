@@ -16,11 +16,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -202,27 +203,27 @@ public final class MoobloomEntity extends AbstractCowEntity implements Shearable
     }
 
     /**
-     * Write the entity data to {@link NbtCompound NBT}
+     * Write the entity data to {@link WriteView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link WriteView NBT Compound Data}
      */
     @Override
-    public void writeCustomDataToNbt(final NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    public void writeCustomData(final WriteView nbt) {
+        super.writeCustomData(nbt);
         nbt.putBoolean("HasFlowers", this.hasFlowers());
         nbt.putInt("FlowerRegrowTime", this.dataTracker.get(FLOWER_REGROW_TIME));
     }
 
     /**
-     * Read the entity data from the {@link NbtCompound NBT}
+     * Read the entity data from the {@link ReadView NBT}
      *
-     * @param nbt The {@link NbtCompound NBT Compound Data}
+     * @param nbt The {@link ReadView NBT Compound Data}
      */
     @Override
-    public void readCustomDataFromNbt(final NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.setHasFlowers(nbt.getBoolean("HasFlowers").orElse(true));
-        this.dataTracker.set(FLOWER_REGROW_TIME, nbt.getInt("FlowerRegrowTime").orElse(MAX_REGROW_TIME));
+    public void readCustomData(final ReadView nbt) {
+        super.readCustomData(nbt);
+        this.setHasFlowers(nbt.getBoolean("HasFlowers", true));
+        this.dataTracker.set(FLOWER_REGROW_TIME, nbt.getInt("FlowerRegrowTime", MAX_REGROW_TIME));
     }
 
 }

@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockModelRenderer;
@@ -61,7 +62,8 @@ public final class MuddyPigFlowerFeatureRenderer extends FeatureRenderer<MuddyPi
                 final BlockStateModel blockStateModel = this.blockRenderManager.getModel(blockState);
 
                 matrixStack.push();
-                this.getContextModel().getPart("head").ifPresent(head -> {
+                ModelPart head = this.getContextModel().getRootPart().getChild("head");
+                if(head != null) {
                     head.applyTransform(matrixStack);
                     matrixStack.translate(0.0F, -0.7F, -0.2F);
                     matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-65.0F));
@@ -70,7 +72,7 @@ public final class MuddyPigFlowerFeatureRenderer extends FeatureRenderer<MuddyPi
                     matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-10.0F));
                     matrixStack.translate(0.0F, -0.115F, 0.0F);
                     this.renderFlower(matrixStack, vertexConsumerProvider, light, renderFlowerModel, blockState, overlay, blockStateModel);
-                });
+                }
                 matrixStack.pop();
             }
         }
