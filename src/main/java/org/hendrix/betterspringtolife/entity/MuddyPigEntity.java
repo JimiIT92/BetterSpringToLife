@@ -73,17 +73,17 @@ public final class MuddyPigEntity extends PigEntity implements Shearable {
     public ActionResult interactMob(final PlayerEntity player, final Hand hand) {
         final ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
-            final World world = this.getWorld();
+            final World world = this.getEntityWorld();
             if (world instanceof ServerWorld serverWorld) {
                 this.sheared(serverWorld, SoundCategory.PLAYERS, itemStack);
                 this.emitGameEvent(GameEvent.SHEAR, player);
-                itemStack.damage(1, player, getSlotForHand(hand));
+                itemStack.damage(1, player, hand.getEquipmentSlot());
                 this.dropStack(serverWorld, new ItemStack(Blocks.POPPY, 1));
             }
             return ActionResult.SUCCESS;
         }
         else if (itemStack.isOf(Items.WATER_BUCKET)) {
-            final World world = this.getWorld();
+            final World world = this.getEntityWorld();
             if (world instanceof ServerWorld serverWorld) {
                 world.playSoundFromEntity(null, player, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 this.clean(serverWorld);

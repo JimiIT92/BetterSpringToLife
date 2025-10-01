@@ -135,11 +135,11 @@ public final class MoobloomEntity extends AbstractCowEntity implements Shearable
             return ActionResult.SUCCESS.withNewHandStack(ItemUsage.exchangeStack(itemStack, player, suspiciousStew, false));
         }
         else if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
-            final World world = this.getWorld();
+            final World world = this.getEntityWorld();
             if (world instanceof ServerWorld serverWorld) {
                 this.sheared(serverWorld, SoundCategory.PLAYERS, itemStack);
                 this.emitGameEvent(GameEvent.SHEAR, player);
-                itemStack.damage(1, player, getSlotForHand(hand));
+                itemStack.damage(1, player, hand.getEquipmentSlot());
                 this.dropStack(serverWorld, new ItemStack(BSTLBlocks.BUTTERCUP, 4));
             }
             return ActionResult.SUCCESS;

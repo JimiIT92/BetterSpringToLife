@@ -89,7 +89,8 @@ public final class BSTLItems {
      */
     private static Item registerSpawnEgg(final String name, final Supplier<EntityType<? extends MobEntity>> entityType) {
         final Identifier identifier = IdentifierUtils.modIdentifier(name);
-        return registerItem(name, Suppliers.memoize(() -> new SpawnEggItem(entityType.get(), new Item.Settings()
+        return registerItem(name, Suppliers.memoize(() -> new SpawnEggItem(new Item.Settings()
+                .spawnEgg(entityType.get())
                 .useItemPrefixedTranslationKey()
                 .registryKey(RegistryKey.of(RegistryKeys.ITEM, identifier))
         )));

@@ -5,12 +5,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.BabyModelPair;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.equipment.EquipmentModel;
 import net.minecraft.client.render.entity.feature.SaddleFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PigEntityModel;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.PigVariant;
@@ -82,12 +84,12 @@ public final class MuddyPigEntityRenderer extends MobEntityRenderer<MuddyPigEnti
      *
      * @param muddyPigEntityRenderState The {@link MuddyPigEntityRenderState Muddy Pig Entity Render State}
      * @param matrixStack The {@link MatrixStack render matrix stack}
-     * @param vertexConsumerProvider The {@link VertexConsumerProvider Vertex Consumer provider}
-     * @param light The {@link Integer client light}
+     * @param orderedRenderCommandQueue The {@link OrderedRenderCommandQueue Ordered Render Command Queue provider}
+     * @param cameraRenderState The {@link CameraRenderState Camera Render State}
      */
-    public void render(final MuddyPigEntityRenderState muddyPigEntityRenderState, final MatrixStack matrixStack, final VertexConsumerProvider vertexConsumerProvider, final int light) {
+    public void render(final MuddyPigEntityRenderState muddyPigEntityRenderState, final MatrixStack matrixStack, final OrderedRenderCommandQueue orderedRenderCommandQueue, final CameraRenderState cameraRenderState) {
         this.model = this.modelPairs.get(PigVariant.Model.NORMAL).get(muddyPigEntityRenderState.baby);
-        super.render(muddyPigEntityRenderState, matrixStack, vertexConsumerProvider, light);
+        super.render(muddyPigEntityRenderState, matrixStack, orderedRenderCommandQueue, cameraRenderState);
     }
 
     /**

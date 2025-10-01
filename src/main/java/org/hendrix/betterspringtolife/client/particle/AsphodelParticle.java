@@ -9,6 +9,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.random.Random;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Implementation class for the {@link AscendingParticle Asphodel Particle}
@@ -67,14 +68,15 @@ public final class AsphodelParticle extends AscendingParticle {
          * @param velocityX The {@link Double Particle X velocity}
          * @param velocityY The {@link Double Particle Y velocity}
          * @param velocityZ The {@link Double Particle Z velocity}
+         * @param random The {@link Random random variable}
          * @return The {@link Particle spawned Particle}
          */
-        public Particle createParticle(final SimpleParticleType simpleParticleType, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            final Random random = world.random;
+        public Particle createParticle(final SimpleParticleType simpleParticleType, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ, final Random random) {
             final double particleVelocityX = (double)random.nextFloat() * (double)random.nextFloat() * 0.1;
             final double particleVelocityY = (double)random.nextFloat() * (double)-0.5F * (double)random.nextFloat() * 0.1;
             final double particleVelocityZ = (double)random.nextFloat() * (double)random.nextFloat() * 0.1;
             return new AsphodelParticle(world, x, y, z, particleVelocityX, particleVelocityY, particleVelocityZ, 1.0F, this.spriteProvider);
         }
+
     }
 }

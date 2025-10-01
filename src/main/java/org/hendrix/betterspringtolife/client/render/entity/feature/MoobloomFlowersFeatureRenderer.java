@@ -7,11 +7,13 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockModelRenderer;
 import net.minecraft.client.render.block.BlockRenderManager;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.CowEntityModel;
 import net.minecraft.client.render.model.BlockStateModel;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
@@ -45,16 +47,16 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
      * Render the flowers on top of a {@link MoobloomEntity Moobloom}
      *
      * @param matrixStack The {@link MatrixStack render matrix stack}
-     * @param vertexConsumerProvider The {@link VertexConsumerProvider Vertex Consumer Provider instance}
+     * @param orderedRenderCommandQueue The {@link OrderedRenderCommandQueue Ordered Render Command Queue provider}
      * @param light The {@link Integer client light}
      * @param moobloomEntityRenderState The {@link MoobloomEntityRenderState Moobloom Entity Render State}
      * @param limbAngle The {@link Float entity limb angle}
      * @param limbDistance The {@link Float entity limb distance}
      */
     @Override
-    public void render(final MatrixStack matrixStack, final VertexConsumerProvider vertexConsumerProvider, final int light, final MoobloomEntityRenderState moobloomEntityRenderState, final float limbAngle, final float limbDistance) {
+    public void render(final MatrixStack matrixStack, final OrderedRenderCommandQueue orderedRenderCommandQueue, final int light, final MoobloomEntityRenderState moobloomEntityRenderState, final float limbAngle, final float limbDistance) {
         if (!moobloomEntityRenderState.baby && moobloomEntityRenderState.hasFlowers) {
-            final boolean renderFlowerModel = moobloomEntityRenderState.hasOutline && moobloomEntityRenderState.invisible;
+            final boolean renderFlowerModel = moobloomEntityRenderState.hasOutline() && moobloomEntityRenderState.invisible;
             if (!moobloomEntityRenderState.invisible || renderFlowerModel) {
                 final BlockState blockState = BSTLBlocks.BUTTERCUP.getDefaultState();
                 final int overlay = LivingEntityRenderer.getOverlay(moobloomEntityRenderState, 0.0F);
@@ -65,7 +67,7 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-48.0F));
                 matrixStack.scale(-1.0F, -1.0F, 1.0F);
                 matrixStack.translate(-0.5F, -0.5F, -0.5F);
-                this.renderFlower(matrixStack, vertexConsumerProvider, light, renderFlowerModel, blockState, overlay, blockStateModel);
+                this.renderFlower(matrixStack, orderedRenderCommandQueue, light, renderFlowerModel, moobloomEntityRenderState.outlineColor, blockState, overlay, blockStateModel);
                 matrixStack.pop();
 
                 matrixStack.push();
@@ -75,7 +77,7 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-48.0F));
                 matrixStack.scale(-1.0F, -1.0F, 1.0F);
                 matrixStack.translate(-0.5F, -0.5F, -0.5F);
-                this.renderFlower(matrixStack, vertexConsumerProvider, light, renderFlowerModel, blockState, overlay, blockStateModel);
+                this.renderFlower(matrixStack, orderedRenderCommandQueue, light, renderFlowerModel, moobloomEntityRenderState.outlineColor, blockState, overlay, blockStateModel);
                 matrixStack.pop();
 
                 matrixStack.push();
@@ -85,7 +87,7 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(48.0F));
                 matrixStack.scale(-1.0F, -1.0F, 1.0F);
                 matrixStack.translate(-0.5F, -0.5F, -0.5F);
-                this.renderFlower(matrixStack, vertexConsumerProvider, light, renderFlowerModel, blockState, overlay, blockStateModel);
+                this.renderFlower(matrixStack, orderedRenderCommandQueue, light, renderFlowerModel, moobloomEntityRenderState.outlineColor, blockState, overlay, blockStateModel);
                 matrixStack.pop();
 
                 matrixStack.push();
@@ -94,7 +96,7 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-78.0F));
                 matrixStack.scale(-1.0F, -1.0F, 1.0F);
                 matrixStack.translate(-0.5F, -0.5F, -0.5F);
-                this.renderFlower(matrixStack, vertexConsumerProvider, light, renderFlowerModel, blockState, overlay, blockStateModel);
+                this.renderFlower(matrixStack, orderedRenderCommandQueue, light, renderFlowerModel, moobloomEntityRenderState.outlineColor, blockState, overlay, blockStateModel);
                 matrixStack.pop();
             }
         }
@@ -104,18 +106,19 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
      * Render a flower on top of a {@link MoobloomEntity Moobloom}
      *
      * @param matrixStack The {@link MatrixStack render matrix stack}
-     * @param vertexConsumerProvider The {@link VertexConsumerProvider Vertex Consumer Provider instance}
+     * @param orderedRenderCommandQueue The {@link OrderedRenderCommandQueue Ordered Render Command Queue provider}
      * @param light The {@link Integer client light}
      * @param renderAsModel {@link Boolean Whether the flower should be rendered on the entity model or not}
+     * @param outline The {@link Integer entity outline color}
      * @param flowerState The {@link BlockState flower Block State}
      * @param overlay The {@link Integer client overlay value}
      * @param flowerModel The {@link BlockStateModel flower Block State Model}
      */
-    private void renderFlower(final MatrixStack matrixStack, final VertexConsumerProvider vertexConsumerProvider, final int light, final boolean renderAsModel, final BlockState flowerState, final int overlay, final BlockStateModel flowerModel) {
+    private void renderFlower(final MatrixStack matrixStack, final OrderedRenderCommandQueue orderedRenderCommandQueue, final int light, final boolean renderAsModel, final int outline, final BlockState flowerState, final int overlay, final BlockStateModel flowerModel) {
         if (renderAsModel) {
-            BlockModelRenderer.render(matrixStack.peek(), vertexConsumerProvider.getBuffer(RenderLayer.getOutline(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay);
+            orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getOutline(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay, outline);
         } else {
-            this.blockRenderManager.renderBlockAsEntity(flowerState, matrixStack, vertexConsumerProvider, light, overlay);
+            orderedRenderCommandQueue.submitBlock(matrixStack, flowerState, light, overlay, outline);
         }
     }
 

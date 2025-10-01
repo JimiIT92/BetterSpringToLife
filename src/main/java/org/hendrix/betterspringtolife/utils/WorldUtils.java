@@ -40,12 +40,12 @@ public final class WorldUtils {
             }
             if (itemStack != null && !itemStack.isEmpty()) {
                 if(itemStack.isDamageable()) {
-                    itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
+                    itemStack.damage(1, player, hand.getEquipmentSlot());
                 } else {
                     itemStack.decrementUnlessCreative(1, player);
                 }
             }
-            boolean isClient = world.isClient;
+            boolean isClient = world.isClient();
             if(isClient) {
                 player.swingHand(hand);
                 player.playSound(sound, 1.0F, 1.0F);

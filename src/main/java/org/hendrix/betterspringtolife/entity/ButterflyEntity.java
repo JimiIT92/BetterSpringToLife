@@ -389,8 +389,8 @@ public final class ButterflyEntity extends PathAwareEntity implements Flutterer 
 
             for(BlockPos pos : BlockPos.iterate(MathHelper.floor(this.mob.getX() - (double)3.0F), MathHelper.floor(this.mob.getY() - (double)6.0F), MathHelper.floor(this.mob.getZ() - (double)3.0F), MathHelper.floor(this.mob.getX() + (double)3.0F), MathHelper.floor(this.mob.getY() + (double)6.0F), MathHelper.floor(this.mob.getZ() + (double)3.0F))) {
                 if (!blockPos.equals(pos)) {
-                    final BlockState blockState = this.mob.getWorld().getBlockState(mutable2.set(pos, Direction.DOWN));
-                    if ((blockState.getBlock() instanceof LeavesBlock || blockState.isIn(BlockTags.LOGS)) && this.mob.getWorld().isAir(pos) && this.mob.getWorld().isAir(mutable.set(pos, Direction.UP))) {
+                    final BlockState blockState = this.mob.getEntityWorld().getBlockState(mutable2.set(pos, Direction.DOWN));
+                    if ((blockState.getBlock() instanceof LeavesBlock || blockState.isIn(BlockTags.LOGS)) && this.mob.getEntityWorld().isAir(pos) && this.mob.getEntityWorld().isAir(mutable.set(pos, Direction.UP))) {
                         return Vec3d.ofBottomCenter(pos);
                     }
                 }
