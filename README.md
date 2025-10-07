@@ -1,7 +1,7 @@
 <img src="./.docs/logo.png" alt="Better Spring to Life logo"> 
 
-[![](https://img.shields.io/badge/Minecraft-1.21.9-success)](https://minecraft.net/)
-[![](https://img.shields.io/badge/Fabric-1.21.9--0.133.14-informational?logo=curseforge)](https://fabricmc.net/")
+[![](https://img.shields.io/badge/Minecraft-1.21.10-success)](https://minecraft.net/)
+[![](https://img.shields.io/badge/Fabric-1.21.10--0.134.1-informational?logo=curseforge)](https://fabricmc.net/")
 [![](http://cf.way2muchnoise.eu/full_1225597_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/hendrixs-better-spring-to-life)
 [![](https://img.shields.io/modrinth/dt/FwTcHrQD?logo=modrinth&label=Modrinth&color=darkgreen)](https://modrinth.com/mod/hendrixs-better-spring-to-life)
 
