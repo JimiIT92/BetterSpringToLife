@@ -88,6 +88,7 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(BSTLEntityModelLayers.BUTTERFLY, ButterflyEntityModel::getTexturedModelData);
 
+        BSTLClientEvents.register();
     }
 
 }

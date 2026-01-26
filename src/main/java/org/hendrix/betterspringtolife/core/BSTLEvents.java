@@ -1,20 +1,15 @@
 package org.hendrix.betterspringtolife.core;
 
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.*;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -29,8 +24,6 @@ import org.hendrix.betterspringtolife.block.HollowBlock;
 import org.hendrix.betterspringtolife.block.WallMushroomBlock;
 import org.hendrix.betterspringtolife.component.type.FirefliesComponent;
 import org.hendrix.betterspringtolife.utils.WorldUtils;
-
-import java.util.List;
 
 /**
  * {@link BetterSpringToLife Better Spring to Life} Events
@@ -191,19 +184,6 @@ public final class BSTLEvents {
         return blockState.isOf(block) && blockState.contains(WallMushroomBlock.MUSHROOMS) && blockState.get(WallMushroomBlock.MUSHROOMS) < WallMushroomBlock.MAX_MUSHROOMS && itemStack.isOf(item);
     }
 
-    /**
-     * Append the modded Data Component Tooltips to Items
-     *
-     * @param itemStack The {@link ItemStack current Item Stack}
-     * @param tooltipContext The {@link Item.TooltipContext Item Tooltip Context}
-     * @param tooltipType The {@link TooltipType Tooltip Type}
-     * @param tooltips The {@link List<Text> current Tooltips}
-     */
-    private static void appendComponentTooltips(final ItemStack itemStack, final Item.TooltipContext tooltipContext, final TooltipType tooltipType, final List<Text> tooltips) {
-        final TooltipDisplayComponent tooltipDisplayComponent = itemStack.getOrDefault(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplayComponent.DEFAULT);
-        itemStack.appendComponentTooltip(BSTLDataComponentTypes.FIREFLIES, tooltipContext, tooltipDisplayComponent, tooltips::add, tooltipType);
-    }
-
     //#endregion
 
     /**
@@ -213,7 +193,6 @@ public final class BSTLEvents {
         UseBlockCallback.EVENT.register(BSTLEvents::hollowLog);
         UseBlockCallback.EVENT.register(BSTLEvents::fillFireflyJar);
         UseBlockCallback.EVENT.register(BSTLEvents::placeWallMushrooms);
-        ItemTooltipCallback.EVENT.register(BSTLEvents::appendComponentTooltips);
     }
 
 }
