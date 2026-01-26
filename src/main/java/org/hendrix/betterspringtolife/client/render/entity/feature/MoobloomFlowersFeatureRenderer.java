@@ -3,9 +3,7 @@ package org.hendrix.betterspringtolife.client.render.entity.feature;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.BlockModelRenderer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -13,7 +11,6 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.CowEntityModel;
 import net.minecraft.client.render.model.BlockStateModel;
-import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
@@ -116,7 +113,7 @@ public final class MoobloomFlowersFeatureRenderer extends FeatureRenderer<Mooblo
      */
     private void renderFlower(final MatrixStack matrixStack, final OrderedRenderCommandQueue orderedRenderCommandQueue, final int light, final boolean renderAsModel, final int outline, final BlockState flowerState, final int overlay, final BlockStateModel flowerModel) {
         if (renderAsModel) {
-            orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getOutline(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay, outline);
+            orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayers.outlineNoCull(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay, outline);
         } else {
             orderedRenderCommandQueue.submitBlock(matrixStack, flowerState, light, overlay, outline);
         }

@@ -7,9 +7,9 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.client.render.entity.EntityRendererFactories;
 import net.minecraft.world.biome.FoliageColors;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
@@ -36,7 +36,7 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.putBlocks(
-                BlockRenderLayer.CUTOUT_MIPPED,
+                BlockRenderLayer.CUTOUT,
                 BSTLBlocks.FIREFLY_JAR,
                 BSTLBlocks.EMPTY_FIREFLY_BUSH,
                 BSTLBlocks.SNOWY_BUSH,
@@ -82,9 +82,9 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(BSTLParticles.ASPHODEL, AsphodelParticle.Factory::new);
 
-        EntityRendererRegistry.register(BSTLEntities.MOOBLOOM, MoobloomEntityRenderer::new);
-        EntityRendererRegistry.register(BSTLEntities.MUDDY_PIG, MuddyPigEntityRenderer::new);
-        EntityRendererRegistry.register(BSTLEntities.BUTTERFLY, ButterflyEntityRenderer::new);
+        EntityRendererFactories.register(BSTLEntities.MOOBLOOM, MoobloomEntityRenderer::new);
+        EntityRendererFactories.register(BSTLEntities.MUDDY_PIG, MuddyPigEntityRenderer::new);
+        EntityRendererFactories.register(BSTLEntities.BUTTERFLY, ButterflyEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(BSTLEntityModelLayers.BUTTERFLY, ButterflyEntityModel::getTexturedModelData);
 

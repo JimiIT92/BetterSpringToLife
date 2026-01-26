@@ -50,7 +50,7 @@ public final class EmptyFireflyBush extends FireflyBushBlock {
     @Override
     protected void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
         if (random.nextInt(30) == 0) {
-            if(world.isNightAndNatural() && world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos) <= pos.getY()) {
+            if(world.isNight() && world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos) <= pos.getY()) {
                 WorldUtils.setBlock(Blocks.FIREFLY_BUSH.getDefaultState(), null, null, world, pos, null, null);
             }
         }

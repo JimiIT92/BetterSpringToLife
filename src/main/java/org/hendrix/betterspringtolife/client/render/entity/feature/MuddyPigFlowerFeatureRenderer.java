@@ -5,9 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.BlockModelRenderer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -93,7 +91,7 @@ public final class MuddyPigFlowerFeatureRenderer extends FeatureRenderer<MuddyPi
      */
     private void renderFlower(final MatrixStack matrixStack, final OrderedRenderCommandQueue orderedRenderCommandQueue, final int light, final boolean renderAsModel, final int outline, final BlockState flowerState, final int overlay, final BlockStateModel flowerModel) {
         if (renderAsModel) {
-            orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getOutline(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay, outline);
+            orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayers.outlineNoCull(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), flowerModel, 0.0F, 0.0F, 0.0F, light, overlay, outline);
         } else {
             orderedRenderCommandQueue.submitBlock(matrixStack, flowerState, light, overlay, outline);
         }
