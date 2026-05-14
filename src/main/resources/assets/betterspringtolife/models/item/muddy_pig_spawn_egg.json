@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "betterspringtolife:item/muddy_pig_spawn_egg"
-  }
-}

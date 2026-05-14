@@ -1,8 +1,6 @@
 package org.hendrix.betterspringtolife;
 
 import net.fabricmc.api.ModInitializer;
-import org.hendrix.betterspringtolife.core.*;
-import org.hendrix.betterspringtolife.world.gen.BSTLBiomeFeatures;
 
 /**
  * Hendrix's Better Spring to Life
@@ -20,21 +18,7 @@ public final class BetterSpringToLife implements ModInitializer {
      */
     @Override
     public void onInitialize() {
-        BSTLSounds.register();
-        BSTLItemGroups.register();
-        BSTLDataComponentTypes.register();
-        BSTLParticles.register();
-        BSTLItems.register();
-        BSTLBlocks.register();
-        BSTLEntities.register();
 
-        BSTLBlocks.registerStrippables();
-        BSTLBlocks.registerFlammableBlocks();
-        BSTLBlocks.registerCompostableBlocks();
-
-        BSTLBiomeFeatures.modifyBiomes();
-
-        BSTLEvents.register();
     }
 
 }

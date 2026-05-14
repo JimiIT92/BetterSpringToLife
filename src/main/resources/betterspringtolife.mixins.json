@@ -1,13 +1,13 @@
 {
   "required": true,
   "package": "org.hendrix.betterspringtolife.mixin",
-  "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "CactusBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "BetterSpringToLife-refmap.json"
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }
