@@ -1,0 +1,166 @@
+package org.hendrix.betterspringtolife.core;
+
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import org.hendrix.betterspringtolife.BetterSpringToLife;
+import org.hendrix.betterspringtolife.block.HollowBlock;
+import org.hendrix.betterspringtolife.utils.IdentifierUtils;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.function.Function;
+
+/**
+ * {@link BetterSpringToLife} {@link Block Blocks}
+ */
+public final class BSTLBlocks {
+
+    //#region Blocks
+
+    public static final Block HOLLOW_OAK_LOG = registerHollowBlock(WoodType.OAK, false, Blocks.OAK_LOG);
+    public static final Block HOLLOW_STRIPPED_OAK_LOG = registerHollowBlock(WoodType.OAK, true, Blocks.STRIPPED_OAK_LOG);
+    public static final Block HOLLOW_SPRUCE_LOG = registerHollowBlock(WoodType.SPRUCE, false, Blocks.SPRUCE_LOG);
+    public static final Block HOLLOW_STRIPPED_SPRUCE_LOG = registerHollowBlock(WoodType.SPRUCE, true, Blocks.STRIPPED_SPRUCE_LOG);
+    public static final Block HOLLOW_BIRCH_LOG = registerHollowBlock(WoodType.BIRCH, false, Blocks.BIRCH_LOG);
+    public static final Block HOLLOW_STRIPPED_BIRCH_LOG = registerHollowBlock(WoodType.BIRCH, true, Blocks.STRIPPED_BIRCH_LOG);
+    public static final Block HOLLOW_JUNGLE_LOG = registerHollowBlock(WoodType.JUNGLE, false, Blocks.JUNGLE_LOG);
+    public static final Block HOLLOW_STRIPPED_JUNGLE_LOG = registerHollowBlock(WoodType.JUNGLE, true, Blocks.STRIPPED_JUNGLE_LOG);
+    public static final Block HOLLOW_ACACIA_LOG = registerHollowBlock(WoodType.ACACIA, false, Blocks.ACACIA_LOG);
+    public static final Block HOLLOW_STRIPPED_ACACIA_LOG = registerHollowBlock(WoodType.ACACIA, true, Blocks.STRIPPED_ACACIA_LOG);
+    public static final Block HOLLOW_DARK_OAK_LOG = registerHollowBlock(WoodType.DARK_OAK, false, Blocks.DARK_OAK_LOG);
+    public static final Block HOLLOW_STRIPPED_DARK_OAK_LOG = registerHollowBlock(WoodType.DARK_OAK, true, Blocks.STRIPPED_DARK_OAK_LOG);
+    public static final Block HOLLOW_MANGROVE_LOG = registerHollowBlock(WoodType.MANGROVE, false, Blocks.MANGROVE_LOG);
+    public static final Block HOLLOW_STRIPPED_MANGROVE_LOG = registerHollowBlock(WoodType.MANGROVE, true, Blocks.STRIPPED_MANGROVE_LOG);
+    public static final Block HOLLOW_BAMBOO_BLOCK = registerHollowBlock(WoodType.BAMBOO, false, Blocks.BAMBOO_BLOCK);
+    public static final Block HOLLOW_STRIPPED_BAMBOO_BLOCK = registerHollowBlock(WoodType.BAMBOO, true, Blocks.STRIPPED_BAMBOO_BLOCK);
+    public static final Block HOLLOW_CHERRY_LOG = registerHollowBlock(WoodType.CHERRY, false, Blocks.CHERRY_LOG);
+    public static final Block HOLLOW_STRIPPED_CHERRY_LOG = registerHollowBlock(WoodType.CHERRY, true, Blocks.STRIPPED_CHERRY_LOG);
+    public static final Block HOLLOW_PALE_OAK_LOG = registerHollowBlock(WoodType.PALE_OAK, false, Blocks.PALE_OAK_LOG);
+    public static final Block HOLLOW_STRIPPED_PALE_OAK_LOG = registerHollowBlock(WoodType.PALE_OAK, true, Blocks.STRIPPED_PALE_OAK_LOG);
+    public static final Block HOLLOW_CRIMSON_STEM = registerHollowBlock(WoodType.CRIMSON, false, Blocks.CRIMSON_STEM);
+    public static final Block HOLLOW_STRIPPED_CRIMSON_STEM = registerHollowBlock(WoodType.CRIMSON, true, Blocks.STRIPPED_CRIMSON_STEM);
+    public static final Block HOLLOW_WARPED_STEM = registerHollowBlock(WoodType.WARPED, false, Blocks.WARPED_STEM);
+    public static final Block HOLLOW_STRIPPED_WARPED_STEM = registerHollowBlock(WoodType.WARPED, true, Blocks.STRIPPED_WARPED_STEM);
+
+    //#endregion
+
+    private static Block registerHollowBlock(final WoodType woodType, final boolean stripped, final Block sourceBlock) {
+        String woodSuffix = "_log";
+        if(woodType.equals(WoodType.CRIMSON) || woodType.equals(WoodType.WARPED)) {
+            woodSuffix = "_stem";
+        }
+        if(woodType.equals(WoodType.BAMBOO)) {
+            woodSuffix = "_block";
+        }
+        final String name = "hollow_" + (stripped ? "stripped_" : "") + woodType.name().toLowerCase(Locale.ROOT) + woodSuffix;
+        return register(name, HollowBlock::new, BlockBehaviour.Properties.ofFullCopy(sourceBlock).isViewBlocking(Blocks::never).noOcclusion());
+    }
+
+    /**
+     * Register a {@link Block} without registering a {@link BlockItem}
+     *
+     * @param name The block name
+     * @param blockFactory The block factory
+     * @param properties The {@link BlockBehaviour.Properties block properties}
+     * @return The registered {@link Block}
+     */
+    private static Block registerBlockWithoutBlockItem(final String name, final Function<BlockBehaviour.Properties, Block> blockFactory, final BlockBehaviour.Properties properties) {
+        final ResourceKey<Block> blockResourceKey = ResourceKey.create(Registries.BLOCK, IdentifierUtils.modded(name));
+        final Block block = blockFactory.apply(properties.setId(blockResourceKey));
+        return Registry.register(BuiltInRegistries.BLOCK, blockResourceKey, block);
+    }
+
+    /**
+     * Register a {@link Block}
+     *
+     * @param name The block name
+     * @param blockFactory The block factory
+     * @param properties The {@link BlockBehaviour.Properties block properties}
+     * @return The registered {@link Block}
+     */
+    private static Block register(final String name, final Function<BlockBehaviour.Properties, Block> blockFactory, final BlockBehaviour.Properties properties) {
+        final Block block = registerBlockWithoutBlockItem(name, blockFactory, properties);
+        final ResourceKey<Item> blockItemResourceKey = ResourceKey.create(Registries.ITEM, IdentifierUtils.modded(name));
+        final BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(blockItemResourceKey).useBlockDescriptionPrefix());
+        Registry.register(BuiltInRegistries.ITEM, blockItemResourceKey, blockItem);
+        return block;
+    }
+
+    private static void registerStrippableBlocks() {
+        StrippableBlockRegistry.register(HOLLOW_OAK_LOG, HOLLOW_STRIPPED_OAK_LOG);
+        StrippableBlockRegistry.register(HOLLOW_SPRUCE_LOG, HOLLOW_STRIPPED_SPRUCE_LOG);
+        StrippableBlockRegistry.register(HOLLOW_BIRCH_LOG, HOLLOW_STRIPPED_BIRCH_LOG);
+        StrippableBlockRegistry.register(HOLLOW_JUNGLE_LOG, HOLLOW_STRIPPED_JUNGLE_LOG);
+        StrippableBlockRegistry.register(HOLLOW_ACACIA_LOG, HOLLOW_STRIPPED_ACACIA_LOG);
+        StrippableBlockRegistry.register(HOLLOW_DARK_OAK_LOG, HOLLOW_STRIPPED_DARK_OAK_LOG);
+        StrippableBlockRegistry.register(HOLLOW_MANGROVE_LOG, HOLLOW_STRIPPED_MANGROVE_LOG);
+        StrippableBlockRegistry.register(HOLLOW_BAMBOO_BLOCK, HOLLOW_STRIPPED_BAMBOO_BLOCK);
+        StrippableBlockRegistry.register(HOLLOW_CHERRY_LOG, HOLLOW_STRIPPED_CHERRY_LOG);
+        StrippableBlockRegistry.register(HOLLOW_PALE_OAK_LOG, HOLLOW_STRIPPED_PALE_OAK_LOG);
+        StrippableBlockRegistry.register(HOLLOW_CRIMSON_STEM, HOLLOW_STRIPPED_CRIMSON_STEM);
+        StrippableBlockRegistry.register(HOLLOW_WARPED_STEM, HOLLOW_STRIPPED_WARPED_STEM);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_OAK_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_SPRUCE_LOG, BSTLBlocks.HOLLOW_STRIPPED_SPRUCE_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_BIRCH_LOG, BSTLBlocks.HOLLOW_STRIPPED_BIRCH_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, BSTLBlocks.HOLLOW_STRIPPED_JUNGLE_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_ACACIA_LOG, BSTLBlocks.HOLLOW_STRIPPED_ACACIA_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_DARK_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_DARK_OAK_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_MANGROVE_LOG, BSTLBlocks.HOLLOW_STRIPPED_MANGROVE_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_BAMBOO_BLOCK, BSTLBlocks.HOLLOW_STRIPPED_BAMBOO_BLOCK);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_CHERRY_LOG, BSTLBlocks.HOLLOW_STRIPPED_CHERRY_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_PALE_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_PALE_OAK_LOG);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_CRIMSON_STEM, BSTLBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
+        StrippableBlockRegistry.register(Blocks.STRIPPED_WARPED_STEM, BSTLBlocks.HOLLOW_STRIPPED_WARPED_STEM);
+    }
+
+    private static void registerFlammableBlocks(int igniteOdds, int burnOdds, Block... blocks) {
+        var flammableBlockRegistry = FlammableBlockRegistry.getDefaultInstance();
+        Arrays.stream(blocks).forEach(block -> flammableBlockRegistry.add(block, igniteOdds, burnOdds));
+    }
+
+    /**
+     * Register all {@link Block Blocks}
+     */
+    public static void register() {
+        registerStrippableBlocks();
+        registerFlammableBlocks(
+                5,
+                5,
+                HOLLOW_OAK_LOG,
+                HOLLOW_STRIPPED_OAK_LOG,
+                HOLLOW_SPRUCE_LOG,
+                HOLLOW_STRIPPED_SPRUCE_LOG,
+                HOLLOW_BIRCH_LOG,
+                HOLLOW_STRIPPED_BIRCH_LOG,
+                HOLLOW_JUNGLE_LOG,
+                HOLLOW_STRIPPED_JUNGLE_LOG,
+                HOLLOW_ACACIA_LOG,
+                HOLLOW_STRIPPED_ACACIA_LOG,
+                HOLLOW_DARK_OAK_LOG,
+                HOLLOW_STRIPPED_DARK_OAK_LOG,
+                HOLLOW_MANGROVE_LOG,
+                HOLLOW_STRIPPED_MANGROVE_LOG,
+                HOLLOW_BAMBOO_BLOCK,
+                HOLLOW_STRIPPED_BAMBOO_BLOCK,
+                HOLLOW_CHERRY_LOG,
+                HOLLOW_STRIPPED_CHERRY_LOG,
+                HOLLOW_PALE_OAK_LOG,
+                HOLLOW_STRIPPED_PALE_OAK_LOG,
+                HOLLOW_CRIMSON_STEM,
+                HOLLOW_STRIPPED_CRIMSON_STEM,
+                HOLLOW_WARPED_STEM,
+                HOLLOW_STRIPPED_WARPED_STEM
+        );
+    }
+
+}
