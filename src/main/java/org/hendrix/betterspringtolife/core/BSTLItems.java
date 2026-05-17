@@ -4,6 +4,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
@@ -16,6 +17,13 @@ import java.util.function.Function;
 public final class BSTLItems {
 
     //#region Items
+
+    public static final Item PRICKLY_PEAR = register(
+            "prickly_pear",
+            settings -> new BlockItem(BSTLBlocks.PRICKLY_PEAR, settings),
+            new Item.Properties().useBlockDescriptionPrefix().food(BSTLFoods.PRICKLY_PEAR)
+    );
+
     //#endregion
 
     /**

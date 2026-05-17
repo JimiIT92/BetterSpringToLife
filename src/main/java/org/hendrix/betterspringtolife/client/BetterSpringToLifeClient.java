@@ -3,9 +3,12 @@ package org.hendrix.betterspringtolife.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.minecraft.client.color.block.BlockTintSources;
+import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
 import org.hendrix.betterspringtolife.core.BSTLBlocks;
+import org.hendrix.betterspringtolife.core.BSTLParticles;
 
 import java.util.List;
 
@@ -34,5 +37,7 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
                 List.of(BlockTintSources.grass()),
                 BSTLBlocks.POTTED_BUSH
         );
+
+        ParticleProviderRegistry.getInstance().register(BSTLParticles.ASPHODEL, AsphodelParticle.Provider::new);
     }
 }

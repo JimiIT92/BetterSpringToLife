@@ -7,12 +7,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -93,6 +91,32 @@ public final class BSTLBlocks {
             BlockBehaviour.Properties.ofFullCopy(SHORT_SNOWY_GRASS)
     );
 
+    public static final Block ASPHODEL = register(
+            "asphodel",
+            AsphodelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .replaceable()
+                    .noCollision()
+                    .instabreak()
+                    .ignitedByLava()
+                    .randomTicks()
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    );
+    public static final Block PRICKLY_PEAR = registerBlockWithoutBlockItem(
+            "prickly_pear",
+            CactusFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CACTUS_FLOWER)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    );
+    public static final Block BUTTERCUP = register(
+            "buttercup",
+            settings -> new FlowerBlock(MobEffects.ABSORPTION, 0.35F, settings),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)
+    );
+
     public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
     public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Blocks.BUSH);
     public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", SNOWY_BUSH);
@@ -100,6 +124,8 @@ public final class BSTLBlocks {
     public static final Block POTTED_TALL_DRY_GRASS = registerFlowerPot("potted_tall_dry_grass", Blocks.TALL_DRY_GRASS);
     public static final Block POTTED_SHORT_SNOWY_GRASS = registerFlowerPot("potted_short_snowy_grass", SHORT_SNOWY_GRASS);
     public static final Block POTTED_TALL_SNOWY_GRASS = registerFlowerPot("potted_tall_snowy_grass", TALL_SNOWY_GRASS);
+    public static final Block POTTED_BUTTERCUP = registerFlowerPot("potted_buttercup", BUTTERCUP);
+    public static final Block POTTED_PRICKLY_PEAR = registerFlowerPot("potted_prickly_pear", PRICKLY_PEAR);
 
     //#endregion
 
@@ -267,7 +293,10 @@ public final class BSTLBlocks {
                 100,
                 SNOWY_BUSH,
                 SHORT_SNOWY_GRASS,
-                TALL_SNOWY_GRASS
+                TALL_SNOWY_GRASS,
+                ASPHODEL,
+                PRICKLY_PEAR,
+                BUTTERCUP
         );
         registerCompostableBlocks(
                 0.3F,
@@ -285,6 +314,11 @@ public final class BSTLBlocks {
                 SNOWY_BUSH,
                 SHORT_SNOWY_GRASS,
                 TALL_SNOWY_GRASS
+        );
+        registerCompostableBlocks(
+                0.65F,
+                ASPHODEL,
+                BUTTERCUP
         );
     }
 
