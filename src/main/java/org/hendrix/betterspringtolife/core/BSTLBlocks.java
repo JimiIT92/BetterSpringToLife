@@ -11,13 +11,14 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
-import org.hendrix.betterspringtolife.block.HollowBlock;
-import org.hendrix.betterspringtolife.block.LeafPileBlock;
+import org.hendrix.betterspringtolife.block.*;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
 import java.util.Arrays;
@@ -68,6 +69,38 @@ public final class BSTLBlocks {
     public static final Block AZALEA_LEAVES_PILE = registerLeafPile("azalea", Blocks.AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
     public static final Block FLOWERING_AZALEA_LEAVES_PILE = registerLeafPile("flowering_azalea", Blocks.FLOWERING_AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
 
+    public static final Block SNOWY_BUSH = register(
+            "snowy_bush",
+            SnowyBushBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SNOW)
+                    .replaceable()
+                    .noCollision()
+                    .instabreak()
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.GRASS)
+    );
+    public static final Block SHORT_SNOWY_GRASS = register(
+            "short_snowy_grass",
+            ShortSnowyGrassBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(SNOWY_BUSH)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    );
+    public static final Block TALL_SNOWY_GRASS = register(
+            "tall_snowy_grass",
+            TallSnowyGrassBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(SHORT_SNOWY_GRASS)
+    );
+
+    public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
+    public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Blocks.BUSH);
+    public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", SNOWY_BUSH);
+    public static final Block POTTED_SHORT_DRY_GRASS = registerFlowerPot("potted_short_dry_grass", Blocks.SHORT_DRY_GRASS);
+    public static final Block POTTED_TALL_DRY_GRASS = registerFlowerPot("potted_tall_dry_grass", Blocks.TALL_DRY_GRASS);
+    public static final Block POTTED_SHORT_SNOWY_GRASS = registerFlowerPot("potted_short_snowy_grass", SHORT_SNOWY_GRASS);
+    public static final Block POTTED_TALL_SNOWY_GRASS = registerFlowerPot("potted_tall_snowy_grass", TALL_SNOWY_GRASS);
+
     //#endregion
 
     private static Block registerHollowBlock(final WoodType woodType, final boolean stripped, final Block sourceBlock) {
@@ -103,6 +136,14 @@ public final class BSTLBlocks {
                         .sound(sound)
                         .isViewBlocking((state, level, pos) -> state.getValue(LeafPileBlock.LAYERS) >= 8)
                         .pushReaction(PushReaction.DESTROY)
+        );
+    }
+
+    private static Block registerFlowerPot(final String name, final Block block) {
+        return registerBlockWithoutBlockItem(
+                name,
+                settings -> new FlowerPotBlock(block, settings),
+                Blocks.flowerPotProperties()
         );
     }
 
@@ -221,6 +262,13 @@ public final class BSTLBlocks {
                 AZALEA_LEAVES_PILE,
                 FLOWERING_AZALEA_LEAVES_PILE
         );
+        registerFlammableBlocks(
+                60,
+                100,
+                SNOWY_BUSH,
+                SHORT_SNOWY_GRASS,
+                TALL_SNOWY_GRASS
+        );
         registerCompostableBlocks(
                 0.3F,
                 OAK_LEAVES_PILE,
@@ -233,7 +281,10 @@ public final class BSTLBlocks {
                 PALE_OAK_LEAVES_PILE,
                 MANGROVE_LEAVES_PILE,
                 AZALEA_LEAVES_PILE,
-                FLOWERING_AZALEA_LEAVES_PILE
+                FLOWERING_AZALEA_LEAVES_PILE,
+                SNOWY_BUSH,
+                SHORT_SNOWY_GRASS,
+                TALL_SNOWY_GRASS
         );
     }
 

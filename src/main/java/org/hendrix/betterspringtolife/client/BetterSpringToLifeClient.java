@@ -30,5 +30,9 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
                 List.of(BlockTintSources.constant(-10380959)),
                 BSTLBlocks.SPRUCE_LEAVES_PILE
         );
+        BlockColorRegistry.register(
+                List.of(BlockTintSources.grass()),
+                BSTLBlocks.POTTED_BUSH
+        );
     }
 }
