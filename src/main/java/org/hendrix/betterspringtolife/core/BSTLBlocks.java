@@ -1,5 +1,6 @@
 package org.hendrix.betterspringtolife.core;
 
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
@@ -10,10 +11,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.PushReaction;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.block.HollowBlock;
+import org.hendrix.betterspringtolife.block.LeafPileBlock;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
 import java.util.Arrays;
@@ -52,6 +56,18 @@ public final class BSTLBlocks {
     public static final Block HOLLOW_WARPED_STEM = registerHollowBlock(WoodType.WARPED, false, Blocks.WARPED_STEM);
     public static final Block HOLLOW_STRIPPED_WARPED_STEM = registerHollowBlock(WoodType.WARPED, true, Blocks.STRIPPED_WARPED_STEM);
 
+    public static final Block OAK_LEAVES_PILE = registerLeafPile(WoodType.OAK, Blocks.OAK_LEAVES, SoundType.GRASS);
+    public static final Block SPRUCE_LEAVES_PILE = registerLeafPile(WoodType.SPRUCE, Blocks.SPRUCE_LEAVES, SoundType.GRASS);
+    public static final Block BIRCH_LEAVES_PILE = registerLeafPile(WoodType.BIRCH, Blocks.BIRCH_LEAVES, SoundType.GRASS);
+    public static final Block JUNGLE_LEAVES_PILE = registerLeafPile(WoodType.JUNGLE, Blocks.JUNGLE_LEAVES, SoundType.GRASS);
+    public static final Block ACACIA_LEAVES_PILE = registerLeafPile(WoodType.ACACIA, Blocks.ACACIA_LEAVES, SoundType.GRASS);
+    public static final Block CHERRY_LEAVES_PILE = registerLeafPile(WoodType.CHERRY, Blocks.CHERRY_LEAVES, SoundType.CHERRY_LEAVES);
+    public static final Block DARK_OAK_LEAVES_PILE = registerLeafPile(WoodType.DARK_OAK, Blocks.DARK_OAK_LEAVES, SoundType.GRASS);
+    public static final Block PALE_OAK_LEAVES_PILE = registerLeafPile(WoodType.PALE_OAK, Blocks.PALE_OAK_LEAVES, SoundType.GRASS);
+    public static final Block MANGROVE_LEAVES_PILE = registerLeafPile(WoodType.MANGROVE, Blocks.MANGROVE_LEAVES, SoundType.GRASS);
+    public static final Block AZALEA_LEAVES_PILE = registerLeafPile("azalea", Blocks.AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
+    public static final Block FLOWERING_AZALEA_LEAVES_PILE = registerLeafPile("flowering_azalea", Blocks.FLOWERING_AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
+
     //#endregion
 
     private static Block registerHollowBlock(final WoodType woodType, final boolean stripped, final Block sourceBlock) {
@@ -64,6 +80,30 @@ public final class BSTLBlocks {
         }
         final String name = "hollow_" + (stripped ? "stripped_" : "") + woodType.name().toLowerCase(Locale.ROOT) + woodSuffix;
         return register(name, HollowBlock::new, BlockBehaviour.Properties.ofFullCopy(sourceBlock).isViewBlocking(Blocks::never).noOcclusion());
+    }
+
+    private static Block registerLeafPile(WoodType woodType, final Block leaves, SoundType sound) {
+        return registerLeafPile(
+                woodType.name().toLowerCase(Locale.ROOT),
+                leaves,
+                sound
+        );
+    }
+
+    private static Block registerLeafPile(String woodName, final Block leaves, SoundType sound) {
+        return register(
+                woodName + "_leaves_pile",
+                LeafPileBlock::new,
+                BlockBehaviour.Properties.of()
+                        .mapColor(leaves.defaultMapColor())
+                        .replaceable()
+                        .isValidSpawn(Blocks::never)
+                        .strength(0.1F)
+                        .noCollision()
+                        .sound(sound)
+                        .isViewBlocking((state, level, pos) -> state.getValue(LeafPileBlock.LAYERS) >= 8)
+                        .pushReaction(PushReaction.DESTROY)
+        );
     }
 
     /**
@@ -128,6 +168,11 @@ public final class BSTLBlocks {
         Arrays.stream(blocks).forEach(block -> flammableBlockRegistry.add(block, igniteOdds, burnOdds));
     }
 
+    private static void registerCompostableBlocks(float chance, Block... blocks) {
+        var composterRegistry = CompostableRegistry.INSTANCE;
+        Arrays.stream(blocks).forEach(block -> composterRegistry.add(block, chance));
+    }
+
     /**
      * Register all {@link Block Blocks}
      */
@@ -160,6 +205,35 @@ public final class BSTLBlocks {
                 HOLLOW_STRIPPED_CRIMSON_STEM,
                 HOLLOW_WARPED_STEM,
                 HOLLOW_STRIPPED_WARPED_STEM
+        );
+        registerFlammableBlocks(
+                5,
+                100,
+                OAK_LEAVES_PILE,
+                SPRUCE_LEAVES_PILE,
+                BIRCH_LEAVES_PILE,
+                JUNGLE_LEAVES_PILE,
+                ACACIA_LEAVES_PILE,
+                CHERRY_LEAVES_PILE,
+                DARK_OAK_LEAVES_PILE,
+                PALE_OAK_LEAVES_PILE,
+                MANGROVE_LEAVES_PILE,
+                AZALEA_LEAVES_PILE,
+                FLOWERING_AZALEA_LEAVES_PILE
+        );
+        registerCompostableBlocks(
+                0.3F,
+                OAK_LEAVES_PILE,
+                SPRUCE_LEAVES_PILE,
+                BIRCH_LEAVES_PILE,
+                JUNGLE_LEAVES_PILE,
+                ACACIA_LEAVES_PILE,
+                CHERRY_LEAVES_PILE,
+                DARK_OAK_LEAVES_PILE,
+                PALE_OAK_LEAVES_PILE,
+                MANGROVE_LEAVES_PILE,
+                AZALEA_LEAVES_PILE,
+                FLOWERING_AZALEA_LEAVES_PILE
         );
     }
 

@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "org.hendrix.betterspringtolife.BetterSpringToLife"
+    ],
+    "client": [
+      "org.hendrix.betterspringtolife.client.BetterSpringToLifeClient"
     ]
   },
   "mixins": [

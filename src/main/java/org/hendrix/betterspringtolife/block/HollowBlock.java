@@ -20,7 +20,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.hendrix.betterspringtolife.core.BSTLBlocks;
-import org.hendrix.betterspringtolife.utils.BlockUtils;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Map;
@@ -58,7 +57,8 @@ public final class HollowBlock extends RotatedPillarBlock implements SimpleWater
 
     @Override
     public @NonNull BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(BlockStateProperties.WATERLOGGED, BlockUtils.isInWater(context.getLevel(), context.getClickedPos()));
+        FluidState replacedFluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return super.getStateForPlacement(context).setValue(BlockStateProperties.WATERLOGGED, replacedFluidState.is(Fluids.WATER));
     }
 
     @Override
@@ -69,7 +69,7 @@ public final class HollowBlock extends RotatedPillarBlock implements SimpleWater
 
     @Override
     protected @NonNull FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(true) : super.getFluidState(state);
     }
 
     @Override
