@@ -20,6 +20,7 @@ public final class BetterSpringToLife implements ModInitializer {
     @Override
     public void onInitialize() {
         BSTLSounds.register();
+        BSTLCreativeModeTabs.register();
         BSTLDataComponentTypes.register();
         BSTLParticles.register();
         BSTLItems.register();
