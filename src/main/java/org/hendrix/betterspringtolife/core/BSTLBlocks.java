@@ -120,6 +120,14 @@ public final class BSTLBlocks {
     public static final Block BROWN_WALL_MUSHROOM = registerWallMushroom("brown_wall_mushroom", Blocks.BROWN_MUSHROOM);
     public static final Block RED_WALL_MUSHROOM = registerWallMushroom("red_wall_mushroom", Blocks.RED_MUSHROOM);
 
+    public static final Block EMPTY_FIREFLY_BUSH = register(
+            "empty_firefly_bush",
+            EmptyFireflyBushBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.FIREFLY_BUSH)
+                    .lightLevel(_ -> 0)
+                    .randomTicks()
+    );
+
     public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
     public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Blocks.BUSH);
     public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", SNOWY_BUSH);
