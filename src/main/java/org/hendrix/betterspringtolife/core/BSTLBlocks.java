@@ -128,6 +128,21 @@ public final class BSTLBlocks {
                     .randomTicks()
     );
 
+    public static final Block FIREFLY_JAR = registerBlockWithoutBlockItem(
+            "firefly_jar",
+            FireflyJarBlock::new,
+            BlockBehaviour.Properties.of()
+                    .strength(0.3F)
+                    .noOcclusion()
+                    .isViewBlocking(Blocks::never)
+                    .isValidSpawn(Blocks::never)
+                    .isSuffocating(Blocks::never)
+                    .forceSolidOn()
+                    .sound(SoundType.GLASS)
+                    .lightLevel(state -> state.getValue(FireflyJarBlock.FIREFLIES) * 3)
+                    .pushReaction(PushReaction.DESTROY)
+    );
+
     public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
     public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Blocks.BUSH);
     public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", SNOWY_BUSH);

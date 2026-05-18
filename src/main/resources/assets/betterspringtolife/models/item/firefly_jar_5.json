@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "betterspringtolife:item/firefly_jar_5"
+  }
+}

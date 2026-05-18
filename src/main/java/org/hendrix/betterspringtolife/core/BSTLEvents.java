@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,13 +18,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
+import org.hendrix.betterspringtolife.block.FireflyJarBlock;
 import org.hendrix.betterspringtolife.block.HollowBlock;
 import org.hendrix.betterspringtolife.block.WallMushroomBlock;
+import org.hendrix.betterspringtolife.item.component.FirefliesComponent;
 
 /**
  * {@link BetterSpringToLife} events
@@ -78,6 +82,15 @@ public final class BSTLEvents {
         return InteractionResult.PASS;
     }
 
+    private static InteractionResult fillFireflyJar(Player player, Level level, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        final BlockPos blockPos = blockHitResult.getBlockPos();
+        final BlockState blockState = level.getBlockState(blockPos);
+        if(blockState.is(Blocks.FIREFLY_BUSH)) {
+            return pickFirefliesFromFireflyBush(player, interactionHand, player.getItemInHand(interactionHand), level, blockPos, blockState);
+        }
+        return InteractionResult.PASS;
+    }
+
     //#endregion
 
     private static InteractionResult setBlock(final BlockState blockState, final Player player, final InteractionHand hand, final Level level, final BlockPos pos, final ItemStack itemStack, final SoundEvent soundEvent) {
@@ -117,9 +130,42 @@ public final class BSTLEvents {
         return blockState.is(block) && blockState.hasProperty(WallMushroomBlock.MUSHROOMS) && blockState.getValue(WallMushroomBlock.MUSHROOMS) < WallMushroomBlock.MAX_MUSHROOMS && itemStack.is(item);
     }
 
+    private static InteractionResult pickFirefliesFromFireflyBush(final Player player, final InteractionHand hand, final ItemStack itemStack, final Level world, final BlockPos pos, final BlockState blockState) {
+        final RandomSource random = world.getRandom();
+        final int pickedFireflies = 1 + random.nextInt(2);
+        if(itemStack.is(Items.GLASS_BOTTLE)) {
+            itemStack.shrink(1);
+            player.addItem(getFireflyJar(null, pickedFireflies));
+            emptyFireflyBush(world, pos, blockState);
+            return InteractionResult.SUCCESS;
+        }
+        if(itemStack.is(BSTLItems.FIREFLY_JAR)) {
+            final int fireflies = FireflyJarBlock.getFireflies(itemStack);
+            if(fireflies < FireflyJarBlock.MAX_FIREFLIES) {
+                player.setItemInHand(hand, getFireflyJar(itemStack, fireflies + pickedFireflies));
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    private static ItemStack getFireflyJar(ItemStack itemStack, final int fireflies) {
+        if(itemStack == null) {
+            itemStack = new ItemStack(BSTLBlocks.FIREFLY_JAR);
+        }
+        itemStack.set(BSTLDataComponentTypes.FIREFLIES, new FirefliesComponent(Math.min(FireflyJarBlock.MAX_FIREFLIES, fireflies)));
+        return itemStack;
+    }
+
+    private static void emptyFireflyBush(final Level world, final BlockPos pos, final BlockState blockState) {
+        if(world.getRandom().nextBoolean()) {
+            setBlock(BSTLBlocks.EMPTY_FIREFLY_BUSH.withPropertiesOf(blockState), null, null, world, pos, null, null);
+        }
+    }
     public static void register() {
         UseBlockCallback.EVENT.register(BSTLEvents::hollowLog);
         UseBlockCallback.EVENT.register(BSTLEvents::placeWallMushrooms);
+        UseBlockCallback.EVENT.register(BSTLEvents::fillFireflyJar);
     }
 
 }

@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
+import org.hendrix.betterspringtolife.item.FireflyJarItem;
+import org.hendrix.betterspringtolife.item.component.FirefliesComponent;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
 import java.util.function.Function;
@@ -22,6 +24,12 @@ public final class BSTLItems {
             "prickly_pear",
             settings -> new BlockItem(BSTLBlocks.PRICKLY_PEAR, settings),
             new Item.Properties().useBlockDescriptionPrefix().food(BSTLFoods.PRICKLY_PEAR)
+    );
+
+    public static final Item FIREFLY_JAR = register(
+            "firefly_jar",
+            FireflyJarItem::new,
+            new Item.Properties().useBlockDescriptionPrefix().stacksTo(1).component(BSTLDataComponentTypes.FIREFLIES, FirefliesComponent.DEFAULT)
     );
 
     //#endregion

@@ -39,5 +39,6 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
         );
 
         ParticleProviderRegistry.getInstance().register(BSTLParticles.ASPHODEL, AsphodelParticle.Provider::new);
+        BSTLClientEvents.register();
     }
 }

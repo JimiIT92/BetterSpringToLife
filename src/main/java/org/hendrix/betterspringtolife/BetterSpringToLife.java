@@ -1,10 +1,7 @@
 package org.hendrix.betterspringtolife;
 
 import net.fabricmc.api.ModInitializer;
-import org.hendrix.betterspringtolife.core.BSTLBlocks;
-import org.hendrix.betterspringtolife.core.BSTLEvents;
-import org.hendrix.betterspringtolife.core.BSTLItems;
-import org.hendrix.betterspringtolife.core.BSTLParticles;
+import org.hendrix.betterspringtolife.core.*;
 
 /**
  * Hendrix's Better Spring to Life
@@ -22,10 +19,11 @@ public final class BetterSpringToLife implements ModInitializer {
      */
     @Override
     public void onInitialize() {
-
+        BSTLDataComponentTypes.register();
         BSTLParticles.register();
         BSTLItems.register();
         BSTLBlocks.register();
+
         BSTLEvents.register();
 
     }

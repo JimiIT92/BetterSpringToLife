@@ -1,0 +1,6 @@
+{
+  "parent": "betterspringtolife:block/firefly_jar",
+  "textures": {
+    "lantern": "betterspringtolife:block/firefly_jar_4"
+  }
+}

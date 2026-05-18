@@ -1,0 +1,139 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "predicates": {
+              "minecraft:enchantments": [
+                {
+                  "enchantments": "minecraft:silk_touch",
+                  "levels": {
+                    "min": 1
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betterspringtolife:firefly_jar",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "fireflies": "1"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:set_components",
+                  "components": {
+                    "betterspringtolife:fireflies": 1
+                  }
+                }
+              ],
+              "name": "betterspringtolife:firefly_jar"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betterspringtolife:firefly_jar",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "fireflies": "2"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:set_components",
+                  "components": {
+                    "betterspringtolife:fireflies": 2
+                  }
+                }
+              ],
+              "name": "betterspringtolife:firefly_jar"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betterspringtolife:firefly_jar",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "fireflies": "3"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:set_components",
+                  "components": {
+                    "betterspringtolife:fireflies": 3
+                  }
+                }
+              ],
+              "name": "betterspringtolife:firefly_jar"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betterspringtolife:firefly_jar",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "fireflies": "4"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:set_components",
+                  "components": {
+                    "betterspringtolife:fireflies": 4
+                  }
+                }
+              ],
+              "name": "betterspringtolife:firefly_jar"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "betterspringtolife:firefly_jar",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "fireflies": "5"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:set_components",
+                  "components": {
+                    "betterspringtolife:fireflies": 5
+                  }
+                }
+              ],
+              "name": "betterspringtolife:firefly_jar"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "betterspringtolife:blocks/firefly_jar"
+}
