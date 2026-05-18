@@ -3,20 +3,27 @@ package org.hendrix.betterspringtolife.core;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.block.HollowBlock;
+import org.hendrix.betterspringtolife.block.WallMushroomBlock;
 
 /**
  * {@link BetterSpringToLife} events
@@ -33,6 +40,40 @@ public final class BSTLEvents {
             return HollowBlock.getHollow(blockState).map(
                   hollowBlock -> setBlock(hollowBlock, player, interactionHand, level, pos, itemStack, SoundEvents.AXE_STRIP)
             ).orElse(InteractionResult.PASS);
+        }
+        return InteractionResult.PASS;
+    }
+
+    private static InteractionResult placeWallMushrooms(Player player, Level level, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        final BlockPos blockPos = blockHitResult.getBlockPos();
+        final BlockState blockState = level.getBlockState(blockPos);
+        final ItemStack itemStack = player.getItemInHand(interactionHand);
+        final Direction direction = blockHitResult.getDirection();
+        if(direction.getAxis().isHorizontal()) {
+            if(blockState.is(BlockTags.LOGS)) {
+                Block wallMushroomBlock = null;
+                if(itemStack.is(Items.BROWN_MUSHROOM)) {
+                    wallMushroomBlock = BSTLBlocks.BROWN_WALL_MUSHROOM;
+                }
+                if(itemStack.is(Items.RED_MUSHROOM)) {
+                    wallMushroomBlock = BSTLBlocks.RED_WALL_MUSHROOM;
+                }
+                if(wallMushroomBlock != null) {
+                    final BlockPos mushroomPos = blockPos.offset(direction.getUnitVec3i());
+                    if(level.getBlockState(mushroomPos).isAir() || level.getBlockState(mushroomPos).canBeReplaced()) {
+                        setBlock(wallMushroomBlock.defaultBlockState()
+                                        .setValue(WallMushroomBlock.FACING, direction)
+                                        .setValue(WallMushroomBlock.WATERLOGGED, level.getFluidState(mushroomPos).is(Fluids.WATER))
+                                , player, interactionHand, level, blockPos.offset(blockHitResult.getDirection().getUnitVec3i()), itemStack, SoundEvents.GRASS_PLACE);
+                    }
+                }
+            }
+            else if(canIncreaseMushroom(BSTLBlocks.BROWN_WALL_MUSHROOM, Items.BROWN_MUSHROOM, blockState, itemStack) ||
+                    canIncreaseMushroom(BSTLBlocks.RED_WALL_MUSHROOM, Items.RED_MUSHROOM, blockState, itemStack)) {
+                setBlock(blockState
+                                .setValue(WallMushroomBlock.MUSHROOMS, Math.min(WallMushroomBlock.MAX_MUSHROOMS, blockState.getValue(WallMushroomBlock.MUSHROOMS) + 1))
+                        , player, interactionHand, level, blockPos, itemStack, SoundEvents.GRASS_PLACE);
+            }
         }
         return InteractionResult.PASS;
     }
@@ -63,8 +104,22 @@ public final class BSTLEvents {
         return InteractionResult.PASS;
     }
 
+    /**
+     * Check if an already placed {@link WallMushroomBlock Wall Mushroom} can be increased
+     *
+     * @param block The {@link Block Block to check}
+     * @param item The {@link Item Item to check}
+     * @param blockState The {@link BlockState current Block State}
+     * @param itemStack The {@link ItemStack held Item Stack}
+     * @return {@link Boolean True if Mushrooms can be increased}
+     */
+    private static boolean canIncreaseMushroom(final Block block, final Item item, final BlockState blockState, final ItemStack itemStack) {
+        return blockState.is(block) && blockState.hasProperty(WallMushroomBlock.MUSHROOMS) && blockState.getValue(WallMushroomBlock.MUSHROOMS) < WallMushroomBlock.MAX_MUSHROOMS && itemStack.is(item);
+    }
+
     public static void register() {
         UseBlockCallback.EVENT.register(BSTLEvents::hollowLog);
+        UseBlockCallback.EVENT.register(BSTLEvents::placeWallMushrooms);
     }
 
 }

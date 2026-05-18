@@ -117,6 +117,9 @@ public final class BSTLBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)
     );
 
+    public static final Block BROWN_WALL_MUSHROOM = registerWallMushroom("brown_wall_mushroom", Blocks.BROWN_MUSHROOM);
+    public static final Block RED_WALL_MUSHROOM = registerWallMushroom("red_wall_mushroom", Blocks.RED_MUSHROOM);
+
     public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
     public static final Block POTTED_BUSH = registerFlowerPot("potted_bush", Blocks.BUSH);
     public static final Block POTTED_SNOWY_BUSH = registerFlowerPot("potted_snowy_bush", SNOWY_BUSH);
@@ -170,6 +173,16 @@ public final class BSTLBlocks {
                 name,
                 settings -> new FlowerPotBlock(block, settings),
                 Blocks.flowerPotProperties()
+        );
+    }
+
+    private static Block registerWallMushroom(final String name, final Block mushroomBlock) {
+        return registerBlockWithoutBlockItem(
+                name,
+                settings -> new WallMushroomBlock(mushroomBlock, settings),
+                BlockBehaviour.Properties.ofFullCopy(mushroomBlock)
+                        .noCollision()
+                        .instabreak()
         );
     }
 
