@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.item.FireflyJarItem;
 import org.hendrix.betterspringtolife.item.component.FirefliesComponent;
@@ -30,6 +31,12 @@ public final class BSTLItems {
             "firefly_jar",
             FireflyJarItem::new,
             new Item.Properties().useBlockDescriptionPrefix().stacksTo(1).component(BSTLDataComponentTypes.FIREFLIES, FirefliesComponent.DEFAULT)
+    );
+
+    public static final Item MUSIC_DISC_SWEDEN = register(
+            "music_disc_sweden",
+            Item::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, IdentifierUtils.modded("sweden")))
     );
 
     //#endregion
