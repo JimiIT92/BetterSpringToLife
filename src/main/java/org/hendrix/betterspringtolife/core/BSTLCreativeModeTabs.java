@@ -67,8 +67,8 @@ public class BSTLCreativeModeTabs {
                                 BSTLBlocks.BUTTERCUP,
                                 BSTLItems.FIREFLY_JAR,
                                 BSTLItems.PRICKLY_PEAR,
-                                BSTLItems.MUSIC_DISC_SWEDEN//,
-                                //BSTLItems.MOOBLOOM_SPAWN_EGG,
+                                BSTLItems.MUSIC_DISC_SWEDEN,
+                                BSTLItems.MOOBLOOM_SPAWN_EGG//,
                                 //BSTLItems.MUDDY_PIG_SPAWN_EGG,
                                 //BSTLItems.BUTTERFLY_SPAWN_EGG
                         );

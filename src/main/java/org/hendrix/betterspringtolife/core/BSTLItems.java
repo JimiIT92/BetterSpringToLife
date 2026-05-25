@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SpawnEggItem;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.item.FireflyJarItem;
 import org.hendrix.betterspringtolife.item.component.FirefliesComponent;
@@ -38,6 +39,8 @@ public final class BSTLItems {
             Item::new,
             new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, IdentifierUtils.modded("sweden")))
     );
+
+    public static final Item MOOBLOOM_SPAWN_EGG = register("moobloom_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(BSTLEntityTypes.MOOBLOOM));
 
     //#endregion
 

@@ -5,15 +5,31 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.color.block.BlockTintSources;
+import net.minecraft.client.model.animal.cow.BabyCowModel;
+import net.minecraft.client.model.animal.cow.CowModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
+import org.hendrix.betterspringtolife.client.renderer.entity.MoobloomRenderer;
 import org.hendrix.betterspringtolife.core.BSTLBlocks;
+import org.hendrix.betterspringtolife.core.BSTLEntityTypes;
 import org.hendrix.betterspringtolife.core.BSTLParticles;
+import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public final class BetterSpringToLifeClient implements ClientModInitializer {
+
+    //#region Entity Model Layers
+
+    public static final ModelLayerLocation MOOBLOOM = new ModelLayerLocation(IdentifierUtils.modded("moobloom"), "main");
+    public static final ModelLayerLocation MOOBLOOM_BABY = new ModelLayerLocation(IdentifierUtils.modded("moobloom_baby"), "main");
+    public static final ModelLayerLocation BUTTERFLY = new ModelLayerLocation(IdentifierUtils.modded("butterfly"), "main");
+
+    //#endregion
 
     @Override
     public void onInitializeClient() {
@@ -40,5 +56,9 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
 
         ParticleProviderRegistry.getInstance().register(BSTLParticles.ASPHODEL, AsphodelParticle.Provider::new);
         BSTLClientEvents.register();
+
+        ModelLayerRegistry.registerModelLayer(MOOBLOOM, CowModel::createBodyLayer);
+        ModelLayerRegistry.registerModelLayer(MOOBLOOM_BABY, BabyCowModel::createBodyLayer);
+        EntityRenderers.register(BSTLEntityTypes.MOOBLOOM, MoobloomRenderer::new);
     }
 }
