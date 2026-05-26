@@ -3,6 +3,7 @@ package org.hendrix.betterspringtolife.core;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import org.hendrix.betterspringtolife.entity.Butterfly;
 import org.hendrix.betterspringtolife.item.component.FirefliesComponent;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
@@ -16,6 +17,9 @@ public final class BSTLDataComponentTypes {
             .persistent(FirefliesComponent.CODEC)
             .networkSynchronized(FirefliesComponent.PACKET_CODEC));
 
+    public static final DataComponentType<Butterfly.Variant> BUTTERFLY_VARIANT = register("butterfly/variant", (builder) -> builder
+            .persistent(Butterfly.Variant.CODEC)
+            .networkSynchronized(Butterfly.Variant.PACKET_CODEC));
 
     //#endregion
 

@@ -15,8 +15,10 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
+import org.hendrix.betterspringtolife.client.renderer.entity.ButterflyRenderer;
 import org.hendrix.betterspringtolife.client.renderer.entity.MoobloomRenderer;
 import org.hendrix.betterspringtolife.client.renderer.entity.MuddyPigRenderer;
+import org.hendrix.betterspringtolife.client.renderer.entity.model.ButterflyModel;
 import org.hendrix.betterspringtolife.core.BSTLBlocks;
 import org.hendrix.betterspringtolife.core.BSTLEntityTypes;
 import org.hendrix.betterspringtolife.core.BSTLParticles;
@@ -67,7 +69,9 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
         ModelLayerRegistry.registerModelLayer(MOOBLOOM_BABY, BabyCowModel::createBodyLayer);
         ModelLayerRegistry.registerModelLayer(MUDDY_PIG, () -> PigModel.createBodyLayer(CubeDeformation.NONE));
         ModelLayerRegistry.registerModelLayer(MUDDY_PIG_BABY, () -> BabyPigModel.createBodyLayer(CubeDeformation.NONE));
+        ModelLayerRegistry.registerModelLayer(BUTTERFLY, ButterflyModel::createBodyLayer);
         EntityRenderers.register(BSTLEntityTypes.MOOBLOOM, MoobloomRenderer::new);
         EntityRenderers.register(BSTLEntityTypes.MUDDY_PIG, MuddyPigRenderer::new);
+        EntityRenderers.register(BSTLEntityTypes.BUTTERFLY, ButterflyRenderer::new);
     }
 }

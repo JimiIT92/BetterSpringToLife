@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import org.hendrix.betterspringtolife.entity.Butterfly;
 import org.hendrix.betterspringtolife.entity.Moobloom;
 import org.hendrix.betterspringtolife.entity.MuddyPig;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
@@ -33,6 +34,14 @@ public class BSTLEntityTypes {
                     .clientTrackingRange(10)
     );
 
+    public static final EntityType<Butterfly> BUTTERFLY = register(
+            "butterfly",
+            EntityType.Builder.of(Butterfly::new, MobCategory.CREATURE)
+                    .sized(0.3F, 0.25F)
+                    .eyeHeight(0.19F)
+                    .clientTrackingRange(8)
+    );
+
     //#endregion
 
     /**
@@ -54,6 +63,7 @@ public class BSTLEntityTypes {
     public static void register() {
         FabricDefaultAttributeRegistry.register(MOOBLOOM, Moobloom.createAttributes());
         FabricDefaultAttributeRegistry.register(MUDDY_PIG, MuddyPig.createAttributes());
+        FabricDefaultAttributeRegistry.register(BUTTERFLY, Butterfly.createAttributes());
     }
 
 }
