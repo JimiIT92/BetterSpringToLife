@@ -41,6 +41,7 @@ public final class BSTLItems {
     );
 
     public static final Item MOOBLOOM_SPAWN_EGG = register("moobloom_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(BSTLEntityTypes.MOOBLOOM));
+    public static final Item MUDDY_PIG_SPAWN_EGG = register("muddy_pig_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(BSTLEntityTypes.MUDDY_PIG));
 
     //#endregion
 

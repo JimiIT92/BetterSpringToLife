@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import org.hendrix.betterspringtolife.entity.Moobloom;
+import org.hendrix.betterspringtolife.entity.MuddyPig;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
 public class BSTLEntityTypes {
@@ -21,6 +22,14 @@ public class BSTLEntityTypes {
                     .sized(0.9F, 1.4F)
                     .eyeHeight(1.3F)
                     .passengerAttachments(1.36875F)
+                    .clientTrackingRange(10)
+    );
+
+    public static final EntityType<MuddyPig> MUDDY_PIG = register(
+            "muddy_pig",
+            EntityType.Builder.of(MuddyPig::new, MobCategory.CREATURE)
+                    .sized(0.9F, 0.9F)
+                    .passengerAttachments(0.86875F)
                     .clientTrackingRange(10)
     );
 
@@ -44,6 +53,7 @@ public class BSTLEntityTypes {
      */
     public static void register() {
         FabricDefaultAttributeRegistry.register(MOOBLOOM, Moobloom.createAttributes());
+        FabricDefaultAttributeRegistry.register(MUDDY_PIG, MuddyPig.createAttributes());
     }
 
 }

@@ -7,12 +7,12 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "minecraft:entities/cow",
+          "value": "minecraft:entities/pig",
           "weight": 1,
           "quality": 1
         }
       ]
     }
   ],
-  "random_sequence": "betterspringtolife:entities/moobloom"
+  "random_sequence": "betterspringtolife:entities/muddy_pig"
 }

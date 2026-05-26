@@ -9,10 +9,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.model.animal.cow.BabyCowModel;
 import net.minecraft.client.model.animal.cow.CowModel;
+import net.minecraft.client.model.animal.pig.BabyPigModel;
+import net.minecraft.client.model.animal.pig.PigModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import org.hendrix.betterspringtolife.client.particle.AsphodelParticle;
 import org.hendrix.betterspringtolife.client.renderer.entity.MoobloomRenderer;
+import org.hendrix.betterspringtolife.client.renderer.entity.MuddyPigRenderer;
 import org.hendrix.betterspringtolife.core.BSTLBlocks;
 import org.hendrix.betterspringtolife.core.BSTLEntityTypes;
 import org.hendrix.betterspringtolife.core.BSTLParticles;
@@ -27,6 +31,8 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
 
     public static final ModelLayerLocation MOOBLOOM = new ModelLayerLocation(IdentifierUtils.modded("moobloom"), "main");
     public static final ModelLayerLocation MOOBLOOM_BABY = new ModelLayerLocation(IdentifierUtils.modded("moobloom_baby"), "main");
+    public static final ModelLayerLocation MUDDY_PIG = new ModelLayerLocation(IdentifierUtils.modded("muddy_pig"), "main");
+    public static final ModelLayerLocation MUDDY_PIG_BABY = new ModelLayerLocation(IdentifierUtils.modded("muddy_pig_baby"), "main");
     public static final ModelLayerLocation BUTTERFLY = new ModelLayerLocation(IdentifierUtils.modded("butterfly"), "main");
 
     //#endregion
@@ -59,6 +65,9 @@ public final class BetterSpringToLifeClient implements ClientModInitializer {
 
         ModelLayerRegistry.registerModelLayer(MOOBLOOM, CowModel::createBodyLayer);
         ModelLayerRegistry.registerModelLayer(MOOBLOOM_BABY, BabyCowModel::createBodyLayer);
+        ModelLayerRegistry.registerModelLayer(MUDDY_PIG, () -> PigModel.createBodyLayer(CubeDeformation.NONE));
+        ModelLayerRegistry.registerModelLayer(MUDDY_PIG_BABY, () -> BabyPigModel.createBodyLayer(CubeDeformation.NONE));
         EntityRenderers.register(BSTLEntityTypes.MOOBLOOM, MoobloomRenderer::new);
+        EntityRenderers.register(BSTLEntityTypes.MUDDY_PIG, MuddyPigRenderer::new);
     }
 }
