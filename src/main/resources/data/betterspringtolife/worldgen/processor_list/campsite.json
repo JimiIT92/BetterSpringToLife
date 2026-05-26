@@ -1,0 +1,19 @@
+{
+  "processors": [
+    {
+      "integrity": 0.75,
+      "processor_type": "minecraft:block_rot",
+      "rottable_blocks": [
+        "minecraft:oak_log",
+        "minecraft:birch_log",
+        "minecraft:stripped_birch_log",
+        "minecraft:spruce_log",
+        "minecraft:oak_slab",
+        "minecraft:birch_slab",
+        "minecraft:spruce_slab",
+        "minecraft:leaf_litter",
+        "minecraft:campfire"
+      ]
+    }
+  ]
+}

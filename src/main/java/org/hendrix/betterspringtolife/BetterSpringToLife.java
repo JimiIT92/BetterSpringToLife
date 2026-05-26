@@ -26,9 +26,8 @@ public final class BetterSpringToLife implements ModInitializer {
         BSTLParticles.register();
         BSTLItems.register();
         BSTLBlocks.register();
-
         BSTLEvents.register();
-
+        BSTLBiomeFeatures.register();
     }
 
 }

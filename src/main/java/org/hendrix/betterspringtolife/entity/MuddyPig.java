@@ -1,5 +1,6 @@
 package org.hendrix.betterspringtolife.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -7,16 +8,19 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -24,6 +28,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.hendrix.betterspringtolife.core.BSTLEntityTypes;
 import org.hendrix.betterspringtolife.core.BSTLSounds;
+import org.hendrix.betterspringtolife.core.BSTLTags;
 import org.jspecify.annotations.Nullable;
 
 public class MuddyPig extends Pig implements Shearable {
@@ -113,6 +118,11 @@ public class MuddyPig extends Pig implements Shearable {
     private void clean(final ServerLevel world) {
         world.sendParticles(ParticleTypes.FALLING_WATER, this.getX(), this.getY(0.5D) + 0.5D, this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
         this.convertTo(EntityType.PIG, ConversionParams.single(this, false, false), (pig) -> { });
+    }
+
+    public static boolean checkAnimalSpawnRules(final EntityType<? extends Animal> type, final LevelAccessor level, final EntitySpawnReason spawnReason, final BlockPos pos, final RandomSource random) {
+        boolean brightEnoughToSpawn = EntitySpawnReason.ignoresLightRequirements(spawnReason) || isBrightEnoughToSpawn(level, pos);
+        return level.getBlockState(pos.below()).is(BSTLTags.BlockTags.MUDDY_PIGS_SPAWNABLE_ON) && brightEnoughToSpawn;
     }
 
 }

@@ -3,6 +3,7 @@
   "package": "org.hendrix.betterspringtolife.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "CactusBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

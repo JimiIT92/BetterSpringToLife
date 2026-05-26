@@ -11,10 +11,9 @@ public final class BSTLTags {
 
         //#region Tags
 
-        public static final TagKey<Block> LEAF_PILE_CANNOT_SURVIVE_ON = register("leaf_pile_cannot_survive_on");
-        public static final TagKey<Block> LEAF_PILE_CAN_SURVIVE_ON = register("leaf_pile_can_survive_on");
         public static final TagKey<Block> SNOWY_VEGETATION_MAY_PLACE_ON = register("snowy_vegetation_may_place_on");
         public static final TagKey<Block> BUTTERFLIES_SPAWNABLE_ON = register("butterflies_spawnable_on");
+        public static final TagKey<Block> MUDDY_PIGS_SPAWNABLE_ON = register("muddy_pigs_spawnable_on");
 
         //#endregion
 
