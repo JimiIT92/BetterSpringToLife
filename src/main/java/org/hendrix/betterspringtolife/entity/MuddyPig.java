@@ -29,6 +29,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import org.hendrix.betterspringtolife.core.BSTLEntityTypes;
 import org.hendrix.betterspringtolife.core.BSTLSounds;
 import org.hendrix.betterspringtolife.core.BSTLTags;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class MuddyPig extends Pig implements Shearable {
@@ -40,13 +41,13 @@ public class MuddyPig extends Pig implements Shearable {
     }
 
     @Override
-    protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
+    protected void defineSynchedData(final SynchedEntityData.@NonNull Builder entityData) {
         super.defineSynchedData(entityData);
         entityData.define(HAS_FLOWERS, true);
     }
 
     @Override
-    public void shear(ServerLevel level, SoundSource soundSource, ItemStack tool) {
+    public void shear(ServerLevel level, @NonNull SoundSource soundSource, @NonNull ItemStack tool) {
         level.playSound(null, this, BSTLSounds.ENTITY_MOOBLOOM_SHEAR, soundSource, 1.0F, 1.0F);
         level.sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
         this.setHasFlowers(false);
@@ -66,25 +67,25 @@ public class MuddyPig extends Pig implements Shearable {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
+    protected void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putBoolean("HasFlowers", this.hasFlowers());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
+    protected void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
         this.setHasFlowers(input.getBooleanOr("HasFlowers", true));
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
+    public @NonNull SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
         this.setHasFlowers(this.random.nextBoolean());
         return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
     }
 
     @Override
-    public @Nullable Pig getBreedOffspring(ServerLevel level, AgeableMob partner) {
+    public @Nullable Pig getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob partner) {
         MuddyPig child = BSTLEntityTypes.MUDDY_PIG.create(level, EntitySpawnReason.BREEDING);
         if(child != null) {
             child.setHasFlowers(false);
@@ -93,7 +94,7 @@ public class MuddyPig extends Pig implements Shearable {
     }
 
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
         final ItemStack itemStack = player.getItemInHand(hand);
         final Level world = this.level();
         if (world instanceof ServerLevel serverLevel) {
@@ -107,7 +108,6 @@ public class MuddyPig extends Pig implements Shearable {
             else if (itemStack.is(Items.WATER_BUCKET)) {
                 world.playSound(null, player, SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 1.0F, 1.0F);
                 this.clean(serverLevel);
-                //player.setItemInHand(hand, InteractionResult.ItemContext.exchangeStack(itemStack, player, new ItemStack(Items.BUCKET)));
                 return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.BUCKET), false));
             }
         }
@@ -117,7 +117,7 @@ public class MuddyPig extends Pig implements Shearable {
 
     private void clean(final ServerLevel world) {
         world.sendParticles(ParticleTypes.FALLING_WATER, this.getX(), this.getY(0.5D) + 0.5D, this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-        this.convertTo(EntityType.PIG, ConversionParams.single(this, false, false), (pig) -> { });
+        this.convertTo(EntityTypes.PIG, ConversionParams.single(this, false, false), (pig) -> { });
     }
 
     public static boolean checkAnimalSpawnRules(final EntityType<? extends Animal> type, final LevelAccessor level, final EntitySpawnReason spawnReason, final BlockPos pos, final RandomSource random) {

@@ -2,6 +2,7 @@ package org.hendrix.betterspringtolife.core;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
 
@@ -25,6 +26,26 @@ public final class BSTLTags {
          */
         private static TagKey<Block> register(final String name) {
             return TagKey.create(Registries.BLOCK, IdentifierUtils.modded(name));
+        }
+
+    }
+
+    public static class ItemTags {
+
+        //#region Tags
+
+        public static final TagKey<Item> BUTTERFLY_ATTRACTIVE = register("butterfly_attractive");
+
+        //#endregion
+
+        /**
+         * Register an item {@link TagKey}
+         *
+         * @param name The tag name
+         * @return The item {@link TagKey}
+         */
+        private static TagKey<Item> register(final String name) {
+            return TagKey.create(Registries.ITEM, IdentifierUtils.modded(name));
         }
 
     }

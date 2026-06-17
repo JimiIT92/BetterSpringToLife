@@ -12,7 +12,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -37,11 +35,12 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.hendrix.betterspringtolife.core.BSTLDataComponentTypes;
 import org.hendrix.betterspringtolife.core.BSTLTags;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.function.IntFunction;
 
-public class Butterfly extends PathfinderMob implements FlyingAnimal {
+public class Butterfly extends PathfinderMob {
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Butterfly.class, EntityDataSerializers.INT);
     public float flap;
@@ -53,7 +52,7 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
 
     public Butterfly(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
-        this.moveControl = new FlyingMoveControl(this, 10, false);
+        this.moveControl = new FlyingMoveControl<>(this, 10, false);
         this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
         this.setPathfindingMalus(PathType.FIRE, -1.0F);
         this.setPathfindingMalus(PathType.COCOA, -1.0F);
@@ -61,26 +60,26 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25F, itemStack -> itemStack.is(ItemTags.SMALL_FLOWERS), false));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25F, itemStack -> itemStack.is(BSTLTags.ItemTags.BUTTERFLY_ATTRACTIVE), false));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(3, new Butterfly.FlyOntoTreeGoal(this, 1.0F));
-        this.goalSelector.addGoal(4, new FollowMobGoal(this, (double)1.0F, 3.0F, 7.0F));
+        this.goalSelector.addGoal(4, new FollowMobGoal(this, 1.0F, 3.0F, 7.0F));
     }
 
     @Override
-    protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
+    protected void defineSynchedData(final SynchedEntityData.@NonNull Builder entityData) {
         super.defineSynchedData(entityData);
         entityData.define(VARIANT, Butterfly.Variant.DEFAULT.index);
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
+    protected void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.store("Variant", Butterfly.Variant.INDEX_CODEC, this.getVariant());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
+    protected void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
         this.setVariant(input.read("Variant", Butterfly.Variant.INDEX_CODEC).orElse(Butterfly.Variant.DEFAULT));
     }
@@ -94,13 +93,13 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
     }
 
     @Override
-    protected void applyImplicitComponents(DataComponentGetter components) {
+    protected void applyImplicitComponents(@NonNull DataComponentGetter components) {
         this.applyImplicitComponentIfPresent(components, BSTLDataComponentTypes.BUTTERFLY_VARIANT);
         super.applyImplicitComponents(components);
     }
 
     @Override
-    protected <T> boolean applyImplicitComponent(DataComponentType<T> type, T value) {
+    protected <T> boolean applyImplicitComponent(@NonNull DataComponentType<T> type, @NonNull T value) {
         if(BSTLDataComponentTypes.BUTTERFLY_VARIANT.equals(type)) {
             this.setVariant(castComponentValue(BSTLDataComponentTypes.BUTTERFLY_VARIANT, value));
             return true;
@@ -116,12 +115,12 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
         this.setVariant(Util.getRandom(Butterfly.Variant.values(), level.getRandom()));
         return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
     }
 
-    protected PathNavigation createNavigation(final Level level) {
+    protected @NonNull PathNavigation createNavigation(final @NonNull Level level) {
         FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level);
         flyingPathNavigation.setCanOpenDoors(false);
         flyingPathNavigation.setCanFloat(true);
@@ -145,13 +144,13 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
         this.flapping *= 0.5F;
         Vec3 movement = this.getDeltaMovement();
         if (!this.onGround() && movement.y < (double)0.0F) {
-            this.setDeltaMovement(movement.multiply((double)1.0F, 0.6, (double)1.0F));
+            this.setDeltaMovement(movement.multiply(1.0F, 0.6, 1.0F));
         }
 
         this.flap += this.flapping * 2.0F;
     }
 
-    protected void checkFallDamage(final double ya, final boolean onGround, final BlockState onState, final BlockPos pos) {
+    protected void checkFallDamage(final double ya, final boolean onGround, final @NonNull BlockState onState, final @NonNull BlockPos pos) {
     }
 
     protected boolean isFlapping() {
@@ -166,13 +165,12 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
         return true;
     }
 
-    protected void doPush(final Entity entity) {
+    protected void doPush(final @NonNull Entity entity) {
         if (!(entity instanceof Player)) {
             super.doPush(entity);
         }
     }
 
-    @Override
     public boolean isFlying() {
         return !this.onGround();
     }
@@ -234,7 +232,7 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
         private final int index;
         private final String name;
 
-        private Variant(final int index, final String name) {
+        Variant(final int index, final String name) {
             this.index = index;
             this.name = name;
         }
@@ -247,7 +245,7 @@ public class Butterfly extends PathfinderMob implements FlyingAnimal {
             return INDEX_MAPPER.apply(index);
         }
 
-        public String getSerializedName() {
+        public @NonNull String getSerializedName() {
             return this.name;
         }
 
