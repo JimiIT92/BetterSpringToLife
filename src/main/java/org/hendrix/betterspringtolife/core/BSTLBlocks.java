@@ -1,5 +1,6 @@
 package org.hendrix.betterspringtolife.core;
 
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -257,33 +258,32 @@ public final class BSTLBlocks {
         return block;
     }
 
-    /*private static void registerStrippableBlocks() {
-        StrippableBlockRegistry.register(HOLLOW_OAK_LOG, HOLLOW_STRIPPED_OAK_LOG);
-        StrippableBlockRegistry.register(HOLLOW_SPRUCE_LOG, HOLLOW_STRIPPED_SPRUCE_LOG);
-        StrippableBlockRegistry.register(HOLLOW_BIRCH_LOG, HOLLOW_STRIPPED_BIRCH_LOG);
-        StrippableBlockRegistry.register(HOLLOW_JUNGLE_LOG, HOLLOW_STRIPPED_JUNGLE_LOG);
-        StrippableBlockRegistry.register(HOLLOW_ACACIA_LOG, HOLLOW_STRIPPED_ACACIA_LOG);
-        StrippableBlockRegistry.register(HOLLOW_DARK_OAK_LOG, HOLLOW_STRIPPED_DARK_OAK_LOG);
-        StrippableBlockRegistry.register(HOLLOW_MANGROVE_LOG, HOLLOW_STRIPPED_MANGROVE_LOG);
-        StrippableBlockRegistry.register(HOLLOW_BAMBOO_BLOCK, HOLLOW_STRIPPED_BAMBOO_BLOCK);
-        StrippableBlockRegistry.register(HOLLOW_CHERRY_LOG, HOLLOW_STRIPPED_CHERRY_LOG);
-        StrippableBlockRegistry.register(HOLLOW_PALE_OAK_LOG, HOLLOW_STRIPPED_PALE_OAK_LOG);
-        StrippableBlockRegistry.register(HOLLOW_CRIMSON_STEM, HOLLOW_STRIPPED_CRIMSON_STEM);
-        StrippableBlockRegistry.register(HOLLOW_WARPED_STEM, HOLLOW_STRIPPED_WARPED_STEM);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_OAK_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_SPRUCE_LOG, BSTLBlocks.HOLLOW_STRIPPED_SPRUCE_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_BIRCH_LOG, BSTLBlocks.HOLLOW_STRIPPED_BIRCH_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, BSTLBlocks.HOLLOW_STRIPPED_JUNGLE_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_ACACIA_LOG, BSTLBlocks.HOLLOW_STRIPPED_ACACIA_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_DARK_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_DARK_OAK_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_MANGROVE_LOG, BSTLBlocks.HOLLOW_STRIPPED_MANGROVE_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_BAMBOO_BLOCK, BSTLBlocks.HOLLOW_STRIPPED_BAMBOO_BLOCK);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_CHERRY_LOG, BSTLBlocks.HOLLOW_STRIPPED_CHERRY_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_PALE_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_PALE_OAK_LOG);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_CRIMSON_STEM, BSTLBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
-        StrippableBlockRegistry.register(Blocks.STRIPPED_WARPED_STEM, BSTLBlocks.HOLLOW_STRIPPED_WARPED_STEM);
+    private static void registerStrippableBlocks() {
+        BlockTransformerHelper.registerStripping(HOLLOW_OAK_LOG, HOLLOW_STRIPPED_OAK_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_SPRUCE_LOG, HOLLOW_STRIPPED_SPRUCE_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_BIRCH_LOG, HOLLOW_STRIPPED_BIRCH_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_JUNGLE_LOG, HOLLOW_STRIPPED_JUNGLE_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_ACACIA_LOG, HOLLOW_STRIPPED_ACACIA_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_DARK_OAK_LOG, HOLLOW_STRIPPED_DARK_OAK_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_MANGROVE_LOG, HOLLOW_STRIPPED_MANGROVE_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_BAMBOO_BLOCK, HOLLOW_STRIPPED_BAMBOO_BLOCK);
+        BlockTransformerHelper.registerStripping(HOLLOW_CHERRY_LOG, HOLLOW_STRIPPED_CHERRY_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_PALE_OAK_LOG, HOLLOW_STRIPPED_PALE_OAK_LOG);
+        BlockTransformerHelper.registerStripping(HOLLOW_CRIMSON_STEM, HOLLOW_STRIPPED_CRIMSON_STEM);
+        BlockTransformerHelper.registerStripping(HOLLOW_WARPED_STEM, HOLLOW_STRIPPED_WARPED_STEM);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_OAK_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_SPRUCE_LOG, BSTLBlocks.HOLLOW_STRIPPED_SPRUCE_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_BIRCH_LOG, BSTLBlocks.HOLLOW_STRIPPED_BIRCH_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_JUNGLE_LOG, BSTLBlocks.HOLLOW_STRIPPED_JUNGLE_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_ACACIA_LOG, BSTLBlocks.HOLLOW_STRIPPED_ACACIA_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_DARK_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_DARK_OAK_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_MANGROVE_LOG, BSTLBlocks.HOLLOW_STRIPPED_MANGROVE_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_BAMBOO_BLOCK, BSTLBlocks.HOLLOW_STRIPPED_BAMBOO_BLOCK);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_CHERRY_LOG, BSTLBlocks.HOLLOW_STRIPPED_CHERRY_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_PALE_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_PALE_OAK_LOG);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_CRIMSON_STEM, BSTLBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_WARPED_STEM, BSTLBlocks.HOLLOW_STRIPPED_WARPED_STEM);
     }
-    */
 
     private static void registerFlammableBlocks(int igniteOdds, int burnOdds, Block... blocks) {
         var flammableBlockRegistry = FlammableBlockRegistry.getDefaultInstance();
@@ -294,7 +294,7 @@ public final class BSTLBlocks {
      * Register all {@link Block Blocks}
      */
     public static void register() {
-        //registerStrippableBlocks();
+        registerStrippableBlocks();
         registerFlammableBlocks(
                 5,
                 5,
