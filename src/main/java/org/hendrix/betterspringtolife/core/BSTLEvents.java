@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -42,7 +43,7 @@ public final class BSTLEvents {
             final BlockPos pos = blockHitResult.getBlockPos();
             final BlockState blockState = level.getBlockState(pos);
             return HollowBlock.getHollow(blockState).map(
-                  hollowBlock -> setBlock(hollowBlock, player, interactionHand, level, pos, itemStack, SoundEvents.AXE_STRIP)
+                  hollowBlock -> setBlock(hollowBlock, player, interactionHand, level, pos, itemStack, SoundEvents.AXE_STRIP.value())
             ).orElse(InteractionResult.PASS);
         }
         return InteractionResult.PASS;
@@ -109,7 +110,7 @@ public final class BSTLEvents {
             }
             final boolean isClient = level.isClientSide();
             if(isClient) {
-                player.swing(hand);
+                player.swing(hand, SwingAnimation.DEFAULT, true);
                 player.playSound(soundEvent);
             }
             return isClient ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;

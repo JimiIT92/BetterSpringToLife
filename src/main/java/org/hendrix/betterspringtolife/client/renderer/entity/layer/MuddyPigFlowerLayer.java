@@ -32,10 +32,10 @@ public class MuddyPigFlowerLayer extends RenderLayer<MuddyPigRenderState, PigMod
                 if(head != null) {
                     head.translateAndRotate(poseStack);
                     poseStack.translate(0.0F, -0.7F, -0.2F);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(-65.0F));
+                    poseStack.rotateDegrees(Axis.YP, -65.0F);
                     poseStack.scale(-0.5F, -0.5F, 0.5F);
                     poseStack.translate(-0.3F, -1.1F, -0.75F);
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-10.0F));
+                    poseStack.rotateDegrees(Axis.XP, -10.0F);
                     poseStack.translate(0.0F, -0.115F, 0.0F);
                     this.submitPoppy(poseStack, submitNodeCollector, lightCoords, appearsGlowingWithInvisibility, state.outlineColor, state.poppyModel, overlay);
                 }

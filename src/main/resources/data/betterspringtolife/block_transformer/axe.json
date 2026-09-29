@@ -1,0 +1,371 @@
+[
+  {
+    "block_state_provider": {
+      "type": "minecraft:rule_based",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_spruce_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_spruce_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_birch_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_birch_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_jungle_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_jungle_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_acacia_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_acacia_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_dark_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_dark_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_mangrove_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_mangrove_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_bamboo_block"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_bamboo_block",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_cherry_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_cherry_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_pale_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_pale_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_crimson_stem"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_crimson_stem",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "betterspringtolife:hollow_warped_stem"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_warped_stem",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_spruce_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_spruce_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_birch_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_birch_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_jungle_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_jungle_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_acacia_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_acacia_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_dark_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_dark_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_mangrove_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_mangrove_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_bamboo_block"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_bamboo_block",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_cherry_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_cherry_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_pale_oak_log"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_pale_oak_log",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_crimson_stem"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_crimson_stem",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:stripped_warped_stem"
+          },
+          "then": {
+            "type": "minecraft:copy_properties",
+            "source": {
+              "id": "betterspringtolife:hollow_stripped_warped_stem",
+              "properties": {
+                "axis": "y"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "item_damage_per_use": 1,
+    "sound": "minecraft:item.axe.strip"
+  }
+]

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:birch_leaves_pile"
+        "recipes": "betterspringtolife:birch_leaves_pile"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

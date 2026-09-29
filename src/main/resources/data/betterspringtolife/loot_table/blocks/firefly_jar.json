@@ -2,137 +2,103 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "predicates": {
-              "minecraft:enchantments": [
-                {
-                  "enchantments": "minecraft:silk_touch",
-                  "levels": {
-                    "min": 1
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ],
+      "condition": "minecraft:tool/can_silk_touch",
+
       "entries": [
         {
           "type": "minecraft:alternatives",
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betterspringtolife:firefly_jar",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "fireflies": "1"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:firefly_jar",
+                "state": {
+                  "fireflies": "1"
                 }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_components",
-                  "components": {
-                    "betterspringtolife:fireflies": 1
-                  }
+              },
+              "modifier": {
+                "type": "minecraft:set_components",
+                "components": {
+                  "betterspringtolife:fireflies": 1
                 }
-              ],
-              "name": "betterspringtolife:firefly_jar"
+              },
+              "name": "betterspringtolife:jungle_leaves_pile"
             },
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betterspringtolife:firefly_jar",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "fireflies": "2"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:firefly_jar",
+                "state": {
+                  "fireflies": "2"
                 }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_components",
-                  "components": {
-                    "betterspringtolife:fireflies": 2
-                  }
+              },
+              "modifier": {
+                "type": "minecraft:set_components",
+                "components": {
+                  "betterspringtolife:fireflies": 2
                 }
-              ],
-              "name": "betterspringtolife:firefly_jar"
+              },
+              "name": "betterspringtolife:jungle_leaves_pile"
             },
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betterspringtolife:firefly_jar",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "fireflies": "3"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:firefly_jar",
+                "state": {
+                  "fireflies": "3"
                 }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_components",
-                  "components": {
-                    "betterspringtolife:fireflies": 3
-                  }
+              },
+              "modifier": {
+                "type": "minecraft:set_components",
+                "components": {
+                  "betterspringtolife:fireflies": 3
                 }
-              ],
-              "name": "betterspringtolife:firefly_jar"
+              },
+              "name": "betterspringtolife:jungle_leaves_pile"
             },
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betterspringtolife:firefly_jar",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "fireflies": "4"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:firefly_jar",
+                "state": {
+                  "fireflies": "4"
                 }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_components",
-                  "components": {
-                    "betterspringtolife:fireflies": 4
-                  }
+              },
+              "modifier": {
+                "type": "minecraft:set_components",
+                "components": {
+                  "betterspringtolife:fireflies": 4
                 }
-              ],
-              "name": "betterspringtolife:firefly_jar"
+              },
+              "name": "betterspringtolife:jungle_leaves_pile"
             },
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "betterspringtolife:firefly_jar",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "fireflies": "5"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:firefly_jar",
+                "state": {
+                  "fireflies": "5"
                 }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_components",
-                  "components": {
-                    "betterspringtolife:fireflies": 5
-                  }
+              },
+              "modifier": {
+                "type": "minecraft:set_components",
+                "components": {
+                  "betterspringtolife:fireflies": 5
                 }
-              ],
-              "name": "betterspringtolife:firefly_jar"
+              },
+              "name": "betterspringtolife:jungle_leaves_pile"
             }
-          ]
+          ],
+          "condition": "minecraft:tool/can_silk_touch",
+          "name": "betterspringtolife:firefly_jar"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "betterspringtolife:blocks/firefly_jar"

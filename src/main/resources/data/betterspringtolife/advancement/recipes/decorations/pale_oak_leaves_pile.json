@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:pale_oak_leaves_pile"
+        "recipes": "betterspringtolife:pale_oak_leaves_pile"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

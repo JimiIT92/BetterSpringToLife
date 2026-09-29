@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:yellow_dye_from_buttercup"
+        "recipes": "betterspringtolife:yellow_dye_from_buttercup"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

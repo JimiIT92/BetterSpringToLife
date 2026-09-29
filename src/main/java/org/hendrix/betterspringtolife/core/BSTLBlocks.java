@@ -1,8 +1,6 @@
 package org.hendrix.betterspringtolife.core;
 
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import org.hendrix.betterspringtolife.BetterSpringToLife;
 import org.hendrix.betterspringtolife.block.*;
 import org.hendrix.betterspringtolife.utils.IdentifierUtils;
@@ -76,19 +75,22 @@ public final class BSTLBlocks {
                     .noCollision()
                     .instabreak()
                     .ignitedByLava()
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.GRASS)
+                    .pushReaction(PushReaction.POPPED)
+                    .sound(SoundType.GRASS),
+            new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_LOW)
     );
     public static final Block SHORT_SNOWY_GRASS = register(
             "short_snowy_grass",
             ShortSnowyGrassBlock::new,
             BlockBehaviour.Properties.ofFullCopy(SNOWY_BUSH)
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .offsetType(BlockBehaviour.OffsetType.XZ),
+            new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_LOW)
     );
     public static final Block TALL_SNOWY_GRASS = register(
             "tall_snowy_grass",
             TallSnowyGrassBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(SHORT_SNOWY_GRASS)
+            BlockBehaviour.Properties.ofFullCopy(SHORT_SNOWY_GRASS),
+            new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_LOW)
     );
 
     public static final Block ASPHODEL = register(
@@ -101,9 +103,10 @@ public final class BSTLBlocks {
                     .instabreak()
                     .ignitedByLava()
                     .randomTicks()
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .sound(SoundType.GRASS)
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .offsetType(BlockBehaviour.OffsetType.XZ),
+            new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
     );
     public static final Block PRICKLY_PEAR = registerBlockWithoutBlockItem(
             "prickly_pear",
@@ -114,7 +117,8 @@ public final class BSTLBlocks {
     public static final Block BUTTERCUP = register(
             "buttercup",
             settings -> new FlowerBlock(MobEffects.ABSORPTION, 0.35F, settings),
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION),
+            new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
     );
 
     public static final Block BROWN_WALL_MUSHROOM = registerWallMushroom("brown_wall_mushroom", Blocks.BROWN_MUSHROOM);
@@ -134,13 +138,13 @@ public final class BSTLBlocks {
             BlockBehaviour.Properties.of()
                     .strength(0.3F)
                     .noOcclusion()
-                    .isViewBlocking(Blocks::never)
+                    .isViewBlocking((state, level, pos, aabb) -> false)
                     .isValidSpawn(Blocks::never)
                     .isSuffocating(Blocks::never)
                     .forceSolidOn()
                     .sound(SoundType.GLASS)
                     .lightLevel(state -> state.getValue(FireflyJarBlock.FIREFLIES) * 3)
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
     );
 
     public static final Block POTTED_CACTUS_FLOWER = registerFlowerPot("potted_cactus_flower", Blocks.CACTUS_FLOWER);
@@ -164,7 +168,7 @@ public final class BSTLBlocks {
             woodSuffix = "_block";
         }
         final String name = "hollow_" + (stripped ? "stripped_" : "") + woodType.name().toLowerCase(Locale.ROOT) + woodSuffix;
-        return register(name, HollowBlock::new, BlockBehaviour.Properties.ofFullCopy(sourceBlock).isViewBlocking(Blocks::never).noOcclusion());
+        return register(name, HollowBlock::new, BlockBehaviour.Properties.ofFullCopy(sourceBlock).isViewBlocking((state, level, pos, aabb) -> false).noOcclusion());
     }
 
     private static Block registerLeafPile(WoodType woodType, final Block leaves, SoundType sound) {
@@ -186,8 +190,9 @@ public final class BSTLBlocks {
                         .strength(0.1F)
                         .noCollision()
                         .sound(sound)
-                        .isViewBlocking((state, level, pos) -> state.getValue(LeafPileBlock.LAYERS) >= 8)
-                        .pushReaction(PushReaction.DESTROY)
+                        .isViewBlocking((state, level, pos, aabb) -> state.getValue(LeafPileBlock.LAYERS) >= 8)
+                        .pushReaction(PushReaction.POPPED),
+                new Item.Properties().compostable(ContextIntProviders.COMPOSTABLE_LOW)
         );
     }
 
@@ -232,14 +237,27 @@ public final class BSTLBlocks {
      * @return The registered {@link Block}
      */
     private static Block register(final String name, final Function<BlockBehaviour.Properties, Block> blockFactory, final BlockBehaviour.Properties properties) {
+        return register(name, blockFactory, properties, new Item.Properties());
+    }
+
+    /**
+     * Register a {@link Block}
+     *
+     * @param name The block name
+     * @param blockFactory The block factory
+     * @param properties The {@link BlockBehaviour.Properties block properties}
+     * @param itemProperties The {@link Item.Properties}
+     * @return The registered {@link Block}
+     */
+    private static Block register(final String name, final Function<BlockBehaviour.Properties, Block> blockFactory, final BlockBehaviour.Properties properties, final Item.Properties itemProperties) {
         final Block block = registerBlockWithoutBlockItem(name, blockFactory, properties);
         final ResourceKey<Item> blockItemResourceKey = ResourceKey.create(Registries.ITEM, IdentifierUtils.modded(name));
-        final BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(blockItemResourceKey).useBlockDescriptionPrefix());
+        final BlockItem blockItem = new BlockItem(block, itemProperties.setId(blockItemResourceKey).useBlockDescriptionPrefix());
         Registry.register(BuiltInRegistries.ITEM, blockItemResourceKey, blockItem);
         return block;
     }
 
-    private static void registerStrippableBlocks() {
+    /*private static void registerStrippableBlocks() {
         StrippableBlockRegistry.register(HOLLOW_OAK_LOG, HOLLOW_STRIPPED_OAK_LOG);
         StrippableBlockRegistry.register(HOLLOW_SPRUCE_LOG, HOLLOW_STRIPPED_SPRUCE_LOG);
         StrippableBlockRegistry.register(HOLLOW_BIRCH_LOG, HOLLOW_STRIPPED_BIRCH_LOG);
@@ -265,22 +283,18 @@ public final class BSTLBlocks {
         StrippableBlockRegistry.register(Blocks.STRIPPED_CRIMSON_STEM, BSTLBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
         StrippableBlockRegistry.register(Blocks.STRIPPED_WARPED_STEM, BSTLBlocks.HOLLOW_STRIPPED_WARPED_STEM);
     }
+    */
 
     private static void registerFlammableBlocks(int igniteOdds, int burnOdds, Block... blocks) {
         var flammableBlockRegistry = FlammableBlockRegistry.getDefaultInstance();
         Arrays.stream(blocks).forEach(block -> flammableBlockRegistry.add(block, igniteOdds, burnOdds));
     }
 
-    private static void registerCompostableBlocks(float chance, Block... blocks) {
-        var composterRegistry = CompostableRegistry.INSTANCE;
-        Arrays.stream(blocks).forEach(block -> composterRegistry.add(block, chance));
-    }
-
     /**
      * Register all {@link Block Blocks}
      */
     public static void register() {
-        registerStrippableBlocks();
+        //registerStrippableBlocks();
         registerFlammableBlocks(
                 5,
                 5,
@@ -332,28 +346,6 @@ public final class BSTLBlocks {
                 TALL_SNOWY_GRASS,
                 ASPHODEL,
                 PRICKLY_PEAR,
-                BUTTERCUP
-        );
-        registerCompostableBlocks(
-                0.3F,
-                OAK_LEAVES_PILE,
-                SPRUCE_LEAVES_PILE,
-                BIRCH_LEAVES_PILE,
-                JUNGLE_LEAVES_PILE,
-                ACACIA_LEAVES_PILE,
-                CHERRY_LEAVES_PILE,
-                DARK_OAK_LEAVES_PILE,
-                PALE_OAK_LEAVES_PILE,
-                MANGROVE_LEAVES_PILE,
-                AZALEA_LEAVES_PILE,
-                FLOWERING_AZALEA_LEAVES_PILE,
-                SNOWY_BUSH,
-                SHORT_SNOWY_GRASS,
-                TALL_SNOWY_GRASS
-        );
-        registerCompostableBlocks(
-                0.65F,
-                ASPHODEL,
                 BUTTERCUP
         );
     }

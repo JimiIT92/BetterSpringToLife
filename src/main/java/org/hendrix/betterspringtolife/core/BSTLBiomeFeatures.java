@@ -46,11 +46,6 @@ public class BSTLBiomeFeatures {
                 ResourceKey.create(Registries.PLACED_FEATURE, IdentifierUtils.modded("patch_asphodel"))
         );
         BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(Biomes.OLD_GROWTH_BIRCH_FOREST),
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                ResourceKey.create(Registries.PLACED_FEATURE, IdentifierUtils.modded("patch_asphodel_2"))
-        );
-        BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(Biomes.SNOWY_TAIGA, Biomes.SNOWY_PLAINS, Biomes.JAGGED_PEAKS, Biomes.FROZEN_PEAKS, Biomes.SNOWY_SLOPES, Biomes.GROVE),
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ResourceKey.create(Registries.PLACED_FEATURE, IdentifierUtils.modded("patch_snowy_bush"))

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:dark_oak_leaves_pile"
+        "recipes": "betterspringtolife:dark_oak_leaves_pile"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

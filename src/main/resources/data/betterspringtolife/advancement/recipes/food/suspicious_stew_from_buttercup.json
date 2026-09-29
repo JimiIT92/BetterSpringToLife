@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:suspicious_stew_from_buttercup"
+        "recipes": "betterspringtolife:suspicious_stew_from_buttercup"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

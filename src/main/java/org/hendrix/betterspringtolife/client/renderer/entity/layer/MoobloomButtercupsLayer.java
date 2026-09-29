@@ -28,7 +28,7 @@ public class MoobloomButtercupsLayer extends RenderLayer<MoobloomRenderState, Co
                 final int overlay = LivingEntityRenderer.getOverlayCoords(state, 0.0F);
                 poseStack.pushPose();
                 poseStack.translate(0.0F, -0.35F, 0.5F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(-48.0F));
+                poseStack.rotateDegrees(Axis.YP, -48.0F);
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
                 poseStack.translate(-0.5F, -0.5F, -0.5F);
                 this.submitButtercup(poseStack, submitNodeCollector, lightCoords, appearsGlowingWithInvisibility, state.outlineColor, state.buttercupModel, overlay);
@@ -36,9 +36,9 @@ public class MoobloomButtercupsLayer extends RenderLayer<MoobloomRenderState, Co
 
                 poseStack.pushPose();
                 poseStack.translate(0.2F, -0.35F, 0.5F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(42.0F));
+                poseStack.rotateDegrees(Axis.YP, 42.0F);
                 poseStack.translate(0.1F, 0.0F, -0.7F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(-48.0F));
+                poseStack.rotateDegrees(Axis.YP, -48.0F);
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
                 poseStack.translate(-0.5F, -0.5F, -0.5F);
                 this.submitButtercup(poseStack, submitNodeCollector, lightCoords, appearsGlowingWithInvisibility, state.outlineColor, state.buttercupModel, overlay);
@@ -46,9 +46,9 @@ public class MoobloomButtercupsLayer extends RenderLayer<MoobloomRenderState, Co
 
                 poseStack.pushPose();
                 poseStack.translate(0.3F, -0.35F, 0.4F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(42.0F));
+                poseStack.rotateDegrees(Axis.YP, 42.0F);
                 poseStack.translate(0.2F, 0.0F, -0.3F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(48.0F));
+                poseStack.rotateDegrees(Axis.YP, 48.0F);
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
                 poseStack.translate(-0.5F, -0.5F, -0.5F);
                 this.submitButtercup(poseStack, submitNodeCollector, lightCoords, appearsGlowingWithInvisibility, state.outlineColor, state.buttercupModel, overlay);
@@ -57,7 +57,7 @@ public class MoobloomButtercupsLayer extends RenderLayer<MoobloomRenderState, Co
                 poseStack.pushPose();
                 this.getParentModel().getHead().translateAndRotate(poseStack);
                 poseStack.translate(0.0F, -0.7F, -0.2F);
-                poseStack.mulPose(Axis.YP.rotationDegrees(-78.0F));
+                poseStack.rotateDegrees(Axis.YP, -78.0F);
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
                 poseStack.translate(-0.5F, -0.5F, -0.5F);
                 this.submitButtercup(poseStack, submitNodeCollector, lightCoords, appearsGlowingWithInvisibility, state.outlineColor, state.buttercupModel, overlay);

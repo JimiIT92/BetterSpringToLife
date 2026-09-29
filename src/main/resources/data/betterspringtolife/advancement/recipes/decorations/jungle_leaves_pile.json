@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:jungle_leaves_pile"
+        "recipes": "betterspringtolife:jungle_leaves_pile"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

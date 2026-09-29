@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "betterspringtolife:white_dye_from_asphodel"
+        "recipes": "betterspringtolife:white_dye_from_asphodel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
