@@ -43,6 +43,7 @@ public final class HollowBlock extends RotatedPillarBlock implements SimpleWater
             .put(Blocks.PALE_OAK_LOG, BSTLBlocks.HOLLOW_PALE_OAK_LOG)
             .put(Blocks.CRIMSON_STEM, BSTLBlocks.HOLLOW_CRIMSON_STEM)
             .put(Blocks.WARPED_STEM, BSTLBlocks.HOLLOW_WARPED_STEM)
+            .put(Blocks.POPLAR_LOG, BSTLBlocks.HOLLOW_POPLAR_LOG)
     .build());
 
     /**

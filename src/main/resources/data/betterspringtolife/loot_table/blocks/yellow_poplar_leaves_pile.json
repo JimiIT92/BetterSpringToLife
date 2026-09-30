@@ -1,0 +1,149 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:entity_properties",
+        "entity": "this",
+        "predicate": {}
+      },
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "1"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 1
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "2"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 2
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "3"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 3
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "4"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 4
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "5"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 5
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "6"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 6
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "7"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 7
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "betterspringtolife:yellow_poplar_leaves_pile",
+                "state": {
+                  "layers": "8"
+                }
+              },
+              "modifier": {
+                "type": "minecraft:set_count",
+                "count": 8
+              },
+              "name": "betterspringtolife:yellow_poplar_leaves_pile"
+            }
+          ],
+          "condition": {
+            "type": "minecraft:any_of",
+            "terms": [
+              "minecraft:tool/can_shear",
+              "minecraft:tool/can_silk_touch"
+            ]
+          },
+          "name": "betterspringtolife:yellow_poplar_leaves_pile"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "betterspringtolife:blocks/yellow_poplar_leaves_pile"
+}

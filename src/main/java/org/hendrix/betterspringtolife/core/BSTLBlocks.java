@@ -54,6 +54,8 @@ public final class BSTLBlocks {
     public static final Block HOLLOW_STRIPPED_CRIMSON_STEM = registerHollowBlock(WoodType.CRIMSON, true, Blocks.STRIPPED_CRIMSON_STEM);
     public static final Block HOLLOW_WARPED_STEM = registerHollowBlock(WoodType.WARPED, false, Blocks.WARPED_STEM);
     public static final Block HOLLOW_STRIPPED_WARPED_STEM = registerHollowBlock(WoodType.WARPED, true, Blocks.STRIPPED_WARPED_STEM);
+    public static final Block HOLLOW_POPLAR_LOG = registerHollowBlock(WoodType.POPLAR, false, Blocks.POPLAR_LOG);
+    public static final Block HOLLOW_STRIPPED_POPLAR_LOG = registerHollowBlock(WoodType.POPLAR, true, Blocks.STRIPPED_POPLAR_LOG);
 
     public static final Block OAK_LEAVES_PILE = registerLeafPile(WoodType.OAK, Blocks.OAK_LEAVES, SoundType.GRASS);
     public static final Block SPRUCE_LEAVES_PILE = registerLeafPile(WoodType.SPRUCE, Blocks.SPRUCE_LEAVES, SoundType.GRASS);
@@ -66,6 +68,9 @@ public final class BSTLBlocks {
     public static final Block MANGROVE_LEAVES_PILE = registerLeafPile(WoodType.MANGROVE, Blocks.MANGROVE_LEAVES, SoundType.GRASS);
     public static final Block AZALEA_LEAVES_PILE = registerLeafPile("azalea", Blocks.AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
     public static final Block FLOWERING_AZALEA_LEAVES_PILE = registerLeafPile("flowering_azalea", Blocks.FLOWERING_AZALEA_LEAVES, SoundType.AZALEA_LEAVES);
+    public static final Block RED_POPLAR_LEAVES_PILE = registerLeafPile("red_poplar", Blocks.RED_POPLAR_LEAVES, SoundType.POPLAR_LEAVES);
+    public static final Block ORANGE_POPLAR_LEAVES_PILE = registerLeafPile("orange_poplar", Blocks.ORANGE_POPLAR_LEAVES, SoundType.POPLAR_LEAVES);
+    public static final Block YELLOW_POPLAR_LEAVES_PILE = registerLeafPile("yellow_poplar", Blocks.YELLOW_POPLAR_LEAVES, SoundType.POPLAR_LEAVES);
 
     public static final Block SNOWY_BUSH = register(
             "snowy_bush",
@@ -271,6 +276,7 @@ public final class BSTLBlocks {
         BlockTransformerHelper.registerStripping(HOLLOW_PALE_OAK_LOG, HOLLOW_STRIPPED_PALE_OAK_LOG);
         BlockTransformerHelper.registerStripping(HOLLOW_CRIMSON_STEM, HOLLOW_STRIPPED_CRIMSON_STEM);
         BlockTransformerHelper.registerStripping(HOLLOW_WARPED_STEM, HOLLOW_STRIPPED_WARPED_STEM);
+        BlockTransformerHelper.registerStripping(HOLLOW_POPLAR_LOG, HOLLOW_STRIPPED_POPLAR_LOG);
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_OAK_LOG);
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_SPRUCE_LOG, BSTLBlocks.HOLLOW_STRIPPED_SPRUCE_LOG);
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_BIRCH_LOG, BSTLBlocks.HOLLOW_STRIPPED_BIRCH_LOG);
@@ -283,6 +289,7 @@ public final class BSTLBlocks {
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_PALE_OAK_LOG, BSTLBlocks.HOLLOW_STRIPPED_PALE_OAK_LOG);
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_CRIMSON_STEM, BSTLBlocks.HOLLOW_STRIPPED_CRIMSON_STEM);
         BlockTransformerHelper.registerStripping(Blocks.STRIPPED_WARPED_STEM, BSTLBlocks.HOLLOW_STRIPPED_WARPED_STEM);
+        BlockTransformerHelper.registerStripping(Blocks.STRIPPED_POPLAR_LOG, BSTLBlocks.HOLLOW_STRIPPED_POPLAR_LOG);
     }
 
     private static void registerFlammableBlocks(int igniteOdds, int burnOdds, Block... blocks) {
@@ -321,7 +328,9 @@ public final class BSTLBlocks {
                 HOLLOW_CRIMSON_STEM,
                 HOLLOW_STRIPPED_CRIMSON_STEM,
                 HOLLOW_WARPED_STEM,
-                HOLLOW_STRIPPED_WARPED_STEM
+                HOLLOW_STRIPPED_WARPED_STEM,
+                HOLLOW_POPLAR_LOG,
+                HOLLOW_STRIPPED_POPLAR_LOG
         );
         registerFlammableBlocks(
                 5,
@@ -336,7 +345,10 @@ public final class BSTLBlocks {
                 PALE_OAK_LEAVES_PILE,
                 MANGROVE_LEAVES_PILE,
                 AZALEA_LEAVES_PILE,
-                FLOWERING_AZALEA_LEAVES_PILE
+                FLOWERING_AZALEA_LEAVES_PILE,
+                ORANGE_POPLAR_LEAVES_PILE,
+                RED_POPLAR_LEAVES_PILE,
+                YELLOW_POPLAR_LEAVES_PILE
         );
         registerFlammableBlocks(
                 60,

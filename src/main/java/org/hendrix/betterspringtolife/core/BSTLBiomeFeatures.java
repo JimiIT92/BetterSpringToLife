@@ -37,6 +37,11 @@ public class BSTLBiomeFeatures {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ResourceKey.create(Registries.PLACED_FEATURE, IdentifierUtils.modded("fallen_hollow_super_birch_tree"))
         );
+        BiomeModifications.addFeature(
+                BiomeSelectors.includeByKey(Biomes.DAPPLED_FOREST),
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ResourceKey.create(Registries.PLACED_FEATURE, IdentifierUtils.modded("fallen_hollow_poplar_tree"))
+        );
     }
 
     public static void addFlowers() {
